@@ -1,0 +1,26 @@
+##	The Thunder UI
+##
+##Minimalistic World of Warcraft user interface compilation
+##
+##	Info:
+##
+##The UI is optimised for 1280x1024+ screen resolution.
+##Some simple option are configured ingame, other option are configured through editing lua files. 
+##If you don't know how to edit lua files or don't want to learn *a bit* lua language - then this UI is probably not for you.
+##
+##For upgrade version 1.x,2.x,3.x,4.x - need completely reinstall!
+##
+##	Installation:
+##Backup your Fonts, WTF, and Interface folders. Delete the originals.
+##Copy contents of The Thunder UI into your WoW addons directory (\Interface\AddOns\)
+##Play! :)
+##
+##	Credits
+##
+##Much from the code is not by myself so thanks to all the authors
+##If i'm missed some copyright please write me
+##
+##Monolit - for original minimalistic ui layout, addons and tweaks
+##Fernir - for great ingame config
+##ALZA, Shestak, Caellian, Tukz, Nightcracker - for perfect minimalistic ui, addons and code
+##Allez, haste, p3lim, Zork, Tekkub, Tuller, Freebaser, FatalEntity and other - for greats addons and code
