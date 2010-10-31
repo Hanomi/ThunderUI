@@ -111,6 +111,12 @@ DefaultSettings = {
 		["LootFont"] = media.."font.ttf",
 	},
 
+	["Lootroll"] = {
+		["Roll X"] = 340, -- ThunderDB["Lootroll"]["Roll X"]
+		["Roll Y"] = -180, -- ThunderDB["Lootroll"]["Roll Y"]
+		["BoE color"] =  {1, 0.8, 0.8, 1},
+	},
+
 	["Cooldown"] = {
 		["CCFont"] = media.."font.ttf",
 		["CCFontSize"] = 18,

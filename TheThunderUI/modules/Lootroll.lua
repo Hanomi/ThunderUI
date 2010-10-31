@@ -22,7 +22,7 @@ if not (GetLocale=="enGB" or GetLocale=="enUS") then
 	LOOT_ROLL_DISENCHANT = "%s has selected Disenchant for: %s"
 end
 
-local position = {"TOPLEFT", 360, -200} -- roll frames positioning
+local position = {"TOPLEFT", ThunderDB["Lootroll"]["Roll X"], ThunderDB["Lootroll"]["Roll Y"]} -- roll frames positioning
 
 local GFHCName, GFHCHeight = GameFontHighlightCenter:GetFont();
 local grouplootlist, grouplootbars, grouplootrolls = {}, {}, {};
@@ -301,10 +301,8 @@ function frame:UpdateGroupLoot()
 			SetDesaturation(bar.need:GetNormalTexture(), not Needable)
 			SetDesaturation(bar.greed:GetNormalTexture(), not Greedable)
 
-		if ( bindOnPickUp ) then
-			bar.ibg:SetBackdropBorderColor(unpack(ThunderDB["Main"]["Border color"]))
-		else
-			bar.ibg:SetBackdropBorderColor(1, 0.8, 0.8, 1)
+		if not bindOnPickUp then
+			bar.ibg:SetBackdropBorderColor(unpack(ThunderDB["Lootroll"]["BoE color"]))
 		end
 			
 		bar:SetStatusBarColor(color.r, color.g, color.b, 1);
