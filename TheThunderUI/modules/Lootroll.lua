@@ -301,7 +301,9 @@ function frame:UpdateGroupLoot()
 			SetDesaturation(bar.need:GetNormalTexture(), not Needable)
 			SetDesaturation(bar.greed:GetNormalTexture(), not Greedable)
 
-		if not bindOnPickUp then
+		if ( bindOnPickUp ) then
+			bar.ibg:SetBackdropBorderColor(unpack(ThunderDB["Main"]["Border color"]))
+		else
 			bar.ibg:SetBackdropBorderColor(unpack(ThunderDB["Lootroll"]["BoE color"]))
 		end
 			
