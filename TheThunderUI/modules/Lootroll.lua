@@ -178,7 +178,7 @@ function frame:UpdateGroupLoot()
 			bar = CreateFrame("StatusBar", "sGroupLootBar"..index, UIParent);
 			bar:EnableMouse(1);
 			bar:SetWidth(250);
-			bar:SetHeight(25);
+			bar:SetHeight(20);
 			bar:SetStatusBarTexture(ThunderDB["Main"]["BarText"]);
 			if ( index == 1 ) then
 				bar:SetPoint(position[1], position[2], position[3]);
@@ -200,8 +200,8 @@ function frame:UpdateGroupLoot()
 			bar.pass = CreateFrame("Button", "$perentPassButton", bar);
 			bar.pass.type = 0;
 			bar.pass.roll = "pass";
-			bar.pass:SetWidth(28);
-			bar.pass:SetHeight(28);
+			bar.pass:SetWidth(20);
+			bar.pass:SetHeight(20);
 			bar.pass:SetNormalTexture("Interface\\Buttons\\UI-GroupLoot-Pass-Up");
 			bar.pass:SetHighlightTexture("Interface\\Buttons\\UI-GroupLoot-Pass-Down");
 			bar.pass:SetPoint("RIGHT", -5, 1);
@@ -216,8 +216,8 @@ function frame:UpdateGroupLoot()
 			bar.greed = CreateFrame("Button", "$perentGreedButton", bar);
 			bar.greed.type = 2;
 			bar.greed.roll = "greed";
-			bar.greed:SetWidth(28);
-			bar.greed:SetHeight(28);
+			bar.greed:SetWidth(20);
+			bar.greed:SetHeight(20);
 			bar.greed:SetNormalTexture("Interface\\Buttons\\UI-GroupLoot-Coin-Up");
 			bar.greed:SetPushedTexture("Interface\\Buttons\\UI-GroupLoot-Coin-Down");
 			bar.greed:SetHighlightTexture("Interface\\Buttons\\UI-GroupLoot-Coin-Highlight");
@@ -233,8 +233,8 @@ function frame:UpdateGroupLoot()
 			bar.disenchant = CreateFrame("Button", "$perentGreedButton", bar);
 			bar.disenchant.type = 3;
 			bar.disenchant.roll = "disenchant";
-			bar.disenchant:SetWidth(28);
-			bar.disenchant:SetHeight(28);
+			bar.disenchant:SetWidth(20);
+			bar.disenchant:SetHeight(20);
 			bar.disenchant:SetNormalTexture("Interface\\Buttons\\UI-GroupLoot-DE-Up");
 			bar.disenchant:SetPushedTexture("Interface\\Buttons\\UI-GroupLoot-DE-Down");
 			bar.disenchant:SetHighlightTexture("Interface\\Buttons\\UI-GroupLoot-DE-Highlight");
@@ -250,8 +250,8 @@ function frame:UpdateGroupLoot()
 			bar.need = CreateFrame("Button", "$perentNeedButton", bar);
 			bar.need.type = 1;
 			bar.need.roll = "need";
-			bar.need:SetWidth(28);
-			bar.need:SetHeight(28);
+			bar.need:SetWidth(20);
+			bar.need:SetHeight(20);
 			bar.need:SetNormalTexture("Interface\\Buttons\\UI-GroupLoot-Dice-Up");
 			bar.need:SetPushedTexture("Interface\\Buttons\\UI-GroupLoot-Dice-Down");
 			bar.need:SetHighlightTexture("Interface\\Buttons\\UI-GroupLoot-Dice-Highlight");
@@ -268,114 +268,26 @@ function frame:UpdateGroupLoot()
 			bar.text:SetPoint("LEFT", 5, 0);
 			bar.text:SetPoint("RIGHT", bar.need, "LEFT");
 			
-			bar.border = {};
-			bar.border.topleft = bar:CreateTexture(nil, "OVERLAY");
-			bar.border.topleft:SetTexture("Interface\\Addons\\TheThunderUI\\media\\aurabu");
-			bar.border.topleft:SetPoint("TOPLEFT", -2, 2);
-			bar.border.topleft:SetWidth(12);
-			bar.border.topleft:SetHeight(12);
-			bar.border.topleft:SetTexCoord(0, 1/3, 0, 1/3);
-			bar.border.bottomleft = bar:CreateTexture(nil, "OVERLAY");
-			bar.border.bottomleft:SetTexture("Interface\\Addons\\TheThunderUI\\media\\aurabu");
-			bar.border.bottomleft:SetPoint("BOTTOMLEFT", -2, -2);
-			bar.border.bottomleft:SetWidth(12);
-			bar.border.bottomleft:SetHeight(12);
-			bar.border.bottomleft:SetTexCoord(0, 1/3, 2/3, 1);
-			bar.border.topright = bar:CreateTexture(nil, "OVERLAY");
-			bar.border.topright:SetTexture("Interface\\Addons\\TheThunderUI\\media\\aurabu");
-			bar.border.topright:SetPoint("TOPRIGHT", 2, 2);
-			bar.border.topright:SetWidth(12);
-			bar.border.topright:SetHeight(12);
-			bar.border.topright:SetTexCoord(2/3, 1, 0, 1/3);
-			bar.border.bottomright = bar:CreateTexture(nil, "OVERLAY");
-			bar.border.bottomright:SetTexture("Interface\\Addons\\TheThunderUI\\media\\aurabu");
-			bar.border.bottomright:SetPoint("BOTTOMRIGHT", 2, -2);
-			bar.border.bottomright:SetWidth(12);
-			bar.border.bottomright:SetHeight(12);
-			bar.border.bottomright:SetTexCoord(2/3, 1, 2/3, 1);
-			bar.border.top = bar:CreateTexture(nil, "OVERLAY");
-			bar.border.top:SetTexture("Interface\\Addons\\TheThunderUI\\media\\aurabu");
-			bar.border.top:SetPoint("TOPLEFT", bar.border.topleft, "TOPRIGHT");
-			bar.border.top:SetPoint("TOPRIGHT", bar.border.topright, "TOPLEFT");
-			bar.border.top:SetHeight(12);
-			bar.border.top:SetTexCoord(1/3, 2/3, 0, 1/3);
-			bar.border.bottom = bar:CreateTexture(nil, "OVERLAY");
-			bar.border.bottom:SetTexture("Interface\\Addons\\TheThunderUI\\media\\aurabu");
-			bar.border.bottom:SetPoint("BOTTOMLEFT", bar.border.bottomleft, "BOTTOMRIGHT");
-			bar.border.bottom:SetPoint("BOTTOMRIGHT", bar.border.bottomright, "BOTTOMLEFT");
-			bar.border.bottom:SetHeight(12);
-			bar.border.bottom:SetTexCoord(1/3, 2/3, 2/3, 1);
-			bar.border.left = bar:CreateTexture(nil, "OVERLAY");
-			bar.border.left:SetTexture("Interface\\Addons\\TheThunderUI\\media\\aurabu");
-			bar.border.left:SetPoint("TOPLEFT", bar.border.topleft, "BOTTOMLEFT");
-			bar.border.left:SetPoint("BOTTOMLEFT", bar.border.bottomleft, "TOPLEFT");
-			bar.border.left:SetWidth(12);
-			bar.border.left:SetTexCoord(0, 1/3, 1/3, 2/3);
-			bar.border.right = bar:CreateTexture(nil, "OVERLAY");
-			bar.border.right:SetTexture("Interface\\Addons\\TheThunderUI\\media\\aurabu");
-			bar.border.right:SetPoint("TOPRIGHT", bar.border.topright, "BOTTOMRIGHT");
-			bar.border.right:SetPoint("BOTTOMRIGHT", bar.border.bottomright, "TOPRIGHT");
-			bar.border.right:SetWidth(12);
-			bar.border.right:SetTexCoord(2/3, 1, 1/3, 2/3);
+			bar.bg = CreateFrame("Frame", nil, bar)
+			bar.bg:SetPoint("TOPLEFT", -2, 2)
+			bar.bg:SetPoint("BOTTOMRIGHT", 2, -2)
+			bar.bg:SetFrameLevel(bar:GetFrameLevel()-1)
+			SetTemplate(bar.bg)
 			
 			bar.hasItem = 1;
 			
             bar.icon = bar:CreateTexture(nil, "BACKGROUND")
-            bar.icon:SetHeight(33)
-            bar.icon:SetWidth(33)
+            bar.icon:SetHeight(28)
+            bar.icon:SetWidth(28)
             bar.icon:ClearAllPoints()
             bar.icon:SetPoint("RIGHT", bar, "LEFT", -7,0)
             bar.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
     
-            bar.iborder = {};
-            bar.iborder.topleft = bar:CreateTexture(nil, "OVERLAY");
-            bar.iborder.topleft:SetTexture("Interface\\Addons\\TheThunderUI\\media\\aurabu");
-            bar.iborder.topleft:SetPoint("TOPLEFT", bar.icon, "TOPLEFT", -3, 3);
-            bar.iborder.topleft:SetWidth(12);
-            bar.iborder.topleft:SetHeight(12);
-            bar.iborder.topleft:SetTexCoord(0, 1/3, 0, 1/3);
-            bar.iborder.bottomleft = bar:CreateTexture(nil, "OVERLAY");
-            bar.iborder.bottomleft:SetTexture("Interface\\Addons\\TheThunderUI\\media\\aurabu");
-            bar.iborder.bottomleft:SetPoint("BOTTOMLEFT", bar.icon, "BOTTOMLEFT",-3, -3);
-            bar.iborder.bottomleft:SetWidth(12);
-            bar.iborder.bottomleft:SetHeight(12);
-            bar.iborder.bottomleft:SetTexCoord(0, 1/3, 2/3, 1);
-            bar.iborder.topright = bar:CreateTexture(nil, "OVERLAY");
-            bar.iborder.topright:SetTexture("Interface\\Addons\\TheThunderUI\\media\\aurabu");
-            bar.iborder.topright:SetPoint("TOPRIGHT",bar.icon, "TOPRIGHT", 3, 3);
-            bar.iborder.topright:SetWidth(12);
-            bar.iborder.topright:SetHeight(12);
-            bar.iborder.topright:SetTexCoord(2/3, 1, 0, 1/3);
-            bar.iborder.bottomright = bar:CreateTexture(nil, "OVERLAY");
-            bar.iborder.bottomright:SetTexture("Interface\\Addons\\TheThunderUI\\media\\aurabu");
-            bar.iborder.bottomright:SetPoint("BOTTOMRIGHT", bar.icon, "BOTTOMRIGHT", 3, -3);
-            bar.iborder.bottomright:SetWidth(12);
-            bar.iborder.bottomright:SetHeight(12);
-            bar.iborder.bottomright:SetTexCoord(2/3, 1, 2/3, 1);
-            bar.iborder.top = bar:CreateTexture(nil, "OVERLAY");
-            bar.iborder.top:SetTexture("Interface\\Addons\\TheThunderUI\\media\\aurabu");
-            bar.iborder.top:SetPoint("TOPLEFT", bar.iborder.topleft, "TOPRIGHT");
-            bar.iborder.top:SetPoint("TOPRIGHT", bar.iborder.topright, "TOPLEFT");
-            bar.iborder.top:SetHeight(12);
-            bar.iborder.top:SetTexCoord(1/3, 2/3, 0, 1/3);
-            bar.iborder.bottom = bar:CreateTexture(nil, "OVERLAY");
-            bar.iborder.bottom:SetTexture("Interface\\Addons\\TheThunderUI\\media\\aurabu");
-            bar.iborder.bottom:SetPoint("BOTTOMLEFT", bar.iborder.bottomleft, "BOTTOMRIGHT");
-            bar.iborder.bottom:SetPoint("BOTTOMRIGHT", bar.iborder.bottomright, "BOTTOMLEFT");
-            bar.iborder.bottom:SetHeight(12);
-            bar.iborder.bottom:SetTexCoord(1/3, 2/3, 2/3, 1);
-            bar.iborder.left = bar:CreateTexture(nil, "OVERLAY");
-            bar.iborder.left:SetTexture("Interface\\Addons\\TheThunderUI\\media\\aurabu");
-            bar.iborder.left:SetPoint("TOPLEFT", bar.iborder.topleft, "BOTTOMLEFT");
-            bar.iborder.left:SetPoint("BOTTOMLEFT", bar.iborder.bottomleft, "TOPLEFT");
-            bar.iborder.left:SetWidth(12);
-            bar.iborder.left:SetTexCoord(0, 1/3, 1/3, 2/3);
-            bar.iborder.right = bar:CreateTexture(nil, "OVERLAY");
-            bar.iborder.right:SetTexture("Interface\\Addons\\TheThunderUI\\media\\aurabu");
-            bar.iborder.right:SetPoint("TOPRIGHT", bar.iborder.topright, "BOTTOMRIGHT");
-            bar.iborder.right:SetPoint("BOTTOMRIGHT", bar.iborder.bottomright, "TOPRIGHT");
-            bar.iborder.right:SetWidth(12);
-            bar.iborder.right:SetTexCoord(2/3, 1, 1/3, 2/3);  
+			bar.ibg = CreateFrame("Frame", nil, bar)
+			bar.ibg:SetPoint("TOPLEFT", bar.icon, -2, 2)
+			bar.ibg:SetPoint("BOTTOMRIGHT", bar.icon, 2, -2)
+			bar.ibg:SetFrameLevel(bar:GetFrameLevel()-1)
+			SetTemplate(bar.ibg)
 			
 			tinsert(grouplootbars, bar);
 		end
@@ -390,41 +302,9 @@ function frame:UpdateGroupLoot()
 			SetDesaturation(bar.greed:GetNormalTexture(), not Greedable)
 
 		if ( bindOnPickUp ) then
-			bar.border.topleft:SetVertexColor(194/255, 172/255, 114/255, 1);
-			bar.border.bottomleft:SetVertexColor(194/255, 172/255, 114/255, 1);
-			bar.border.topright:SetVertexColor(194/255, 172/255, 114/255, 1);
-			bar.border.bottomright:SetVertexColor(194/255, 172/255, 114/255, 1);
-			bar.border.top:SetVertexColor(194/255, 172/255, 114/255, 1);
-			bar.border.bottom:SetVertexColor(194/255, 172/255, 114/255, 1);
-			bar.border.left:SetVertexColor(194/255, 172/255, 114/255, 1);
-			bar.border.right:SetVertexColor(194/255, 172/255, 114/255, 1);
-			
-            bar.iborder.topleft:SetVertexColor(194/255, 172/255, 114/255, 1);
-            bar.iborder.bottomleft:SetVertexColor(194/255, 172/255, 114/255, 1);
-            bar.iborder.topright:SetVertexColor(194/255, 172/255, 114/255, 1);
-            bar.iborder.bottomright:SetVertexColor(194/255, 172/255, 114/255, 1);
-            bar.iborder.top:SetVertexColor(194/255, 172/255, 114/255, 1);
-            bar.iborder.bottom:SetVertexColor(194/255, 172/255, 114/255, 1);
-            bar.iborder.left:SetVertexColor(194/255, 172/255, 114/255, 1);
-            bar.iborder.right:SetVertexColor(194/255, 172/255, 114/255, 1);
+			bar.ibg:SetBackdropBorderColor(unpack(ThunderDB["Main"]["Border color"]))
 		else
-			bar.border.topleft:SetVertexColor(0.25, 0.25, 0.25, 1);
-			bar.border.bottomleft:SetVertexColor(0.25, 0.25, 0.25, 1);
-			bar.border.topright:SetVertexColor(0.25, 0.25, 0.25, 1);
-			bar.border.bottomright:SetVertexColor(0.25, 0.25, 0.25, 1);
-			bar.border.top:SetVertexColor(0.25, 0.25, 0.25, 1);
-			bar.border.bottom:SetVertexColor(0.25, 0.25, 0.25, 1);
-			bar.border.left:SetVertexColor(0.25, 0.25, 0.25, 1);
-			bar.border.right:SetVertexColor(0.25, 0.25, 0.25, 1);
-			
-            bar.iborder.topleft:SetVertexColor(0.25, 0.25, 0.25, 1);
-            bar.iborder.bottomleft:SetVertexColor(0.25, 0.25, 0.25, 1);
-            bar.iborder.topright:SetVertexColor(0.25, 0.25, 0.25, 1);
-            bar.iborder.bottomright:SetVertexColor(0.25, 0.25, 0.25, 1);
-            bar.iborder.top:SetVertexColor(0.25, 0.25, 0.25, 1);
-            bar.iborder.bottom:SetVertexColor(0.25, 0.25, 0.25, 1);
-            bar.iborder.left:SetVertexColor(0.25, 0.25, 0.25, 1);
-            bar.iborder.right:SetVertexColor(0.25, 0.25, 0.25, 1);
+			bar.ibg:SetBackdropBorderColor(1, 0.8, 0.8, 1)
 		end
 			
 		bar:SetStatusBarColor(color.r, color.g, color.b, 1);

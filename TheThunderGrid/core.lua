@@ -19,12 +19,6 @@ if ThunderDB["UnitFramesRaid"]["KillBlizzRaid"] then
 	CompactRaidFrameContainer:Hide()
 end
 
-if ThunderDB["UnitFramesRaid"]["PowerbarSize"] > 0.1 then
-	ThunderDB["UnitFramesRaid"]["PowerbarSize"] = 0.1
-elseif ThunderDB["UnitFramesRaid"]["PowerbarSize"] < 0.0000001 then
-	ThunderDB["UnitFramesRaid"]["PowerbarSize"] = 0.0000001
-end
-
 -- SetPoint of MOTHERFUCKING DOOM!
 local function SAP()
 	local pos, posRel, spacingX, spacingY, colX, colY, growth, point

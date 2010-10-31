@@ -1,8 +1,13 @@
 ----------------------------------------------------------------------------------------
 -- rActionBarStyler
--- zork - 2010
--- modified by Hanomi for The Thunder UI v5
+-- All credits of this - Zork
 ----------------------------------------------------------------------------------------
+
+--[[
+	Butsu (edit by MonoLiT)
+	
+	All credits of this loot script is by Butsu and his author Haste.
+--]]
 
 local module = {}
 module.name = "ActionBars"

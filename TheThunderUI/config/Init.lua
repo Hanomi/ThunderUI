@@ -215,9 +215,9 @@ local function setupVars()
 	SetCVar("nameplateShowEnemyTotems", 1)
 	SetCVar("ShowClassColorInNameplate", 1)
 	SetCVar("bloattest", 0)
---	SetCVar("bloatnameplates", 0.0)--0.0
-	SetCVar("spreadnameplates", 0)--1
-	SetCVar("bloatthreat", 0)--1
+--	SetCVar("bloatnameplates", 0.0)
+	SetCVar("spreadnameplates", 0)
+	SetCVar("bloatthreat", 0)
 	SetCVar("screenshotQuality", 8)
 	SetCVar("cameraDistanceMax", 50)
 	SetCVar("cameraDistanceMaxFactor", 3.4)
@@ -433,25 +433,33 @@ end
 local LaunchMain = function(ThunderDB)
 
 ----------------------------------------------------------------------------------------
--- Pixel perfect script and auto uiscale
+-- Disable blizz menu scale
 ----------------------------------------------------------------------------------------
 
---disable blizz menu scale
 Advanced_UseUIScale:Hide()
 Advanced_UIScaleSlider:Hide()
 
---auto scale if enable
+----------------------------------------------------------------------------------------
+-- Auto scale if enable
+----------------------------------------------------------------------------------------
+
 if ThunderDB["Main"]["AutoUIScale"] == true then
 	ThunderDB["Main"]["UIScale"] = 768/string.match(({GetScreenResolutions()})[GetCurrentResolution()], "%d+x(%d+)")
 end
 
---pixel perfect size
+----------------------------------------------------------------------------------------
+-- Pixel size
+----------------------------------------------------------------------------------------
+
 local fixx = 768/string.match(GetCVar("gxResolution"), "%d+x(%d+)")/ThunderDB["Main"]["UIScale"]
 function fixscale(x)
     return fixx*math.floor(x/fixx+.5)
 end
 
---set it
+----------------------------------------------------------------------------------------
+-- Set Scale
+----------------------------------------------------------------------------------------
+
 local scalefix = CreateFrame("Frame")
 scalefix:RegisterEvent("PLAYER_LOGIN")
 scalefix:SetScript("OnEvent", function()
@@ -472,6 +480,16 @@ function SetTemplate(f)
 	})
 	f:SetBackdropColor(unpack(ThunderDB["Main"]["Background color"]))
 	f:SetBackdropBorderColor(unpack(ThunderDB["Main"]["Border color"]))
+end
+
+----------------------------------------------------------------------------------------
+-- Option check
+----------------------------------------------------------------------------------------
+
+if ThunderDB["UnitFramesRaid"]["PowerbarSize"] > 0.1 then
+	ThunderDB["UnitFramesRaid"]["PowerbarSize"] = 0.1
+elseif ThunderDB["UnitFramesRaid"]["PowerbarSize"] < 0.0000001 then
+	ThunderDB["UnitFramesRaid"]["PowerbarSize"] = 0.0000001
 end
 
 end
@@ -599,7 +617,7 @@ ThunderUI:SetScript("OnEvent", function()
 		parseOptions(childpanel, module.name, ThunderDB[module.name])
    end
 
-   print("|cff9DC7CCThe Thunder UI v.5|r "..lc_welcome)
+   print("|cff9DC7CCThe Thunder UI v 5.0|r "..lc_welcome)
 
    ThunderUI:UnregisterEvent("VARIABLES_LOADED")
    ThunderUI:SetScript("OnEvent", nil)
