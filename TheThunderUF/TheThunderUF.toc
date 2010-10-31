@@ -1,0 +1,12 @@
+## Interface: 40000
+## Title: |cff9DC7CCThe Thunder Unit Frames v.5|r
+## Version: 5.0
+## Notes: Unit Frames using the oUF framework.
+## Author: Hanomi
+## Credits: Freebaster, Caellian
+## Dependencies: TheThunderUI
+## X-oUF: oUF
+
+oUF_Templates.xml
+ttags.lua
+thunder.lua

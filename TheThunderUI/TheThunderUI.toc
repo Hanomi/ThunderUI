@@ -1,0 +1,41 @@
+## Interface: 40000
+## Title: |cff9DC7CCThe Thunder UI v.5|r
+## Notes: Minimalistic UI.
+## Author: Hanomi
+## Version: 5.0
+## Credits: Monolit, Fernir, Tukz, Tekkub, ALZA, Shestack, Caellian, Allez, Haste, Industrial, Nightcracker, p3lim, Zork, Tuller, Freebaser, Roth and other.
+## SavedVariables: ThunderDB, tgoldDB, bb08df87101dd7f2161e5b77cf750f753c58ef1b
+## X-oUF: oUF
+
+locale\locale.lua
+
+config\Init.lua
+
+modules\Font.lua
+modules\Actionbars.lua
+modules\ButtonStyler.lua
+modules\Chat.lua
+modules\Panels.lua
+modules\Range.lua
+modules\Minimap.lua
+modules\Tooltips.lua
+modules\Datatext.lua
+modules\Bags.lua
+modules\Buffs.lua
+modules\Loot.lua
+modules\Lootroll.lua
+modules\Cooldown.lua
+modules\Binds.lua
+modules\Nameplates.lua
+modules\Tweaker.lua
+modules\SkinME.lua
+modules\ZZTempo.lua
+
+libs\oUF\oUF.xml
+
+libs\plugins\oUF_Experience.lua
+libs\plugins\oUF_MovableFrames.lua
+libs\plugins\oUF_Reputation.lua
+libs\plugins\oUF_Smooth.lua
+libs\plugins\oUF_SpellRange.lua
+libs\plugins\oUF_TotemBar.lua
