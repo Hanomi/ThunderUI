@@ -845,16 +845,23 @@ if (unit == "player" or unit == "target" or unit == "focus") and ThunderDB["Unit
 	self.Castbar:SetStatusBarTexture(ThunderDB["Main"]["BarText"], "OVERLAY")
 	self.Castbar:GetStatusBarTexture():SetHorizTile(false)
 	self.Castbar:SetStatusBarColor(.95, .95, .95, 0.70)
+	
 	if unit == "focus" then
 		self.Castbar:SetPoint("TOPLEFT", UIParent, "CENTER", fixscale(-150), fixscale(210))
 		self.Castbar:SetPoint("BOTTOMRIGHT", UIParent, "CENTER", fixscale(150), fixscale(190))
+	elseif unit == "player" and ThunderDB["UnitFrames"]["CastbarMaxi"] then
+		self.Castbar:SetPoint("TOPLEFT", UIParent, "BOTTOM", fixscale(-112), fixscale(ThunderDB["UnitFrames"]["CastbarMaxi X pos"]+18))
+		self.Castbar:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOM", fixscale(140), fixscale(ThunderDB["UnitFrames"]["CastbarMaxi X pos"]))
+	elseif unit == "target" and ThunderDB["UnitFrames"]["CastbarMaxi"] then
+		self.Castbar:SetPoint("TOPLEFT", self, "TOPLEFT", 3, 98)
+		self.Castbar:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", -28, 80)	
 	else
 		self.Castbar:SetParent(self.Namepanel)
 		self.Castbar:SetPoint("TOPLEFT", self.Namepanel, "TOPLEFT", 1, -1)
 		self.Castbar:SetPoint("BOTTOMRIGHT", self.Namepanel, "BOTTOMRIGHT", -1, 1)
 	end
 	
-	if unit == "focus" then
+	if ThunderDB["UnitFrames"]["CastbarMaxi"] or unit == "focus" then
 		self.Castbarbg = CreateFrame("Frame", nil, self.Castbar)
 		self.Castbarbg:SetPoint("TOPLEFT", self.Castbar, "TOPLEFT", fixscale(-2), fixscale(2))
 		self.Castbarbg:SetPoint("BOTTOMRIGHT", self.Castbar, "BOTTOMRIGHT", fixscale(2), fixscale(-2))
@@ -899,7 +906,11 @@ if ThunderDB["UnitFrames"]["CastbarIcon"] == true and (unit == "player" or unit 
 	end
 	self.Castbar.Icon:SetTexCoord(.1, .9, .1, .9)
 
-	if ThunderDB["UnitFrames"]["Portrait"] and unit == "player" then
+	if ThunderDB["UnitFrames"]["CastbarMaxi"] and unit == "player" then
+		self.Castbar.Icon:SetPoint("BOTTOMRIGHT", self.Castbar, "BOTTOMLEFT", -7, 0)
+	elseif ThunderDB["UnitFrames"]["CastbarMaxi"] and unit == "target" then
+		self.Castbar.Icon:SetPoint("BOTTOMLEFT", self.Castbar, "BOTTOMRIGHT", 7, 0)
+	elseif ThunderDB["UnitFrames"]["Portrait"] and unit == "player" then
 		self.Castbar.Icon:SetPoint("BOTTOMRIGHT", self.Castbar, "BOTTOMLEFT", -32-ThunderDB["UnitFrames"]["Height"], 0)
 	elseif ThunderDB["UnitFrames"]["Portrait"] and unit == "target" then
 		self.Castbar.Icon:SetPoint("BOTTOMLEFT", self.Castbar, "BOTTOMRIGHT", ThunderDB["UnitFrames"]["Height"]+32, 0)
@@ -1171,13 +1182,13 @@ end
 ----------------------------------------------
 -- SpellRange
 ----------------------------------------------
-
+--[[
 if unit == "focus" and IsAddOnLoaded("oUF_SpellRange") then
 	self.SpellRange = {
 	insideAlpha = 1,
 	outsideAlpha = 0.5}
 end
-
+]]
 ----------------------------------------------
 -- UnitSpecific
 ----------------------------------------------
