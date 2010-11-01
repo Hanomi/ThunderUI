@@ -354,12 +354,36 @@ end
 
 local _, class = UnitClass("player")
 local dispellClass = {
-    PRIEST = { Magic = true, Disease = true, },
-    SHAMAN = { Poison = true, Disease = true, Curse = true, },
-    PALADIN = { Magic = true, Poison = true, Disease = true, },
-    MAGE = { Curse = true, },
-    DRUID = { Curse = true, Poison = true, },
+    PRIEST = {
+		Magic = true,
+		Disease = true,
+	},
+    SHAMAN = {
+		Curse = true,
+	},
+    PALADIN = {
+		Poison = true,
+		Disease = true,
+	},
+    MAGE = {
+		Curse = true,
+	},
+    DRUID = {
+		Curse = true,
+		Poison = true,
+	},
 }
+
+local TalentChecker = CreateFrame("Frame");
+TalentChecker:RegisterEvent("PLAYER_ENTERING_WORLD");
+TalentChecker:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED");
+TalentChecker:RegisterEvent("CHARACTER_POINTS_CHANGED");
+TalentChecker:SetScript("OnEvent", function()
+	dispellClass.SHAMAN.Magic = (select(5, GetTalentInfo(3, 12, false, false, nil)) == 1);
+	dispellClass.PALADIN.Magic = (select(5, GetTalentInfo(1, 14, false, false, nil)) == 1);
+	dispellClass.DRUID.Magic = (select(5, GetTalentInfo(3, 17, false, false, nil)) == 1);
+end);
+
 local dispellist = dispellClass[class] or {}
 local dispellPriority = {
     Magic = 4,
