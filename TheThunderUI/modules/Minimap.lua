@@ -133,7 +133,7 @@ GuildInstanceDifficulty:SetScale(0.85)
 ----------------------------------------------------------------------------------------
 MiniMapMailFrame:ClearAllPoints()
 MiniMapMailFrame:SetPoint("BOTTOMRIGHT", Minimap, "BOTTOMRIGHT", 6, -8)
-MiniMapMailIcon:SetTexture("Interface\\AddOns\\!ThunderConfig\\media\\mail")
+MiniMapMailIcon:SetTexture("Interface\\AddOns\\TheThunderUI\\media\\mail")
 
 ----------------------------------------------------------------------------------------
 -- Invites Icon
