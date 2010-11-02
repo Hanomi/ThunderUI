@@ -373,7 +373,7 @@ local dispellClass = {
 		Poison = true,
 	},
 }
-
+ -- talentchecker, thx for original idea Heckffy
 local TalentChecker = CreateFrame("Frame");
 TalentChecker:RegisterEvent("PLAYER_ENTERING_WORLD");
 TalentChecker:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED");
@@ -500,7 +500,7 @@ local sharedstyle = function(self)
 	self.Health.value:SetJustifyH("RIGHT")
 	self.Health.value:SetShadowColor(0, 0, 0)
 	self.Health.value:SetShadowOffset(1, -1)
-	self.Health.value:SetTextColor(0.3, 1, 0.3)
+	self.Health.value:SetTextColor(0.1, 0.3, 0.3)
 	self.Health.value:SetPoint("BOTTOMRIGHT", -1, 1)
 
 ----------------------------------------------

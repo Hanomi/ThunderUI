@@ -1002,7 +1002,7 @@ end
 ----------------------------------------------
 -- Пвп тринькет, необходим скин!
 ----------------------------------------------	
-
+--[[
 if IsAddOnLoaded("oUF_Trinkets") and (unit and unit:find('arena%d') and (not unit:find("arena%dtarget")) and (not unit:find("arena%dpet"))) then
 	self.Trinket = CreateFrame("Frame", nil, self)
 	self.Trinket:SetHeight(30)
@@ -1010,7 +1010,7 @@ if IsAddOnLoaded("oUF_Trinkets") and (unit and unit:find('arena%d') and (not uni
 	self.Trinket:SetPoint("TOPRIGHT", self, "TOPLEFT", -3, 1)
 	self.Trinket.trinketUseAnnounce = false
 	self.Trinket.trinketUpAnnounce = false
-end
+end]]
 
 ----------------------------------------------
 -- Аур всем и каждому!

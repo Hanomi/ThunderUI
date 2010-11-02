@@ -3,12 +3,6 @@
 -- All credits of this - Zork
 ----------------------------------------------------------------------------------------
 
---[[
-	Butsu (edit by MonoLiT)
-	
-	All credits of this loot script is by Butsu and his author Haste.
---]]
-
 local module = {}
 module.name = "ActionBars"
 module.Init = function()
