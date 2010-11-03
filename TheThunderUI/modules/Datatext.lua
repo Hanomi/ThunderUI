@@ -54,7 +54,7 @@ if ThunderDB["Datatext"]["fps_ms"] > 0 then
 	local Stat1 = CreateFrame("Frame")
 
 	local Text  = UIParent:CreateFontString(nil, "OVERLAY")
-	Text:SetFont(ThunderDB["Datatext"]["DataFont"], ThunderDB["Datatext"]["DataFontSize"])
+	Text:SetFont(ThunderDB["Datatext"]["DataFont"], ThunderDB["Datatext"]["DataFontSize"], "OUTLINE")
 	panel_setpoint(ThunderDB["Datatext"]["fps_ms"], Text)
 
 
@@ -90,7 +90,7 @@ if ThunderDB["Datatext"]["mem"] > 0 then
 	Stat2:EnableMouse(true)
 
 	local Text  = UIParent:CreateFontString(nil, "OVERLAY")
-	Text:SetFont(ThunderDB["Datatext"]["DataFont"], ThunderDB["Datatext"]["DataFontSize"])
+	Text:SetFont(ThunderDB["Datatext"]["DataFont"], ThunderDB["Datatext"]["DataFontSize"], "OUTLINE")
 	panel_setpoint(ThunderDB["Datatext"]["mem"], Text)
 
 
@@ -218,7 +218,7 @@ if ThunderDB["Datatext"]["guild"] > 0 then
 	local ttsubh = {r=0.75,g=0.9,b=1}
 
 	local Text  = UIParent:CreateFontString(nil, "OVERLAY")
-	Text:SetFont(ThunderDB["Datatext"]["DataFont"], ThunderDB["Datatext"]["DataFontSize"])
+	Text:SetFont(ThunderDB["Datatext"]["DataFont"], ThunderDB["Datatext"]["DataFontSize"], "OUTLINE")
 	panel_setpoint(ThunderDB["Datatext"]["guild"], Text)
 
 
@@ -304,7 +304,7 @@ if ThunderDB["Datatext"]["bags"] > 0 then
     Stat4:EnableMouse(true)
 
     local Text  = UIParent:CreateFontString(nil, "OVERLAY")
-    Text:SetFont(ThunderDB["Datatext"]["DataFont"], ThunderDB["Datatext"]["DataFontSize"])
+    Text:SetFont(ThunderDB["Datatext"]["DataFont"], ThunderDB["Datatext"]["DataFontSize"], "OUTLINE")
     panel_setpoint(ThunderDB["Datatext"]["bags"], Text)
 
 
@@ -337,7 +337,7 @@ local Stat5 = CreateFrame("Frame")
 	local ttsubh = {r=0.75,g=0.9,b=1}
 
 	local Text  = UIParent:CreateFontString(nil, "LOW")
-	Text:SetFont(ThunderDB["Datatext"]["DataFont"], ThunderDB["Datatext"]["DataFontSize"])
+	Text:SetFont(ThunderDB["Datatext"]["DataFont"], ThunderDB["Datatext"]["DataFontSize"], "OUTLINE")
 	panel_setpoint(ThunderDB["Datatext"]["friends"], Text)
 
 
@@ -432,7 +432,7 @@ if ThunderDB["Datatext"]["armor"] > 0 then
 	Stat6:EnableMouse(true)
 
 	local Text  = UIParent:CreateFontString(nil, "OVERLAY")
-	Text:SetFont(ThunderDB["Datatext"]["DataFont"], ThunderDB["Datatext"]["DataFontSize"])
+	Text:SetFont(ThunderDB["Datatext"]["DataFont"], ThunderDB["Datatext"]["DataFontSize"], "OUTLINE")
 	panel_setpoint(ThunderDB["Datatext"]["armor"], Text)
 
 
@@ -494,7 +494,7 @@ if ThunderDB["Datatext"]["gold"] > 0 then
 	Stat7:EnableMouse(true)
 
 	local Text  = UIParent:CreateFontString(nil, "OVERLAY")
-	Text:SetFont(ThunderDB["Datatext"]["DataFont"], ThunderDB["Datatext"]["DataFontSize"])
+	Text:SetFont(ThunderDB["Datatext"]["DataFont"], ThunderDB["Datatext"]["DataFontSize"], "OUTLINE")
 	panel_setpoint(ThunderDB["Datatext"]["gold"], Text)
 
 
@@ -646,7 +646,7 @@ if ThunderDB["Datatext"]["wowtime"] > 0 then
    Stat8:EnableMouse(true)
 
    local Text  = UIParent:CreateFontString(nil, "OVERLAY")
-   Text:SetFont(ThunderDB["Datatext"]["DataFont"], ThunderDB["Datatext"]["DataFontSize"])
+   Text:SetFont(ThunderDB["Datatext"]["DataFont"], ThunderDB["Datatext"]["DataFontSize"], "OUTLINE")
    panel_setpoint(ThunderDB["Datatext"]["wowtime"], Text)
    
    local int = 1

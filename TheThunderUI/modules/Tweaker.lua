@@ -59,6 +59,7 @@ if ThunderDB["Tweaker"]["AcceptPartyInvite"] then
 	ai:RegisterEvent("PARTY_INVITE_REQUEST")
 	ai:SetScript("OnEvent", function(frame, event, name)
 		if(IsFriend(name)) then
+			if MiniMapLFGFrame:IsShown() then return end -- Prevent losing LFD
 			aInfoText_ShowText(L_INVITE..name)
 			print(format("|cffffff00"..L_INVITE..name.."."))
 			AcceptGroup()
