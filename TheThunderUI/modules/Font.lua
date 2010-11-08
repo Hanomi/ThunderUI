@@ -27,8 +27,8 @@ eventframe:SetScript("OnEvent", function(self, event, addon)
 	local NUMBER     = ThunderDB[l_main][l_font]
 	local fSize      = ThunderDB[l_main][l_fontsize] or 11
 
-	UIDROPDOWNMENU_DEFAULT_TEXT_HEIGHT = 12
-	CHAT_FONT_HEIGHTS = {11, 12, 13, 15, 15, 16, 17, 18, 19, 20}
+	UIDROPDOWNMENU_DEFAULT_TEXT_HEIGHT = fSize
+	CHAT_FONT_HEIGHTS = {10, 11, 12, 13, 15, 15, 16, 17, 18, 19, 20}
 
 	UNIT_NAME_FONT     = NORMAL
 	NAMEPLATE_FONT     = NORMAL
