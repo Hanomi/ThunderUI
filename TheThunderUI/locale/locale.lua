@@ -587,12 +587,12 @@ elseif(L=="frFR") then
 	}
 else
 	--tpanels
-	tp_guild = l_dguild
+	tp_guild = "Guild"
 	tp_noguild = "No Guild"
 	tp_bags = "Bags: "
-	tp_friends = l_dfriends
+	tp_friends = "Friends"
 	tp_online = "Online: "
-	tp_armor = l_darmor
+	tp_armor = "Armor"
 	tp_earned = "Earned:"
 	tp_spent = "Spent:"
 	tp_deficit = "Deficit:"

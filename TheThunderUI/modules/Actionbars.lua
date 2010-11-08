@@ -540,8 +540,8 @@ end
 local petnum = NUM_PET_ACTION_SLOTS
 
 local fbarpet = CreateFrame("Frame","rABS_PetBar",UIParent, "SecureHandlerStateTemplate")
-fbarpet:SetWidth(ThunderDB[l_ab][l_abSBusize]*petnum+ThunderDB[l_ab][l_abOffset]*(petnum-1))
-fbarpet:SetHeight(ThunderDB[l_ab][l_abSBusize])
+fbarpet:SetWidth(ThunderDB[l_ab][l_abBusize]*petnum+ThunderDB[l_ab][l_abOffset]*(petnum-1))
+fbarpet:SetHeight(ThunderDB[l_ab][l_abBusize])
 if ThunderDB[l_ab][l_abThird] then
 	fbarpet:SetPoint(RABSpositions[9].a,RABSpositions[9].x,RABSpositions[9].y+ThunderDB[l_ab][l_abBusize]+ThunderDB[l_ab][l_abOffset])
 else
@@ -558,7 +558,7 @@ PetActionBarFrame:SetParent(fbarpet)
 for i=1, petnum do
 	local petbu = _G["PetActionButton"..i]
 	local cd = _G["PetActionButton"..i.."Cooldown"]
-	petbu:SetSize(ThunderDB[l_ab][l_abSBusize], ThunderDB[l_ab][l_abSBusize])
+	petbu:SetSize(ThunderDB[l_ab][l_abBusize], ThunderDB[l_ab][l_abBusize])
 	petbu:ClearAllPoints()
 	if i == 1 then
 		petbu:SetPoint("BOTTOMLEFT", fbarpet, 0,0)
