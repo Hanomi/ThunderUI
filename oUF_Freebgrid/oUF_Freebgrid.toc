@@ -1,9 +1,8 @@
 ## Interface: 40000
-## Title: |cff9DC7CCThe Thunder Raid Frames v.5|r 
-## Version: 5.0
+## Title: |cff9DC7CCoUF_Freebgrid|r 
+## Version: cute v5
 ## Notes: Raid Frames using the oUF framework.
-## Author: Hanomi
-## Credits: Freebaster, Tukz, Caellian
+## Author: Freebaster
 ## Dependencies: TheThunderUI, TheThunderUF
 ## X-oUF: oUF
 

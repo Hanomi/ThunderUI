@@ -90,7 +90,7 @@ end
 oUF.TagEvents['thunder:color'] = "UNIT_HAPPINESS"
 if (not oUF.Tags['thunder:color']) then
 	oUF.Tags['thunder:color'] = function(unit)
-		if ThunderDB["UnitFrames"]["ClassColors"] and not ThunderDB["UnitFrames"]["InvertClassColors"] then
+		if ThunderDB[l_uf][l_ufcc] and not ThunderDB[l_uf][l_uficc] then
 			if (unit == "pet" and GetPetHappiness()) then
 				local c = thundercolors.happiness[GetPetHappiness()]
 				return string.format("|cff%02x%02x%02x", c[1] * 255, c[2] * 255, c[3] * 255)

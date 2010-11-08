@@ -4,13 +4,13 @@
 ----------------------------------------------------------------------------------------
 
 local module = {}
-module.name = "Tweaker"
+module.name = l_as
 module.Init = function()
 
 ----------------------------------------------------------------------------------------
 -- Clear UIErrors frame(ncError by Nightcracker)
 ----------------------------------------------------------------------------------------
-if ThunderDB["Tweaker"]["HideErrors"] then
+if ThunderDB[l_as][l_asHE] then
 	local f, o, ncErrorDB = CreateFrame("Frame"), L_ERRORS, {
 	["Inventory is full."] = true,
 	["Your quest log is full"] = true,
@@ -35,7 +35,7 @@ end
 ----------------------------------------------------------------------------------------
 -- Auto decline duels
 ----------------------------------------------------------------------------------------
-if ThunderDB["Tweaker"]["DeclineDuels"] then
+if ThunderDB[l_as][l_asDD] then
 	local dd = CreateFrame("Frame")
 	dd:RegisterEvent("DUEL_REQUESTED")
 	dd:SetScript("OnEvent", function(self, event, name)
@@ -49,7 +49,7 @@ end
 ----------------------------------------------------------------------------------------
 -- Auto Accept Invites
 ----------------------------------------------------------------------------------------
-if ThunderDB["Tweaker"]["AcceptPartyInvite"] then
+if ThunderDB[l_as][l_asAPI] then
 	local IsFriend = function(name)
 		for i = 1, GetNumFriends() do if(GetFriendInfo(i) == name) then return true end end
 		if(IsInGuild()) then for i = 1, GetNumGuildMembers() do if(GetGuildRosterInfo(i) == name) then return true end end end
@@ -80,7 +80,7 @@ end
 ----------------------------------------------------------------------------------------
 --	Grab mail in 1 button(OpenAll by Kemayo)
 ----------------------------------------------------------------------------------------
-if ThunderDB["Tweaker"]["GrabMail"] then
+if ThunderDB[l_as][l_asmail] then
 
 if (IsAddOnLoaded("QuickAuctions") or IsAddOnLoaded("OpenAll")) then return end
 
@@ -213,7 +213,7 @@ end
 ----------------------------------------------------------------------------------------
 -- Mob marking(by ALZA)
 ----------------------------------------------------------------------------------------
-if ThunderDB["Tweaker"]["MobMarking"] then
+if ThunderDB[l_as][l_asmark] then
 	local menuFrame = CreateFrame("Frame", "aSettingsMarkingFrame", UIParent, "UIDropDownMenuTemplate")
 	local menuList = {
 		{text = L_CLEAR,
@@ -250,7 +250,7 @@ end
 ----------------------------------------------------------------------------------------
 --	Merchant ( tukui part )
 ----------------------------------------------------------------------------------------
-if ThunderDB["Tweaker"]["AutoMerchant"] then
+if ThunderDB[l_as][l_asmerch] then
 	local f = CreateFrame("Frame")
 	f:SetScript("OnEvent", function()
 
@@ -467,6 +467,14 @@ end
 
 SLASH_CLFIX1 = "/clfix"
 SlashCmdList["CLFIX"] = CLFIX
+
+----------------------------------------------------------------------------------------
+-- Moving TicketStatusFrame
+----------------------------------------------------------------------------------------
+
+TicketStatusFrame:ClearAllPoints()
+TicketStatusFrame:SetPoint("TOPLEFT",UIParent,"TOPLEFT", 240, 0)
+TicketStatusFrame.SetPoint = function() end
 
 ----------------------------------------------------------------------------------------
 -- Info text or other(Do not change or delete!!!)

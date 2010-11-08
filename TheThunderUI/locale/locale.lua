@@ -26,15 +26,15 @@ if(GetLocale() == "ruRU") then
 	L_ALL = "Всё"
 	L_CASH = "Золото"
 	L_REACH = "Сбор почты окончен."
-	
+
 	--aRaidCooldowns
 	L_COOLDOWNS = "Перезарядка: "
-	
+
 	--BaudErrorFrame
 	L_ERRORFRAME = "Ошибки сценариев lua"
 	L_ERRORFRAME_L = "Левый клик для просмотра ошибок."
 	L_ERRORFRAME_R = "Правый клик для настроек."
-	
+
 	--oUF_Shestak
 	L_GHOST = "Призрак"
 	L_DEAD = "Мёртв"
@@ -42,7 +42,7 @@ if(GetLocale() == "ruRU") then
 	L_DRAGON = "Дух дракондора"
 	L_VIPER = "Дух гадюки"
 	L_MANA = "Мало маны"
-	
+
 	--aTooltip
 	L_NO_TALENT = "Нет талантов"
 	L_LOADING = "Загрузка..."
@@ -52,7 +52,7 @@ if(GetLocale() == "ruRU") then
 	L_ACH_STATUS = "Ваш статус:"
 	L_ACH_COMPLETE = "Ваш статус: Получено "
 	L_ACH_INCOMPLETE = "Ваш статус: Не завершено"
-	
+
 	--Butsu
 	L_FISH = "Рыбалка"
 	L_EMPTY = "Пусто"
@@ -71,16 +71,16 @@ if(GetLocale() == "ruRU") then
 	--idChat
 	L_COPY_URL = "Копирование ссылки"
 	L_COPY_CHAT = "Нажмите, чтобы скопировать текст"
-	
+
 	--LitePanels AFK module
 	L_PANELS_AFK = "Вы отсутствуете!"
 	L_PANELS_AFK_CLICK = "Нажмите, чтобы скрыть."
-	
+
 	--pMap
 	L_CURSOR = "Курсор: "
 	L_PLAYER = "Игрок: "
 	L_BOUNDS = "Вне карты!"
-	
+
 	--aMiniMap
 	L_LFRAID = "Поиск рейда"
 	L_CALENDAR = "Календарь"
@@ -124,15 +124,15 @@ elseif(GetLocale() == "frFR") then
 	L_ALL = "Tous"
 	L_CASH = "Or"
 	L_REACH = "Collection presque complète."
-	
+
 	--aRaidCooldowns
 	L_COOLDOWNS = "Accusation: "
-	
+
 	--BaudErrorFrame
 	L_ERRORFRAME = "Erreur sur les cadres"
 	L_ERRORFRAME_L = "Clic gauche pour afficher les erreurs."
 	L_ERRORFRAME_R = "Clic-droit pour les options."
-	
+
 	--oUF_Shestak
 	L_GHOST = "Spectre"
 	L_DEAD = "Mort"
@@ -140,7 +140,7 @@ elseif(GetLocale() == "frFR") then
 	L_DRAGON = "Aspect du faucon-dragon"
 	L_VIPER = "Aspect de la vipère"
 	L_MANA = "Peu mana"
-	
+
 	--aTooltip
 	L_NO_TALENT = "Aucun talent"
 	L_LOADING = "Télécharger..."
@@ -150,7 +150,7 @@ elseif(GetLocale() == "frFR") then
 	L_ACH_STATUS = "Votre statut:"
 	L_ACH_COMPLETE = "Votre statut: Oui "
 	L_ACH_INCOMPLETE = "Votre statut: Non terminé"
-	
+
 	--Butsu
 	L_FISH = "Pêche"
 	L_EMPTY = "Vide"
@@ -169,16 +169,16 @@ elseif(GetLocale() == "frFR") then
 	--idChat
 	L_COPY_URL = "Copier le lien"
 	L_COPY_CHAT = "Cliquez ici pour copier le texte"
-	
+
 	--LitePanels AFK module
 	L_PANELS_AFK = "Tu es AFK!"
 	L_PANELS_AFK_CLICK = "Faites un clic droit de se cacher."
-	
+
 	--pMap
 	L_CURSOR = "Curseur: "
 	L_PLAYER = "Joueur: "
 	L_BOUNDS = "L'extérieur de la carte!"
-	
+
 	--aMiniMap
 	L_LFRAID = "Recherche rade"
 	L_CALENDAR = "Calendrier"
@@ -211,9 +211,9 @@ elseif(GetLocale() == "deDE") then
     L_DIAMOND = "Diamant"
     L_CIRCLE = "Kreis"
     L_STAR = "Stern"
-    L_DALARAN = "Dalaran" 
+    L_DALARAN = "Dalaran"
     L_UNDERBELLY = "Die Schattenseite"
-    L_KRASUS = "Krasus' Landeplatz" 
+    L_KRASUS = "Krasus' Landeplatz"
     L_WINTERGRASP = "Tausendwinter"
     L_VC = "Die Violette Zitadelle"
     L_DONE = "Alles Fertig."
@@ -222,15 +222,15 @@ elseif(GetLocale() == "deDE") then
     L_ALL = "Alles nehmen"
     L_CASH = "Geld nehmen"
     L_REACH = "Ende erreicht."
-    
+
     --aRaidCooldowns
     L_COOLDOWNS = "Abklingzeit: "
-    
+
     --BaudErrorFrame
     L_ERRORFRAME = "Fehler Fenster"
     L_ERRORFRAME_L = "Links-Klick um Fehler anzuzeigen."
     L_ERRORFRAME_R = "Rechts-Klick für die Optionen."
-    
+
     --oUF_Shestak
     L_GHOST = "Geist"
     L_DEAD = "Tod"
@@ -238,7 +238,7 @@ elseif(GetLocale() == "deDE") then
     L_DRAGON = "Aspekt des Drachenfalken"
     L_VIPER = "Aspekt der Viper"
     L_MANA = "Niedriges Mana"
-    
+
     --aTooltip
     L_NO_TALENT = "Keine Talente"
     L_LOADING = "Lade..."
@@ -248,7 +248,7 @@ elseif(GetLocale() == "deDE") then
     L_ACH_STATUS = "Dein Fortschritt:"
     L_ACH_COMPLETE = "Dein Status: Fertig gestellt am "
     L_ACH_INCOMPLETE = "Dein Status: Noch nicht Ferig"
-    
+
     --Butsu
     L_FISH = "Angeln"
     L_EMPTY = "Leer"
@@ -267,16 +267,16 @@ elseif(GetLocale() == "deDE") then
     --idChat
     L_COPY_URL = "Link kopieren"
     L_COPY_CHAT = "Klicken um Text zu Kopieren"
-    
+
     --LitePanels AFK module
     L_PANELS_AFK = "Du bist AFK!"
     L_PANELS_AFK_CLICK = "Rechts-Klick zum Verstecken."
-    
+
     --pMap
     L_CURSOR = "Mauszeiger: "
     L_PLAYER = "Spieler: "
     L_BOUNDS = "Außerhalb der Begrenzung!"
-    
+
     --aMiniMap
     L_LFRAID = "Schlachtzugbrowser"
     L_CALENDAR = "Kalender"
@@ -313,9 +313,9 @@ else
     L_DIAMOND = "Diamond"
     L_CIRCLE = "Circle"
     L_STAR = "Star"
-	L_DALARAN = "Dalaran" 
+	L_DALARAN = "Dalaran"
     L_UNDERBELLY = "The Underbelly"
-    L_KRASUS = "Krasus' Landing" 
+    L_KRASUS = "Krasus' Landing"
     L_WINTERGRASP = "Wintergrasp"
     L_VC = "The Violet Citadel"
 	L_DONE = "All done."
@@ -324,10 +324,10 @@ else
 	L_ALL = "Take All"
 	L_CASH = "Take Cash"
 	L_REACH = "Reached the end."
-	
+
 	--aRaidCooldowns
 	L_COOLDOWNS = "CD: "
-	
+
 	--BaudErrorFrame
 	L_ERRORFRAME = "Error Frame"
 	L_ERRORFRAME_L = "Left-Click to view errors."
@@ -369,16 +369,16 @@ else
 	--idChat
 	L_COPY_URL = "Copy URL"
 	L_COPY_CHAT = "Click to copy text"
-	
+
 	--LitePanels AFK module
 	L_PANELS_AFK = "You are AFK!"
 	L_PANELS_AFK_CLICK = "Right click to hide."
 
 	--pMap
 	L_CURSOR = "Cursor: "
-	L_PLAYER = "Player: " 
+	L_PLAYER = "Player: "
 	L_BOUNDS = "Out of bounds!"
-	
+
 	--aMiniMap
 	L_LFRAID = "LFRaid"
 	L_CALENDAR = "Calendar"
@@ -386,7 +386,7 @@ else
 	--cargBags
 	L_FREE = "Space: "
 	L_OUT_OFF = " / "
-	L_BAGS = "Bags"
+	L_BAGS = l_dbags
 	L_INVENTORY = "Inventory"
 	L_BANK = "Bank"
 
@@ -415,14 +415,13 @@ local function UIHelp()
 		print("|cffff9912/rd|r - Распустить рейд.")
 		print("|cffff9912/wf|r - Разблокировать окно отслеживания заданий для перемещения.")
 		print("|cffff9912/en|r - Включение модификации(|cffff9912/en название_модификации|r).")
-		print("|cffff9912/dis|r - Выключение модификации(|cffff9912/dis название_модификации|r).") 
+		print("|cffff9912/dis|r - Выключение модификации(|cffff9912/dis название_модификации|r).")
 		print(" ")
 		print("|cffbcee68Общая информация по интерфейсу:|r")
 		print("|cffff9912-|r Правый клик по мини-карте для открытия календаря.")
 		print("|cffff9912-|r Средний клик по мини-карте для микро-меню.")
 		print("|cffff9912-|r Назначение клавиш осуществляюся через /hb.")
-		print("|cffff9912-|r Включение и выключение панелей команд осуществляется через /thunder -> Action Bars")
-		print("|cffff9912-|r Зажмите Shift и Alt для перемещения панелей команд")
+		print("|cffff9912-|r Включение и выключение панелей команд осуществляется через /thunder -> Панели команд")
 		print(" ")
 		print("|cffbcee68При первом использовании интерфейса:|r")
 		print("|cffff9912-|r Введите команду |cffff9912/uiconfigure|r для применения настроек.")
@@ -447,7 +446,6 @@ local function UIHelp()
 		print("|cffff9912-|r Middleclick the Minimap to show micromenu.")
 		print("|cffff9912-|r Bindings button /hb.")
 		print("|cffff9912-|r Disable or Enable more actionbars /thunder -> Action Bars")
-		print("|cffff9912-|r Hold Shift and Alt key for moving action bars")
 		print(" ")
 		print("|cff00ff00The first use of this interface:|r")
 		print("|cffff9912-|r Enter command |cffff9912/uiconfigure|r to apply the settings.")
@@ -456,7 +454,7 @@ local function UIHelp()
 	end
 end
 
-SlashCmdList["UIHELP"] = UIHelp	
+SlashCmdList["UIHELP"] = UIHelp
 SLASH_UIHELP1 = "/UIHelp"
 
 local L = GetLocale()
@@ -572,7 +570,7 @@ elseif(L=="frFR") then
 	tp_totalgold = "total: "
 	tp_savedraid = "Raid(s) enregistré(s)"
 	tp_currency = "Monnaie:"
-	
+
 
 	Slots = {
 	[1] = {1, "Tête", 1000},
@@ -589,12 +587,12 @@ elseif(L=="frFR") then
 	}
 else
 	--tpanels
-	tp_guild = "Guild"
+	tp_guild = l_dguild
 	tp_noguild = "No Guild"
 	tp_bags = "Bags: "
-	tp_friends = "Friends"
+	tp_friends = l_dfriends
 	tp_online = "Online: "
-	tp_armor = "Armor"
+	tp_armor = l_darmor
 	tp_earned = "Earned:"
 	tp_spent = "Spent:"
 	tp_deficit = "Deficit:"
@@ -615,7 +613,7 @@ else
 	tp_totalgold = "Total: "
 	tp_savedraid = "Saved Raid(s)"
 	tp_currency = "Currency:"
-	
+
 	Slots = {
 		[1] = {1, "Head", 1000},
 		[2] = {3, "Shoulder", 1000},
@@ -632,138 +630,186 @@ else
 end
 
 if(L=="ruRU") then
-	lc_welcome = "успешно загружен!\nпомощь: /UIHelp\nПожалуйста сообщайте о всех проблемах в комментариях на wowinterface.com"
+	l_welcome = "успешно загружен!\nпомощь: /UIHelp\nПожалуйста сообщайте о всех проблемах в комментариях на wowinterface.com"
+	l_intalltext = "The Thunder UI v 5 установлен.|nНеобходимо перезагрузить интерфейс для сохранения всех настроек.|n Вы сможете изменять их в меню |cffaaaaff/thunder|r используя кнопку |cffaaffaa\"Сохранить\"|r"
+	l_settingchanged = "Настройки изменены.|nПерезагрузить интерфейс?"
+	l_reset = "|cffff0000По умолчанию|r"
+	l_save = "Сохранить"
+	l_resetmodule = "Опции модуля по умолчанию"
+	l_enableG = "|cff00ff00Использовать модуль|r"
+	l_enableR = "|cffff0000Использовать модуль|r"
+
+	l_main = "Main"
+	l_font = "Основной шрифт"
+	l_fontsize = "Размер основного шрифта"
+	l_autoscale = "Автоматически масштабировать интерфейс"
+	l_scale = "Ручной масштаб"
+	l_blank = "Текстура - пустая"
+	l_bar = "Текстура - статус бар"
+	l_shadow = "Текстура - тень"
+	l_cp = "Текстура - комбопоинт"
+	l_bcolor = "Цвет всех фонов"
+	l_bgcolor = "Цвет всех границ"
+
+	l_mbuffs = "Эффекты и ауры"
+	l_mBuffDebuffs = "Отображать отрицательные эффекты"
+	l_mBuffSize = "Размер аур"
+	l_mDeBuffSize = "Размер отрицательных эффектов"
+	l_mBuffPerRow = "Кол-во аур в строке"
+	l_mFont = "Шрифт"
+	l_mFontSize = "Размер шрифта"
+	l_mTimeOffset = "Отступ таймера времени"
+	l_mBuffOffset = "Отступ между аурами"
+	l_mDebuffOffset = "Положение отрицательных эффектов"
+
+	l_ab = "Панели команд"
+	l_abTestMode = "Тестовый режим"
+	l_abInvert = "Инвертировать положение панелей"
+	l_abThird = "Три панели команд внизу"
+	l_ab123x = "Позиция. панели1 X"
+	l_ab123y = "Позиция. панели1 Y"
+	l_ab3x = "Позиция. панели3 X"
+	l_ab3y = "Позиция. панели3 Y"
+	l_ab45x = "Позиция. панели4 X"
+	l_ab45y = "Позиция. панели4 Y"
+	l_abTx = "Позиция. панели тотемов X"
+	l_abTy = "Позиция. панели тотемов Y"
+	l_abPx = "Позиция. панели питомца X"
+	l_abPy = "Позиция. панели питомца Y"
+	l_abSx = "Позиция. панели стоек X"
+	l_abSy = "Позиция. панели стоек Y"
+	l_abVx = "Позиция. кнопки выход X"
+	l_abVy = "Позиция. кнопки выход Y"
+	l_abBusize = "Размер кнопак"
+	l_abSBusize = "Размер кнопак стоек"
+	l_abOffset = "Отступ между кнопками"
+	l_abRB = "Кол-во панелей справо"
+	l_abMR = "Отображать по наведению панели справо"
+	l_abMS = "Отображать по наведению панель стоек"
+	l_abHS = "Скрыть панель стоек"
+	l_abMP = "Отображать по наведению панель питомца"
+
+	l_loot = "Добыча"
+	l_lfontsize = "Размер шрифта"
+	l_lfont = "Шрифт"
+
+	l_lroll = "Добыча - розыгрыш"
+	l_lrX = "Положение окна розыгрыша добычи X"
+	l_lrY = "Положение окна розыгрыша добычи Y"
+	l_lrcolorboe = "Цвет BoE предметов"
+
+	l_cc = "Кулдауны"
+	l_cfont = "Шрифт"
+	l_cfontsize = "Размер шрифта"
+
+	l_as = "Особые возможности"
+	l_asHE = "Скрывать ошибки действий"
+	l_asDD = "Отменять все дуэли"
+	l_asAPI = "Принимать приглашения в группу"
+	l_asmail = "Упрощенный сбор почты"
+	l_asmark = "Меню марок по Шифт+Л.клик"
+	l_asmerch = "Автоматический ремонт и продажа мусора"
+
+	l_bstyler = "Стиль кнопок"
+	l_bsfont = "Шрифт"
+	l_bsfontsize = "Размер шрифта"
+	l_bshh = "Скрывать назначения клавиш"
+	l_bsHighlight = "Текстура - Highlight"
+	l_bsPushed = "Текстура - Pushed"
+	l_bsChecked = "Текстура - Checked"
+
+	l_chat = "Чат"
+	l_cfont = "Шрифт"
+	l_curl = "Копирование ссылок"
+	l_ccopy = "Копирование чата"
+	l_cwidth = "Ширина чата"
+	l_cheight = "Высота чата"
+
+	l_lpanels = "Панели"
+	l_lpwidth = "Ширина правой панели"
+	l_lpheight = "Высота правой панели"
+
+	l_tooltips = "Подсказки"
+	l_tcursor = "Закрепить подсказки за курсором"
+	l_thidecombat = "Прятать подсказки в бою"
+	l_thideuf = "Прятать подсказки фреймов"
+	l_thideab = "Прятать подсказки панелей команд"
+	l_ttitles = "Отображать титулы игроков"
+
+	l_stuffing = "Сумки"
 	
-	lc_unopn = "Опции фреймов"
-	lc_partyopn = "Группа и Рейд"
-	lc_aboptiopn = "Панели команд"
-	lc_panelsopn = "Чат и панели"
-	lc_mediaopn = "Медиа"
-	lc_crapopn = "Прочее"
-	lc_apply = "Принять"
-	lc_applytip = "Перезагрузка интерфейса для применения новых настроек"
-	lc_config1 = "Настройки автоматизации и модулей"
-	lc_pscale = "Масштабирование интерфейса"
-	lc_de = "Подтверждение дизенчанта"
-	lc_res = "Освобождение духа на БГ"
-	lc_autoinvite = "Принимать приглашения"
-	lc_autoinvitetip = "Автоматически принимать приглашение в группу от друзей и согильдийцев"
-	lc_mail = "Сборщик почты"
-	lc_duels = "Отменять дуэли"
-	lc_buystack =  "Купить стак по Alt+Пр.кн"
-	lc_noerror = "Скрывать ошибки действий"
-	lc_noerrorcb = "Скрывать ошибки в бою"
-	lc_noerrorcbtp = "Скрывать ошибки в бою, если отключено скрытие всех ошибок"
-	lc_marking = "Shift+Пр.кн меню меток"
-	lc_merchant = "Ремонт и продажа мусора"
-	lc_UIScaleslider = "Масштаб интерфейса: "
-	lc_UIScaleslidertip = "Установка масштаба интерфейса при отключеном автоматическом маштабировании"	
---	lc_changedmgfont = "Текст боя"
---	lc_changedmgfonttip = "Изменяет позицию, размер и шрифт стандартного текста боя"
-	
-	lc_scale = "Масштаб: "
-	lc_scaletip = "Изменение масштаба фреймов"
-	lc_width = "Ширина: "
-	lc_widthatip = "Установка ширины фрейма игрока, цели и аналогичных"
-	lc_widthbtip = "Установка ширины фрейма питомца, запомненной цели и аналогичных "
-	lc_widthctip = "Установка ширины фрейма цели-цели и аналогичных"
-	lc_clazzcolor = "Фреймы по цвету классов"
-	lc_changecolor = "Инвертировать цвета"
-	lc_portrait3d = "3D портрет"
-	lc_healbarportrait3d = "Портреты поверх баров"
-	lc_healbarportrait3dtip = "Отображает портрет игрока и цели поверх бара здоровья, опция доступна при отключение 3D портретов"
-	lc_pvpflag = "Иконка статуса PvP"
-	lc_showrclassbars = "Классовые панели"
-	lc_auras = "Эффекты и ауры"
-	lc_buffskin = "Менять вид аур игрока"
-	lc_mbuffsize = "Размер бафов игрока: "
-	lc_mbuffsizetip = "Установка размера бафов и дебафов игрока"
-	lc_height = "Высота: "
-	lc_heighttip = "Установка высоты всех фреймов"
-	lc_allinone = "Неразделённые эффекты цели"
-	lc_playerdebuff = "Только дебаффы игрока"
-	lc_totdebuff = "Дебаффы на цели-цели"
-	lc_unitcastbar = "Встроенный кастбар"
-	lc_cbicon = "Иконка каста"
-	lc_latencyshow = "Зона задержки на кастбаре"
-	lc_bossframes = "Фреймы боссов"
-	lc_arenaframes = "Арена интерфейс"
-	lc_aurasize = "Размер аур: "
-	lc_aurasizetip = "Установка размера иконок аур и эффектов"
-	lc_auralimit = "Кол-во аур: "
-	lc_auralimittip = "Установка ограничения на кол-во отображаемых эффектов и аур"
-	lc_topauras = "Ауры сверху фреймов"
-	
-	lc_raidpower = "Отображать мана бары"
-	lc_gridpartylimit = "Кол-во групп: "
-	lc_gridpartylimittip = "Установка ограничения по кол-ву отображаемых групп в рейде"
-	lc_gridheight = "Высота в гриде: "
-	lc_gridheighttip = "Установка высоты фреймов грида"
-	lc_gridwidth = "Ширина в гриде: "
-	lc_gridwidthtip = "Установка ширины фреймов грида"
-	lc_gridspace = "Отступ: "
-	lc_gridspacetip = "Установка промежутка между фреймами в гриде"
-	lc_powerbarsize = "Размер мана бара: "
-	lc_powerbarsizetip = "Установка относительного размера мана баров в гриде, если включено их отображение"
-	lc_iconsize = "Размер иконок: "
-	lc_iconsizetip = "Установка размера угловых иконок"
-	lc_debufficonsize = "Размер дебаффов: "
-	lc_debufficonsizetip = "Установка размера иконки дебаффов рейда"
-	lc_showmt = "Фреймы танков в гриде"
-	lc_showmttip = "Отображает дополнительные фреймы танков в гриде, поддерживаются танки добавленные через oRA3"
-	lc_blizzmt = "Blizz фреймы танков"
-	lc_blizzmttip = "Отображать альтернативный вариант фреймов основного танка blizzard, поддерживается цель и цель-цели"
-	lc_showpets = "Отображать питомцев"
-	lc_showplayerinparty = "Фрейм игрока в группе"
-	lc_multi = "Отдельные группы"
-	lc_multitip = "Отделяет группы в рейде для улучшения сортировки"
-	lc_healmodeuf = "Grid в центре"
-	lc_healmodeuftip = "Распологает грид внизу по центру экрана"
-	
-	lc_hidehotkey = "Скрывать горячие клавиши"
-	lc_hide_shapeshift = "Скрыть панель стоек"
-	lc_third_panel_mode = "Отображать три панели команд внизу"
-	lc_mouseoverpet = " Прятать панель питомца"
-	lc_mouseoverright = " Прятать правые панели команд"
-	lc_mouseoveshift = "Прятать панель стоек"
-	lc_invertmainbar = "Инвертировать порядок основных панелей"
-	lc_shapescaleslider = "Размер стоек: "
-	lc_shapescaleslidertip = "Установка размера кнопак для панели стоек, а также аур, форм и питомца"
-	lc_rightbarsslider = "Панели команд справа: "
-	lc_rightbarsslidertip = "Установка кол-ва отображаемых панелей команд справа"
-	lc_barscaleslider = "Размер панелей: "
-	lc_barscaleslidertip = "Установка размера кнопак для основных панелей команд"	
-	lc_bupaddingslider = "Отступ: "
-	lc_bupaddingslidertip = "Установка размера отступа между кнопак панелей команд"
-	lc_bu_font_sizeslider = "Размер шрифта: "
-	lc_bu_font_sizeslidertip = "Установка размера шрифта для текста на панелях команд"
+	l_data = "Текстовая информация"
+	l_dfont = "Шрифт"
+	l_dfontsize = "Размер шрифта"
+	l_dltime = "Показывать местное время"
+	l_d24time = "Использовать 24:00 формат времени"
+	l_dfpsms = "Позиция - Ping и Fps"
+	l_dmem = "Позиция - Ипользование памяти"
+	l_darmor = "Позиция - Прочность"
+	l_dgold = "Позиция - Золото"
+	l_dtime = "Позиция - Время"
+	l_dfriends = "Позиция - Друзья"
+	l_dguild = "Позиция - Гильдия"
+	l_dbags = "Позиция - Сумки"
 
-	lc_chat_copy = "Копирование чата"
-	lc_chat_copytip = "Позволяет копировать содержимое через специальную клавишу в нижнем левом углу чата"	
-	lc_chat_url = "Копировать ссылки"
-	lc_chat_move = "Фиксированная позиция чата"
-	lc_chat_filter = "Фильтрация чата"
-	lc_localtime = "Местное время"
-	lc_time24 = "формат времени 24:00"
-	lc_chat_width = "Ширина чата: "
-	lc_chat_widthtip = "Установка ширины чата и фона привязного к нему"
-	lc_chat_height = "Высота чата: "
-	lc_chat_heighttip = "Установка высоты чата и фона привязного к нему"
-	lc_border_width = "Ширина правой панели: "
-	lc_border_widthtip = "Установка ширины правой панели, опция не влияет на размер панели для Skada, мини карты и доп. панели команд"
-	lc_border_height = "Высота правой панели: "
-	lc_border_heighttip = "Установка высоты правой панели, опция не влияет на размер панели для Skada, мини карты и доп. панели команд"
-	
-	lc_datapos = "Позиционирование текст.информации"
-	
-	lc_datatextip = "Число соответствует позиции на панелях: нижняя левая [ 1  2  3  4 ] и нижняя правая [ 5  6  7  8 ], а также 0 - для отключения"
+	l_uf = "Юнит фреймы"
+	l_ufcc = "Использовать цвета классов"
+	l_uficc = "Обратить цвета классов"
+	l_uffont = "Шрифт"
+	l_uffsize = "Размер шрифта аур"
+	l_ufufsize = "Размер шрифта фреймов"
+	l_ufclbars = "Отображать классовые спец. бары"
+	l_ufwA = "Ширина - основные фреймы"
+	l_ufwB = "Ширина - вторичные фреймы"
+	l_ufwC = "Ширина - остальные фреймы"
+	l_ufHA = "Высота - высота баров здоровья"
+	l_ufmfs = "Фокус скрипт"
+	l_ufport = "Портреты"
+	l_ufcast = "Использовать встроенные кастбары"
+	l_ufcastmaxi = "Отдельные кастбары"
+	l_ufcastmaxiYpos = "Положение Х кастбара игрока"
+	l_ufcasticon = "Иконки кастбаров"
+	l_ufcastlatency = "Задержка на каст баре"
+	l_ufpvp = "Иконка PVP флага"
+	l_ufauras = "Использовать встроенные ауры"
+	l_ufausize = "Размер аур"
+	l_ufdeb = "Дублировать дебафы игрока"
+	l_ufautop = "Ауры над фреймами"
+	l_ufalim = "Лимит кол-ва аур"
+	l_ufacta = "Обьединять эффекты цели"
+	l_ufospd = "Отображать только дебафы игрока на цели"
+	l_uftotd = "Дебафы на фрейме целицели"
+	l_ufuicont = "Контраст цветов баров"
+	l_ufhideparty = "Всегда скрывать blizz группу"
 
+	l_ufr = "Юнит фреймы - рейд"
+	l_ufrkblizz = "Скрывать blizz рейд"
+	l_ufrhealmode = "Использовать спец. позицию фреймов для лечения"
+	l_ufrwidth = "Grid - ширина"
+	l_ufrheight = "Grid - высота"
+	l_ufroffset = "Grid - отступ"
+	l_ufrpoint = "Pos. party Point TOP or BOTTOM or LEFT or RIGHT"
+	l_ufrgrowth = "Pos. party Growth TOP or BOTTOM or LEFT or RIGHT"
+	l_ufrorient = "Statusbar orientation HORIZONTAL or VERTICAL"
+	l_ufrpower = "Индикаторы маны"
+	l_ufrpowersize = "Размер мана бара"
+	l_ufrisize = "Размер иконок"
+	l_ufrdsize = "Размер дебафов"
+	l_ufrlfdrole = "Иконки роли в группе или рейде"
+	l_ufrfont = "Шрифт"
+	l_ufrufsize = "Размер шрифта"
+	l_ufrhealdif = "Отображать недостаток здоровья"
+	l_ufrpartyn = "Кол-во групп в grid"
+	l_ufrPets = "Отображать питомцев"
+	l_ufrMT = "Отображать танков"
+	l_ufrfu = "Частота обновлений"
 
-
-
-
-
-
+	l_binds = "Назначение клавиш"
+	l_minimap = "Миникарта"
+	l_nameplates = "Индикаторы здоровья"
+	l_npfont = "Шрифт"
+	l_npfontsize = "Размер шрифта"
+	l_skin = "Скиннннер"
 
 	lc_stsearch = "Поиск"
 	lc_stsort = "Сортировка"
@@ -772,139 +818,202 @@ if(L=="ruRU") then
 	lc_stshowkeyring = "Показать ключи"
 	lc_strsearch = "Правый клик для строки поиска"
 else
-	lc_welcome = "successful loaded!\nhelp: /UIHelp\nPlease report any issues in comments on wowinterface.com"
+	l_welcome = "successful loaded!\nhelp: /UIHelp\nPlease report any issues in comments on wowinterface.com"
+	l_intalltext = "The Thunder UI v 5 Install.|nNeed to reload ui for save all settings.|n In future you can change settings in |cffaaaaff\"Settings - Interface - Addons - Thunder UI\"|r by press a key |cffaaffaa\"Save\"|r"
+	l_settingchanged = "Settings changed.|nReload UI?"
+	l_reset = "|cffff0000Reset All|r"
+	l_save = "Save"
+	l_resetmodule = "Reset module options"
+	l_enableG = "|cff00ff00Enable|r"
+	l_enableR = "|cffff0000Enable|r"
+
+	l_main = "Main"
+	l_font = "General font"
+	l_fontsize = "General font size"
+	l_autoscale = "Auto ui scale"
+	l_scale = "Manual ui scale"
+	l_blank = "Texture - blank"
+	l_bar = "Texture - statusbar"
+	l_shadow = "Texture - shadow"
+	l_cp = "Texture - combopoints"
+	l_bcolor = "Color for all backgrounds"
+	l_bgcolor = "Color for all borders"
+
+	l_mbuffs = "Buffs"
+	l_mBuffDebuffs = "Show standart player debuffs"
+	l_mBuffSize = "Buffs size"
+	l_mDeBuffSize = "Debuffs size"
+	l_mBuffPerRow = "Buffs per row"
+	l_mFont = l_font
+	l_mFontSize = "Font size"
+	l_mTimeOffset = "Time Y offset"
+	l_mBuffOffset = "Buffs offset"
+	l_mDebuffOffset = "Debuffs position offset"
+
+	l_ab = "Action Bars"
+	l_abTestMode = "Test mode"
+	l_abInvert = "Invert bars"
+	l_abThird = "Third bars in bottom"
+	l_ab123x = "Pos. bar1 X"
+	l_ab123y = "Pos. bar1 Y"
+	l_ab3x = "Pos. bar3 X"
+	l_ab3y = "Pos. bar3 Y"
+	l_ab45x = "Pos. bar4 X"
+	l_ab45y = "Pos. bar4 Y"
+	l_abTx = "Pos. totembar X"
+	l_abTy = "Pos. totembar Y"
+	l_abPx = "Pos. petbar X"
+	l_abPy = "Pos. petbar Y"
+	l_abSx = "Pos. stancebar X"
+	l_abSy = "Pos. stancebar Y"
+	l_abVx = "Pos. vehicle exit X"
+	l_abVy = "Pos. vehicle exit Y"
+	l_abBusize = "Button size"
+	l_abSBusize = "Stance button size"
+	l_abOffset = "Button offset"
+	l_abRB = "Number of right bars"
+	l_abMR = "Mouseover right bars"
+	l_abMS = "Mouseover stance bar"
+	l_abHS = "Hide stance bar"
+	l_abMP = "Mouseover pet"
+
+	l_loot = "Loot"
+	l_lfontsize = "Font size"
+	l_lfont = "Font"
 	
-	lc_unopn = "Player frames"
-	lc_partyopn = "Party&Raid"
-	lc_aboptiopn = "Action Bars"
-	lc_panelsopn = "Chat&Datatext"
-	lc_mediaopn = "Media"
-	lc_crapopn = "Other"
-	lc_apply = "Apply"
-	lc_applytip = "Reload UI to apply settings"
-	lc_config1 = "UI tweaks and modules setting"
-	lc_pscale = "Pixelperfect UI scale"
-	lc_de = "Confirm disenchanting"
-	lc_res = "Release spirit on bg"
-	lc_autoinvite = "Accept invite in group"
-	lc_autoinvitetip = "Auto accept invite in group from friends and guld members"
-	lc_mail = "Add grabmail"
-	lc_duels = "Cancel all duels"
-	lc_buystack =  "Alt+R.click for buy stack"
-	lc_noerror = "Hide errors"
-	lc_noerrorcb = "Hide only combat errors"
-	lc_noerrorcbtp = "Hide errors only combat if hide all errors disable"
-	lc_marking = "Shift+R.cl fast mark menu"
-	lc_merchant = "Autorepair and selljunk"
-	lc_UIScaleslider = "Interface scale: "
-	lc_UIScaleslidertip = "Set scale for UI if autoscale disable"	
---	lc_changedmgfont = "Combat Text"
---	lc_changedmgfonttip = "Change font, position and size blizzard sct"
+	l_lroll = "Loor roll"
+	l_lrX = "Pos. roll window X"
+	l_lrY = "Pos. roll window Y"
+	l_lrcolorboe = "Color for BoE items"
 	
-	lc_scale = "Scale: "
-	lc_scaletip = "Set the specific scale of unit frames"
-	lc_width = "Width: "
-	lc_widthatip = "Set the width of player/target"
-	lc_widthbtip = "Set the width of focus/pet"
-	lc_widthctip = "Set the width of tot/focustarget"
-	lc_clazzcolor = "Class color frames"
-	lc_changecolor = "Invert class colors"
-	lc_portrait3d = "3D Portrait"
-	lc_healbarportrait3d = "Portrait on healbar"
-	lc_healbarportrait3dtip = "Show portrait on player and target healbra if standart 3D portrait disable"
-	lc_pvpflag = "PvP flag icon"
-	lc_showrclassbars = "Show class bars"
-	lc_auras = "show auras"
-	lc_buffskin = "Reskin blizzard buffs"
-	lc_mbuffsize = "Player buff size: "
-	lc_mbuffsizetip = "Set player buffs and debuffs size"
-	lc_height = "Height: "
-	lc_heighttip = "Set the height of all frames"
-	lc_allinone = "Compact target auras"
-	lc_playerdebuff = "Only player debuffs"
-	lc_totdebuff = "ToT on debuffs"
-	lc_unitcastbar = "Castbar"
-	lc_cbicon = "Cast icon"
-	lc_latencyshow = "Latency on castbar"
-	lc_bossframes = "Boss frames"
-	lc_arenaframes = "Arena Frames"
-	lc_aurasize = "Aura size: "
-	lc_aurasizetip = "Set buffs and defuss size"
-	lc_auralimit = "Auras limit: "
-	lc_auralimittip = "Setting the number of displayed auras"
-	lc_topauras = "Auras in top"
+	l_cc = "Cooldowns"
+	l_cfont = "Font"
+	l_cfontsize = "Font size"
+
+	l_as = "Tweaker"
+	l_asHE = "Hide action errors"
+	l_asDD = "Decline all duels"
+	l_asAPI = "Accept invites in group"
+	l_asmail = "Auto grab mail"
+	l_asmark = "Shift+L.click - mob marking menu"
+	l_asmerch = "Auto trash sell and repair"
+
+	l_bstyler = "Button Style"
+	l_bsfont = "Font"
+	l_bsfontsize = "Font size"
+	l_bshh = "Hide hotkeys"
+	l_bsHighlight = "Texture - Highlight"
+	l_bsPushed = "Texture - Pushed"
+	l_bsChecked = "Texture - Checked"
 	
-	lc_raidpower = "Show raid power bars"
-	lc_gridpartylimit = "Group: "
-	lc_gridpartylimittip = "Party limit in freebgrid"
-	lc_gridheight = "Grid height: "
-	lc_gridheighttip = "Set the height of grid"
-	lc_gridwidth = "Grid width: "
-	lc_gridwidthtip = "Set the width of grid"
-	lc_gridspace = "Space: "
-	lc_gridspacetip = "Set raid unit spacing"
-	lc_powerbarsize = "Manabar size: "
-	lc_powerbarsizetip = "Set the size of manabars"
-	lc_iconsize = "Icons size: "
-	lc_iconsizetip = "Set the size of corner icons"
-	lc_debufficonsize = "Debuffs size: "
-	lc_debufficonsizetip = "Set the size of debuff icon"
-	lc_showmt = "Show mt in grid"
-	lc_showmttip = "Show main tank frames in grid, support blizzard mt and oRA3"
-	lc_blizzmt = "Alternative mt frames"
-	lc_blizzmttip = "Show alternative blizz main tank frames, include target and target-target"
-	lc_showpets = "Show pets"
-	lc_showplayerinparty = "Show player in party"
-	lc_multi = "Multiple headers"
-	lc_multitip = "Spawn multiple headers for better sorting"
-	lc_healmodeuf = "Grid in bottom"
-	lc_healmodeuftip = "Set grid in bottom screen"
+	l_chat = "Chat"
+	l_cfont = "Font"
+	l_curl = "Copy URL"
+	l_ccopy = "Copy chat"
+	l_cwidth = "Chat Width"
+	l_cheight = "Chat Heigt"
+
+	l_lpanels = "Panels"
+	l_lpwidth = "Right panel width"
+	l_lpheight = "Right panel height"
 	
-	lc_hidehotkey = "Hide hotkey"
-	lc_hide_shapeshift = "Hide shapeshift."
-	lc_third_panel_mode = "Use 3 bottom bars"
-	lc_mouseoverpet = "Mouseover show petbars"
-	lc_mouseoverright = "Mouseover show rightbars"
-	lc_mouseoveshift = "Mouseover show stancebar"
-	lc_invertmainbar = "Invert bottom bars"
-	lc_shapescaleslider = "Stance button size: "
-	lc_shapescaleslidertip = "Set stance, aura and pet button size"
-	lc_rightbarsslider = "Right bars: "
-	lc_rightbarsslidertip = "Numbers of right bars"
-	lc_barscaleslider = "Actionbars button size: "
-	lc_barscaleslidertip = "Set main button actionbars size"	
-	lc_bupaddingslider = "Button spacing: "
-	lc_bupaddingslidertip = "Set button spacing"
-	lc_bu_font_sizeslider = "Font size: "
-	lc_bu_font_sizeslidertip = "Set font size for action bars"
-	
-	lc_chat_copy = "Copy chat"
-	lc_chat_copytip = "Enable chat copy button in bottomleft"	
-	lc_chat_url = "Copy URL"
-	lc_chat_move = "Fixed chat position"
-	lc_chat_filter = "Chat filter"
-	lc_localtime = "Local time"
-	lc_time24 = "24:00 time format"
-	lc_chat_width = "Chat width: "
-	lc_chat_widthtip = "Chat width"
-	lc_chat_height = "Chat height: "
-	lc_chat_heighttip = "Chat height"
-	lc_border_width = "Right panel width: "
-	lc_border_widthtip = "Right panel width"
-	lc_border_height = "Right panel height: "
-	lc_border_heighttip = "Right panel height"
-	
-	lc_datapos = "Data text position"
-	
-	lc_datatextip = "Set position for datatext: bottom left bar [ 1  2  3  4 ] and  bottom right bar [ 5  6  7  8 ], 0 - disable"
-	
-	
+	l_tooltips = "Tooltips"
+	l_tcursor = "Anchor tooltip on cursor"
+	l_thidecombat = "Hide tooltip in combat"
+	l_thideuf = "Hide unitframes tooltip"
+	l_thideab = "Hide buttons tooltip"
+	l_ttitles = "Show player titles in tooltip"
+
 	lc_stsearch = "Search"
 	lc_stsort = "Sort"
 	lc_ststack = "Stack"
 	lc_stshowbags = "Show Bags"
 	lc_stshowkeyring = "Show Keyring"
 	lc_strsearch = "Right-click to search"
+
+	l_stuffing = "Bags"
+	
+	l_data = "Datatext panels"
+	l_dfont = "Font"
+	l_dfontsize = "Font Size"
+	l_dltime = "Show local time"
+	l_d24time = "Use 24:00 time format"
+	l_dfpsms = "Set pos. fps and ping"
+	l_dmem = "Set pos. mem."
+	l_darmor = "Set pos. durability"
+	l_dgold = "Set pos. gold"
+	l_dtime = "Set pos. time"
+	l_dfriends = "Set pos. friends"
+	l_dguild = "Set pos. guild"
+	l_dbags = "Set pos. bags"
+	
+	
+	l_uf = "Unit frames"
+	l_ufcc = "Use class colors"
+	l_uficc = "Invert class colors"
+	l_uffont = "Font"
+	l_uffsize = "Auras font size"
+	l_ufufsize = "Frames font size"
+	l_ufclbars = "Show special class bars"
+	l_ufwA = "Width - main frames"
+	l_ufwB = "Width - secondary frames"
+	l_ufwC = "Width - other frames"
+	l_ufHA = "Height - heal bar"
+	l_ufmfs = "Add mouse over focus script on target frames"
+	l_ufport = "Show 3D portrait"
+	l_ufcast = "Enable all castbars"
+	l_ufcastmaxi = "Separated castbars"
+	l_ufcastmaxiYpos = "Separated player castbar pos. Y"
+	l_ufcasticon = "Castbar icons"
+	l_ufcastlatency = "Castbar latency"
+	l_ufpvp = "Show PvP flag icon"
+	l_ufauras = "Enable auras"
+	l_ufausize = "Auras size"
+	l_ufdeb = "Player debuffs"
+	l_ufautop = "Auras on top frames"
+	l_ufalim = "Number of aura limit"
+	l_ufacta = "Compact target auras"
+	l_ufospd = "Show only player debuffs"
+	l_uftotd = "Target on target debuffs"
+	l_ufuicont = "Status bar color contrast"
+	l_ufhideparty = "Always hide party"
+
+	l_ufr = "Unit frames - raid"
+	l_ufrkblizz = "Hide blizz raid"
+	l_ufrhealmode = "Heal frames position"
+	l_ufrwidth = "Grid width"
+	l_ufrheight = "Grid height"
+	l_ufroffset = "Grid offset"
+	l_ufrpoint = "Pos. party Point TOP or BOTTOM or LEFT or RIGHT"
+	l_ufrgrowth = "Pos. party Growth TOP or BOTTOM or LEFT or RIGHT"
+	l_ufrorient = "Statusbar orientation HORIZONTAL or VERTICAL"
+	l_ufrpower = "Enable raid power bars"
+	l_ufrpowersize = "Power bars size"
+	l_ufrisize = "Icon size"
+	l_ufrdsize = "Debuff size"
+	l_ufrlfdrole = "Show lfd role"
+	l_ufrfont = "Font"
+	l_ufrufsize = "Font size"
+	l_ufrhealdif = "Enable heal dif"
+	l_ufrpartyn = "Party in grid"
+	l_ufrPets = "Show pets"
+	l_ufrMT = "Show MT"
+	l_ufrfu = "Freq update"
+	
+	
+	--"ZZTempo" = "Tempo stuff"
+	l_binds = "Binds"
+	l_minimap = "Minimap"
+	l_nameplates = "Nameplates"
+	l_npfont = "Font"
+	l_npfontsize = "Font size"
+	l_skin = "Skinnnner"
+	
+	
+	
+	
+	
+	
 	
 	
 end

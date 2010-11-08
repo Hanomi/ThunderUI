@@ -22,10 +22,10 @@ end
 eventframe:RegisterEvent("PLAYER_ENTERING_WORLD")
 eventframe:SetScript("OnEvent", function(self, event, addon)
 	
-   local NORMAL     = ThunderDB["Main"]["Font"]
-	local COMBAT     = ThunderDB["Main"]["Font"]
-	local NUMBER     = ThunderDB["Main"]["Font"]
-	local fSize      = ThunderDB["Main"]["FontSize"] or 11
+   local NORMAL     = ThunderDB[l_main][l_font]
+	local COMBAT     = ThunderDB[l_main][l_font]
+	local NUMBER     = ThunderDB[l_main][l_font]
+	local fSize      = ThunderDB[l_main][l_fontsize] or 11
 
 	UIDROPDOWNMENU_DEFAULT_TEXT_HEIGHT = 12
 	CHAT_FONT_HEIGHTS = {11, 12, 13, 15, 15, 16, 17, 18, 19, 20}

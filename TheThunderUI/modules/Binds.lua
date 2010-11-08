@@ -1,10 +1,10 @@
-----------------------------------------------------------------------------------------
+﻿----------------------------------------------------------------------------------------
 -- ncHoverBind
 -- Nightcracker - 2010
 ----------------------------------------------------------------------------------------
 
 local module = {}
-module.name = "Binds"
+module.name = l_binds
 module.Init = function()
 	if not ThunderDB.modules[module.name] then return end
 	local settings = ThunderDB

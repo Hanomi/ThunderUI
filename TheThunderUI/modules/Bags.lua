@@ -1,17 +1,17 @@
-----------------------------------------------------------------------------------------
+﻿----------------------------------------------------------------------------------------
 -- Stuffing
 -- Hungtar - 2010
 ----------------------------------------------------------------------------------------
 
 local module = {}
-module.name = "Bags"
+module.name = l_stuffing
 module.Init = function()
 	if not ThunderDB.modules[module.name] then return end
 	local settings = ThunderDB
 
 local BAGS_BACKPACK = {0, 1, 2, 3, 4}
 local BAGS_BANK = {-1, 5, 6, 7, 8, 9, 10, 11}
-local BAGSFONT = ThunderDB["Main"]["Font"]
+local BAGSFONT = ThunderDB[l_main][l_font]
 local ST_NORMAL = 1
 local ST_SOULBAG = 2
 local ST_SPECIAL = 3
@@ -444,8 +444,8 @@ function Stuffing:CreateBagFrame(w)
 
 	local x = 18
 	
-	local y1 = (30 + ThunderDB["Chat"]["ChatHeight"])
-	local y2 = (30 + ThunderDB["LitePanels"]["RightPanelHeight"])
+	local y1 = (30 + ThunderDB[l_chat][l_cheight])
+	local y2 = (30 + ThunderDB[l_lpanels][l_lpheight])
 	
 	if w == "Bank" then
 		f:SetPoint ("BOTTOMLEFT", UIParent, "BOTTOMLEFT", x, y1)
@@ -668,13 +668,13 @@ function Stuffing:Layout(lb)
 
 	f:SetClampedToScreen(1)
 	f:SetBackdrop({
-		bgFile = ThunderDB["Main"]["BlankText"],
-		edgeFile = ThunderDB["Main"]["BlankText"],
+		bgFile = ThunderDB[l_main][l_blank],
+		edgeFile = ThunderDB[l_main][l_blank],
 		edgeSize = 1,
 		insets = {left = -1, right = -1, top = -1, bottom = -1}
 	})
-	f:SetBackdropColor(unpack(ThunderDB["Main"]["Background color"]))
-	f:SetBackdropBorderColor(unpack(ThunderDB["Main"]["Border color"])) 
+	f:SetBackdropColor(unpack(ThunderDB[l_main][l_bcolor]))
+	f:SetBackdropBorderColor(unpack(ThunderDB[l_main][l_bgcolor])) 
 
 
 	-- bag frame stuff
@@ -682,13 +682,13 @@ function Stuffing:Layout(lb)
 	if bag_bars == 1 then
 		fb:SetClampedToScreen(1)
 		fb:SetBackdrop({
-			bgFile = ThunderDB["Main"]["BlankText"],
-			edgeFile = ThunderDB["Main"]["BlankText"],
+			bgFile = ThunderDB[l_main][l_blank],
+			edgeFile = ThunderDB[l_main][l_blank],
 			edgeSize = 1,
 			insets = {left = -1, right = -1, top = -1, bottom = -1}
 		})
-		fb:SetBackdropColor(unpack(ThunderDB["Main"]["Background color"]))
-		fb:SetBackdropBorderColor(unpack(ThunderDB["Main"]["Border color"])) 
+		fb:SetBackdropColor(unpack(ThunderDB[l_main][l_bcolor]))
+		fb:SetBackdropBorderColor(unpack(ThunderDB[l_main][l_bgcolor])) 
 
 		local bsize = 30
 		if lb then bsize = 37 end

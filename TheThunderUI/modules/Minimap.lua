@@ -1,10 +1,10 @@
-----------------------------------------------------------------------------------------
+﻿----------------------------------------------------------------------------------------
 -- aMinimap
 -- ALZA - 2010
 ----------------------------------------------------------------------------------------
 
 local module = {}
-module.name = "Minimap"
+module.name = l_minimap
 module.Init = function()
 	if not ThunderDB.modules[module.name] then return end
 	local settings = ThunderDB
@@ -17,7 +17,7 @@ local minimap_position = {"BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -24/minimap_sc
 ----------------------------------------------------------------------------------------
 Minimap:ClearAllPoints()
 Minimap:SetPoint(unpack(minimap_position))
-Minimap:SetMaskTexture(ThunderDB["Main"]["BlankText"])
+Minimap:SetMaskTexture(ThunderDB[l_main][l_blank])
 MinimapCluster:SetScale(minimap_scale)
 Minimap:SetFrameStrata("LOW")
 
@@ -29,7 +29,7 @@ local total = 0
 local SetTextureTrick = function(self, elapsed)
     total = total + elapsed
     if(total > 2) then
-        Minimap:SetMaskTexture(ThunderDB["Main"]["BlankText"])
+        Minimap:SetMaskTexture(ThunderDB[l_main][l_blank])
         hint:SetScript("OnUpdate", nil)
     end
 end
@@ -197,7 +197,7 @@ end)
 local ZZFramE = CreateFrame("Frame")
 
 ZOMGTEXT = UIParent:CreateFontString(nil, "OVERLAY")
-ZOMGTEXT:SetFont(ThunderDB["Main"]["Font"], ThunderDB["Main"]["FontSize"], "OUTLINE")
+ZOMGTEXT:SetFont(ThunderDB[l_main][l_font], ThunderDB[l_main][l_fontsize], "OUTLINE")
 ZOMGTEXT:SetPoint("TOP", Minimap, 0, -20)
 ZOMGTEXT:SetWidth((Minimap:GetWidth() - 25))
 ZOMGTEXT:SetAlpha(0)

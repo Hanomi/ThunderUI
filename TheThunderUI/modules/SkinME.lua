@@ -1,5 +1,5 @@
 ﻿local module = {}
-module.name = "SkinME"
+module.name = l_skin
 module.Init = function()
 	if not ThunderDB.modules[module.name] then return end
 	
@@ -18,6 +18,7 @@ module.Init = function()
 	(C)2010 Darth Android / Telroth - Black Dragonflight
 	File version v15.37
 ]]
+if not IsAddOnLoaded("Skada") then return end
 
 Mod_AddonSkins = CreateFrame("Frame")
 local Mod_AddonSkins = Mod_AddonSkins
@@ -43,10 +44,10 @@ end
 Mod_AddonSkins.SkinFrame = skinFrame
 Mod_AddonSkins.SkinBackgroundFrame = skinFrame
 Mod_AddonSkins.SkinButton = skinButton
-Mod_AddonSkins.normTexture = ThunderDB["Main"]["BarText"]
-Mod_AddonSkins.bgTexture = ThunderDB["Main"]["BlankText"]
-Mod_AddonSkins.font = ThunderDB["Main"]["Font"]
-Mod_AddonSkins.smallFont = ThunderDB["Main"]["Font"]
+Mod_AddonSkins.normTexture = ThunderDB[l_main][l_bar]
+Mod_AddonSkins.bgTexture = ThunderDB[l_main][l_blank]
+Mod_AddonSkins.font = ThunderDB[l_main][l_font]
+Mod_AddonSkins.smallFont = ThunderDB[l_main][l_font]
 Mod_AddonSkins.fontSize = 10
 Mod_AddonSkins.buttonSize = fixscale(27,27)
 Mod_AddonSkins.buttonSpacing = fixscale(4,4)
@@ -79,18 +80,17 @@ Mod_AddonSkins:SetScript("OnEvent",function(self, event, addon)
 	end
 
 	-- Embed Right
-	if IsAddOnLoaded("Skada") then
 		SkadaBarWindowSkada:ClearAllPoints()
-		SkadaBarWindowSkada:SetPoint("TOPRIGHT", UIParent, "BOTTOMRIGHT", -152, 18+ThunderDB["LitePanels"]["RightPanelHeight"])
+		SkadaBarWindowSkada:SetPoint("TOPRIGHT", UIParent, "BOTTOMRIGHT", -152, 18+ThunderDB[l_lpanels][l_lpheight])
 	--local function AdjustSkadaFrameLevels()
 		--	SkadaBarWindowSkada:SetFrameLevel(ChatFrame3:GetFrameLevel() + 2)
 		--	if SkadaBG then
 		--		SkadaBG:SetFrameStrata("MEDIUM")	
 		--		SkadaBG:ClearAllPoints()
 		--		SkadaBG:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -150, 26)
-		--		SkadaBG:SetHeight(ThunderDB["LitePanels"]["RightPanelHeight"]-10)
+		--		SkadaBG:SetHeight(ThunderDB[l_lpanels][l_lpheight]-10)
 		--		SkadaBG:SetWidth(fixscale(148))
-		--		--fixscale(148) ThunderDB["LitePanels"]["RightPanelHeight"]-10
+		--		--fixscale(148) ThunderDB[l_lpanels][l_lpheight]-10
 		--	end
 	--	end
 		
@@ -98,7 +98,6 @@ Mod_AddonSkins:SetScript("OnEvent",function(self, event, addon)
 		--trick game into firing OnShow script so we can adjust the frame levels
 		SkadaBarWindowSkada:Hide()
 		SkadaBarWindowSkada:Show()
-	end
 end)
 
 local Skada = Skada
@@ -164,8 +163,8 @@ Mod_AddonSkins:RegisterSkin("Skada",function(Skin,skin,Layout,layout,config)
 	
 		win.db.barwidth = fixscale(146)
 		win.db.barheight = 14
-		win.db.barmax = (math.floor((ThunderDB["LitePanels"]["RightPanelHeight"]-6) / win.db.barheight) - 1)
-		win.db.background.height = ThunderDB["LitePanels"]["RightPanelHeight"]-6
+		win.db.barmax = (math.floor((ThunderDB[l_lpanels][l_lpheight]-6) / win.db.barheight) - 1)
+		win.db.background.height = ThunderDB[l_lpanels][l_lpheight]-6
 		win.db.spark = false
 		win.db.barslocked = true
 	
@@ -183,7 +182,7 @@ Mod_AddonSkins:RegisterSkin("Skada",function(Skin,skin,Layout,layout,config)
 		titlefont:SetFont(config.font,config.fontSize, config.fontFlags)
 		win.bargroup.button:SetNormalFontObject(titlefont)
         local color = win.db.title.color
-	    win.bargroup.button:SetBackdropColor(unpack(ThunderDB["Main"]["Background color"]))
+	    win.bargroup.button:SetBackdropColor(unpack(ThunderDB[l_main][l_bcolor]))
 		if win.bargroup.bgframe then
             skin:SkinBackgroundFrame(win.bargroup.bgframe)
 			if win.db.reversegrowth then

@@ -1,10 +1,10 @@
-----------------------------------------------------------------------------------------
+﻿----------------------------------------------------------------------------------------
 -- rActionBarStyler
 -- All credits of this - Zork
 ----------------------------------------------------------------------------------------
 
 local module = {}
-module.name = "ActionBars"
+module.name = l_ab
 module.Init = function()
 	if not ThunderDB.modules[module.name] then return end
 	local settings = ThunderDB
@@ -25,18 +25,18 @@ InterfaceOptionsActionBarsPanelAlwaysShowActionBars:Hide()
 
 local _, class = UnitClass("player")
 
-if ThunderDB["ActionBars"]["RightBars"] > 2 then
-	ThunderDB["ActionBars"]["RightBars"] = 2
+if ThunderDB[l_ab][l_abRB] > 2 then
+	ThunderDB[l_ab][l_abRB] = 2
 end
 
 local RABSpositions = {
-	[1] = { a = "BOTTOM",		x = fixscale(ThunderDB["ActionBars"]["Bar123_X"]),	y = fixscale(ThunderDB["ActionBars"]["Bar123_Y"])},--fbar123
-	[2] = { a = "BOTTOMRIGHT",	x = fixscale(ThunderDB["ActionBars"]["Bar3_X"]),	y = fixscale(ThunderDB["ActionBars"]["Bar3_Y"])},--fbar3
-	[3] = { a = "RIGHT",		x = fixscale(ThunderDB["ActionBars"]["Bar4_X"]),	y = fixscale(ThunderDB["ActionBars"]["Bar4_Y"])},--fbar4
-	[6] = { a = "BOTTOM",		x = fixscale(ThunderDB["ActionBars"]["BarTotem_X"]),y = fixscale(ThunderDB["ActionBars"]["BarTotem_Y"])},--totem
-	[9] = { a = "BOTTOM",		x = fixscale(ThunderDB["ActionBars"]["BarPet_X"]),	y = fixscale(ThunderDB["ActionBars"]["BarPet_Y"])},--petbar
-	[10]= { a = "TOPLEFT",		x = fixscale(ThunderDB["ActionBars"]["BarClass_X"]),y = fixscale(ThunderDB["ActionBars"]["BarClass_Y"])},--shapeshift
-	[11]= { a = "BOTTOM",		x = fixscale(ThunderDB["ActionBars"]["BarExit_X"]),	y = fixscale(ThunderDB["ActionBars"]["BarExit_Y"])},--my own vehicle exit button
+	[1] = { a = "BOTTOM",		x = fixscale(ThunderDB[l_ab][l_ab123x]),	y = fixscale(ThunderDB[l_ab][l_ab123y])},--fbar123
+	[2] = { a = "BOTTOMRIGHT",	x = fixscale(ThunderDB[l_ab][l_ab3x]),	y = fixscale(ThunderDB[l_ab][l_ab3y])},--fbar3
+	[3] = { a = "RIGHT",		x = fixscale(ThunderDB[l_ab][l_ab45x]),	y = fixscale(ThunderDB[l_ab][l_ab45y])},--fbar4
+	[6] = { a = "BOTTOM",		x = fixscale(ThunderDB[l_ab][l_abTx]),y = fixscale(ThunderDB[l_ab][l_abTy])},--totem
+	[9] = { a = "BOTTOM",		x = fixscale(ThunderDB[l_ab][l_abPx]),	y = fixscale(ThunderDB[l_ab][l_abPy])},--petbar
+	[10]= { a = "TOPLEFT",		x = fixscale(ThunderDB[l_ab][l_abSx]),y = fixscale(ThunderDB[l_ab][l_abSy])},--shapeshift
+	[11]= { a = "BOTTOM",		x = fixscale(ThunderDB[l_ab][l_abVx]),	y = fixscale(ThunderDB[l_ab][l_abVy])},--my own vehicle exit button
 }
 
 ----------------------------------------------------------------------------------------
@@ -112,19 +112,19 @@ end)
 ----------------------------------------------------------------------------------------
 
 local fbar1 = CreateFrame("Frame","rABS_MainMenuBar",UIParent, "SecureHandlerStateTemplate")
-fbar1:SetWidth(ThunderDB["ActionBars"]["ButtonSize"]*12+ThunderDB["ActionBars"]["Offset"]*11)
-fbar1:SetHeight(ThunderDB["ActionBars"]["ButtonSize"])
-if ThunderDB["ActionBars"]["InvertBars"] then
-	if ThunderDB["ActionBars"]["ThirdPanel"] then
-		fbar1:SetPoint(RABSpositions[1].a,RABSpositions[1].x,RABSpositions[1].y+ThunderDB["ActionBars"]["ButtonSize"]*2+ThunderDB["ActionBars"]["Offset"]*2)
+fbar1:SetWidth(ThunderDB[l_ab][l_abBusize]*12+ThunderDB[l_ab][l_abOffset]*11)
+fbar1:SetHeight(ThunderDB[l_ab][l_abBusize])
+if ThunderDB[l_ab][l_abInvert] then
+	if ThunderDB[l_ab][l_abThird] then
+		fbar1:SetPoint(RABSpositions[1].a,RABSpositions[1].x,RABSpositions[1].y+ThunderDB[l_ab][l_abBusize]*2+ThunderDB[l_ab][l_abOffset]*2)
 	else
-		fbar1:SetPoint(RABSpositions[1].a,RABSpositions[1].x,RABSpositions[1].y+ThunderDB["ActionBars"]["ButtonSize"]+ThunderDB["ActionBars"]["Offset"])
+		fbar1:SetPoint(RABSpositions[1].a,RABSpositions[1].x,RABSpositions[1].y+ThunderDB[l_ab][l_abBusize]+ThunderDB[l_ab][l_abOffset])
 	end
 else
 	fbar1:SetPoint(RABSpositions[1].a,RABSpositions[1].x,RABSpositions[1].y)
 end
 
-if ThunderDB["ActionBars"]["TestMode"] then
+if ThunderDB[l_ab][l_abTestMode] then
 	fbar1:SetBackdrop({bgFile = "Interface/Tooltips/UI-Tooltip-Background", edgeFile = "", tile = true, tileSize = 16, edgeSize = 16, insets = { left = 0, right = 0, top = 0, bottom = 0 }})
 end
 fbar1:SetScale(1)
@@ -189,14 +189,14 @@ fbar1:SetScript("OnEvent", function(self, event, ...)
 		local bu1
 		for i = 1, 12 do
 			bu1 = _G["ActionButton"..i]
-			bu1:SetSize(ThunderDB["ActionBars"]["ButtonSize"], ThunderDB["ActionBars"]["ButtonSize"])
+			bu1:SetSize(ThunderDB[l_ab][l_abBusize], ThunderDB[l_ab][l_abBusize])
 			bu1:ClearAllPoints()
 			bu1:SetParent(self)
 			if i == 1 then
 				bu1:SetPoint("BOTTOMLEFT", fbar1, 0,0)
 			else
 				local previous = _G["ActionButton"..i-1]
-				bu1:SetPoint("LEFT", previous, "RIGHT", ThunderDB["ActionBars"]["Offset"], 0)
+				bu1:SetPoint("LEFT", previous, "RIGHT", ThunderDB[l_ab][l_abOffset], 0)
 			end
 		end
 	else
@@ -209,15 +209,15 @@ end)
 ----------------------------------------------------------------------------------------
 
 local fbar2 = CreateFrame("Frame","rABS_MultiBarBottomLeft",UIParent, "SecureHandlerStateTemplate")
-fbar2:SetWidth(ThunderDB["ActionBars"]["ButtonSize"]*12+ThunderDB["ActionBars"]["Offset"]*11)
-fbar2:SetHeight(ThunderDB["ActionBars"]["ButtonSize"])
-if ThunderDB["ActionBars"]["InvertBars"] and ThunderDB["ActionBars"]["ThirdPanel"] ~= true then
+fbar2:SetWidth(ThunderDB[l_ab][l_abBusize]*12+ThunderDB[l_ab][l_abOffset]*11)
+fbar2:SetHeight(ThunderDB[l_ab][l_abBusize])
+if ThunderDB[l_ab][l_abInvert] and ThunderDB[l_ab][l_abThird] ~= true then
 	fbar2:SetPoint(RABSpositions[1].a,RABSpositions[1].x,RABSpositions[1].y)
 else
-	fbar2:SetPoint(RABSpositions[1].a,RABSpositions[1].x,RABSpositions[1].y+ThunderDB["ActionBars"]["ButtonSize"]+ThunderDB["ActionBars"]["Offset"])
+	fbar2:SetPoint(RABSpositions[1].a,RABSpositions[1].x,RABSpositions[1].y+ThunderDB[l_ab][l_abBusize]+ThunderDB[l_ab][l_abOffset])
 end
 
-if ThunderDB["ActionBars"]["TestMode"] then
+if ThunderDB[l_ab][l_abTestMode] then
 	fbar2:SetBackdrop({bgFile = "Interface/Tooltips/UI-Tooltip-Background", edgeFile = "", tile = true, tileSize = 16, edgeSize = 16, insets = { left = 0, right = 0, top = 0, bottom = 0 }})
 end
 fbar2:SetScale(1)
@@ -226,13 +226,13 @@ MultiBarBottomLeft:SetParent(fbar2)
 
 for i=1, 12 do
 	local bu2 = _G["MultiBarBottomLeftButton"..i]
-	bu2:SetSize(ThunderDB["ActionBars"]["ButtonSize"], ThunderDB["ActionBars"]["ButtonSize"])
+	bu2:SetSize(ThunderDB[l_ab][l_abBusize], ThunderDB[l_ab][l_abBusize])
 	bu2:ClearAllPoints()
 	if i == 1 then
 		bu2:SetPoint("BOTTOMLEFT", fbar2, 0,0)
 	else
 		local previous = _G["MultiBarBottomLeftButton"..i-1]
-		bu2:SetPoint("LEFT", previous, "RIGHT", ThunderDB["ActionBars"]["Offset"], 0)
+		bu2:SetPoint("LEFT", previous, "RIGHT", ThunderDB[l_ab][l_abOffset], 0)
 	end
 end
 
@@ -247,7 +247,7 @@ fbar3:SetHeight(fixscale(124))
 fbar3:SetWidth(fixscale(60))
 fbar3:SetPoint(RABSpositions[2].a,RABSpositions[2].x,RABSpositions[2].y)
 
-if ThunderDB["ActionBars"]["TestMode"] then
+if ThunderDB[l_ab][l_abTestMode] then
 	fbar3:SetBackdrop({bgFile = "Interface/Tooltips/UI-Tooltip-Background", edgeFile = "", tile = true, tileSize = 16, edgeSize = 16, insets = { left = 0, right = 0, top = 0, bottom = 0 }})
 end
 fbar3:SetScale(1)
@@ -281,23 +281,23 @@ end
 -- fbar4
 ----------------------------------------------------------------------------------------
 
-if ThunderDB["ActionBars"]["ThirdPanel"] or ThunderDB["ActionBars"]["RightBars"] > 0 then	
+if ThunderDB[l_ab][l_abThird] or ThunderDB[l_ab][l_abRB] > 0 then	
 	local fbar4 = CreateFrame("Frame","rABS_MultiBarRight",UIParent, "SecureHandlerStateTemplate")
-	if ThunderDB["ActionBars"]["ThirdPanel"] then
-		fbar4:SetHeight(ThunderDB["ActionBars"]["ButtonSize"])
-		fbar4:SetWidth(ThunderDB["ActionBars"]["ButtonSize"]*12+ThunderDB["ActionBars"]["Offset"]*11)
-		if ThunderDB["ActionBars"]["InvertBars"] then
+	if ThunderDB[l_ab][l_abThird] then
+		fbar4:SetHeight(ThunderDB[l_ab][l_abBusize])
+		fbar4:SetWidth(ThunderDB[l_ab][l_abBusize]*12+ThunderDB[l_ab][l_abOffset]*11)
+		if ThunderDB[l_ab][l_abInvert] then
 			fbar4:SetPoint(RABSpositions[1].a,RABSpositions[1].x,RABSpositions[1].y)
 		else
-			fbar4:SetPoint(RABSpositions[1].a,RABSpositions[1].x,RABSpositions[1].y+ThunderDB["ActionBars"]["ButtonSize"]*2+ThunderDB["ActionBars"]["Offset"]*2)
+			fbar4:SetPoint(RABSpositions[1].a,RABSpositions[1].x,RABSpositions[1].y+ThunderDB[l_ab][l_abBusize]*2+ThunderDB[l_ab][l_abOffset]*2)
 		end
 	else
-		fbar4:SetHeight(ThunderDB["ActionBars"]["ButtonSize"]*12+ThunderDB["ActionBars"]["Offset"]*11)
-		fbar4:SetWidth(ThunderDB["ActionBars"]["ButtonSize"])
+		fbar4:SetHeight(ThunderDB[l_ab][l_abBusize]*12+ThunderDB[l_ab][l_abOffset]*11)
+		fbar4:SetWidth(ThunderDB[l_ab][l_abBusize])
 		fbar4:SetPoint(RABSpositions[3].a,RABSpositions[3].x,RABSpositions[3].y)
 	end
 	
-	if ThunderDB["ActionBars"]["TestMode"] then
+	if ThunderDB[l_ab][l_abTestMode] then
 		fbar4:SetBackdrop({bgFile = "Interface/Tooltips/UI-Tooltip-Background", edgeFile = "", tile = true, tileSize = 16, edgeSize = 16, insets = { left = 0, right = 0, top = 0, bottom = 0 }})
 	end
 	fbar4:SetScale(1)
@@ -307,15 +307,15 @@ if ThunderDB["ActionBars"]["ThirdPanel"] or ThunderDB["ActionBars"]["RightBars"]
 	for i=1, 12 do
 		local bu4 = _G["MultiBarRightButton"..i]
 		bu4:ClearAllPoints()
-		bu4:SetSize(ThunderDB["ActionBars"]["ButtonSize"], ThunderDB["ActionBars"]["ButtonSize"])
+		bu4:SetSize(ThunderDB[l_ab][l_abBusize], ThunderDB[l_ab][l_abBusize])
 		if i == 1 then
 			bu4:SetPoint("TOPLEFT", fbar4, 0,0)
 		else
 			local previous = _G["MultiBarRightButton"..i-1]
-			if ThunderDB["ActionBars"]["ThirdPanel"] then
-				bu4:SetPoint("LEFT", previous, "RIGHT", ThunderDB["ActionBars"]["Offset"], 0)
+			if ThunderDB[l_ab][l_abThird] then
+				bu4:SetPoint("LEFT", previous, "RIGHT", ThunderDB[l_ab][l_abOffset], 0)
 			else
-				bu4:SetPoint("TOP", previous, "BOTTOM", 0, -ThunderDB["ActionBars"]["Offset"])
+				bu4:SetPoint("TOP", previous, "BOTTOM", 0, -ThunderDB[l_ab][l_abOffset])
 			end
 		end
 	end
@@ -333,23 +333,23 @@ end
 -- fbar5
 ----------------------------------------------------------------------------------------
 
-if (ThunderDB["ActionBars"]["ThirdPanel"] and ThunderDB["ActionBars"]["RightBars"] > 0) or (ThunderDB["ActionBars"]["RightBars"] > 1)then 
+if (ThunderDB[l_ab][l_abThird] and ThunderDB[l_ab][l_abRB] > 0) or (ThunderDB[l_ab][l_abRB] > 1)then 
 local fbar5 = CreateFrame("Frame","rABS_MultiBarLeft",UIParent, "SecureHandlerStateTemplate")
-fbar5:SetHeight(ThunderDB["ActionBars"]["ButtonSize"]*12+ThunderDB["ActionBars"]["Offset"]*11)
-fbar5:SetWidth(ThunderDB["ActionBars"]["ButtonSize"])
-if ThunderDB["ActionBars"]["ThirdPanel"] then
+fbar5:SetHeight(ThunderDB[l_ab][l_abBusize]*12+ThunderDB[l_ab][l_abOffset]*11)
+fbar5:SetWidth(ThunderDB[l_ab][l_abBusize])
+if ThunderDB[l_ab][l_abThird] then
 	fbar5:SetPoint(RABSpositions[3].a,RABSpositions[3].x,RABSpositions[3].y)
 else
-	fbar5:SetPoint(RABSpositions[3].a,RABSpositions[3].x-ThunderDB["ActionBars"]["ButtonSize"]-ThunderDB["ActionBars"]["Offset"],RABSpositions[3].y)
+	fbar5:SetPoint(RABSpositions[3].a,RABSpositions[3].x-ThunderDB[l_ab][l_abBusize]-ThunderDB[l_ab][l_abOffset],RABSpositions[3].y)
 end
 
 local mousebar = CreateFrame("Frame","rABS_MultiBarMouseLeftRight",UIParent, "SecureHandlerStateTemplate")
-mousebar:SetHeight(ThunderDB["ActionBars"]["ButtonSize"]*12+ThunderDB["ActionBars"]["Offset"]*11)
-mousebar:SetWidth(ThunderDB["ActionBars"]["ButtonSize"]*2+ThunderDB["ActionBars"]["Offset"])
+mousebar:SetHeight(ThunderDB[l_ab][l_abBusize]*12+ThunderDB[l_ab][l_abOffset]*11)
+mousebar:SetWidth(ThunderDB[l_ab][l_abBusize]*2+ThunderDB[l_ab][l_abOffset])
 mousebar:SetPoint(RABSpositions[3].a,RABSpositions[3].x,RABSpositions[3].y)
 
 
-if ThunderDB["ActionBars"]["TestMode"] then
+if ThunderDB[l_ab][l_abTestMode] then
 	fbar5:SetBackdrop({bgFile = "Interface/Tooltips/UI-Tooltip-Background", edgeFile = "", tile = true, tileSize = 16, edgeSize = 16, insets = { left = 0, right = 0, top = 0, bottom = 0 }})
 end
 fbar5:SetScale(1)
@@ -359,17 +359,17 @@ MultiBarLeft:SetParent(fbar5)
 for i=1, 12 do
 	local bu5 = _G["MultiBarLeftButton"..i]
 	bu5:ClearAllPoints()
-	bu5:SetSize(ThunderDB["ActionBars"]["ButtonSize"], ThunderDB["ActionBars"]["ButtonSize"])
+	bu5:SetSize(ThunderDB[l_ab][l_abBusize], ThunderDB[l_ab][l_abBusize])
 	if i == 1 then
 		bu5:SetPoint("TOPLEFT", fbar5, 0,0)
 	else
 		local previous = _G["MultiBarLeftButton"..i-1]
-		bu5:SetPoint("TOP", previous, "BOTTOM", 0, -ThunderDB["ActionBars"]["Offset"])
+		bu5:SetPoint("TOP", previous, "BOTTOM", 0, -ThunderDB[l_ab][l_abOffset])
 	end
 end
 
-if ThunderDB["ActionBars"]["MouseoverRight"] then
-	if ThunderDB["ActionBars"]["ThirdPanel"] then
+if ThunderDB[l_ab][l_abMR] then
+	if ThunderDB[l_ab][l_abThird] then
 		local function lighton(alpha)
 		  if MultiBarLeft:IsShown() then
 			for i=1, 12 do
@@ -434,16 +434,16 @@ end
 -- Class Bar - Stances, Auras and etc
 ----------------------------------------------------------------------------------------
 
-if not ThunderDB["ActionBars"]["HideClassBar"] then
+if not ThunderDB[l_ab][l_abHS] then
   
 	local shapenum = NUM_SHAPESHIFT_SLOTS
     
     local classbar = CreateFrame("Frame","rABS_StanceBar",UIParent, "SecureHandlerStateTemplate")
-    classbar:SetWidth(ThunderDB["ActionBars"]["ClassButtonSize"]*shapenum+ThunderDB["ActionBars"]["Offset"]*(shapenum-1))
-    classbar:SetHeight(ThunderDB["ActionBars"]["ClassButtonSize"])
+    classbar:SetWidth(ThunderDB[l_ab][l_abSBusize]*shapenum+ThunderDB[l_ab][l_abOffset]*(shapenum-1))
+    classbar:SetHeight(ThunderDB[l_ab][l_abSBusize])
     classbar:SetPoint(RABSpositions[10].a,RABSpositions[10].x,RABSpositions[10].y)
     
-if ThunderDB["ActionBars"]["TestMode"] then
+if ThunderDB[l_ab][l_abTestMode] then
 	classbar:SetBackdrop({bgFile = "Interface/Tooltips/UI-Tooltip-Background", edgeFile = "", tile = true, tileSize = 16, edgeSize = 16, insets = { left = 0, right = 0, top = 0, bottom = 0 }})
 end
 classbar:SetScale(1)
@@ -452,13 +452,13 @@ classbar:SetScale(1)
     
     for i=1, shapenum do
       local classbu = _G["ShapeshiftButton"..i]
-      classbu:SetSize(ThunderDB["ActionBars"]["ClassButtonSize"], ThunderDB["ActionBars"]["ClassButtonSize"])
+      classbu:SetSize(ThunderDB[l_ab][l_abSBusize], ThunderDB[l_ab][l_abSBusize])
       classbu:ClearAllPoints()
       if i == 1 then
         classbu:SetPoint("BOTTOMLEFT", classbar, 0,0)
       else
         local previous = _G["ShapeshiftButton"..i-1]      
-        classbu:SetPoint("LEFT", previous, "RIGHT", ThunderDB["ActionBars"]["Offset"], 0)
+        classbu:SetPoint("LEFT", previous, "RIGHT", ThunderDB[l_ab][l_abOffset], 0)
       end
     end
     
@@ -468,7 +468,7 @@ classbar:SetScale(1)
     hooksecurefunc("ShapeshiftBar_Update", rABS_MoveShapeshift);
     
     
-    if ThunderDB["ActionBars"]["MouseoverClassBar"] then    
+    if ThunderDB[l_ab][l_abMS] then    
       local function lighton(alpha)
         if ShapeshiftBarFrame:IsShown() then
           for i=1, shapenum do
@@ -502,7 +502,7 @@ if class == "SHAMAN" then
       local holder = CreateFrame("Frame","rABS_TotemBar",UIParent, "SecureHandlerStateTemplate")
       holder:SetWidth(tbar:GetWidth())
       holder:SetHeight(tbar:GetHeight())
-if ThunderDB["ActionBars"]["TestMode"] then
+if ThunderDB[l_ab][l_abTestMode] then
 	tbar:SetBackdrop({bgFile = "Interface/Tooltips/UI-Tooltip-Background", edgeFile = "", tile = true, tileSize = 16, edgeSize = 16, insets = { left = 0, right = 0, top = 0, bottom = 0 }})
 end
             
@@ -517,7 +517,7 @@ end
       end
             
       hooksecurefunc(tbar, "SetPoint", moveTotem)
-	if ThunderDB["ActionBars"]["ThirdPanel"] then
+	if ThunderDB[l_ab][l_abThird] then
 		holder:SetPoint(RABSpositions[6].a,RABSpositions[6].x,RABSpositions[6].y+44)
 	else
 		holder:SetPoint(RABSpositions[6].a,RABSpositions[6].x,RABSpositions[6].y)
@@ -540,15 +540,15 @@ end
 local petnum = NUM_PET_ACTION_SLOTS
 
 local fbarpet = CreateFrame("Frame","rABS_PetBar",UIParent, "SecureHandlerStateTemplate")
-fbarpet:SetWidth(ThunderDB["ActionBars"]["ClassButtonSize"]*petnum+ThunderDB["ActionBars"]["Offset"]*(petnum-1))
-fbarpet:SetHeight(ThunderDB["ActionBars"]["ClassButtonSize"])
-if ThunderDB["ActionBars"]["ThirdPanel"] then
-	fbarpet:SetPoint(RABSpositions[9].a,RABSpositions[9].x,RABSpositions[9].y+ThunderDB["ActionBars"]["ButtonSize"]+ThunderDB["ActionBars"]["Offset"])
+fbarpet:SetWidth(ThunderDB[l_ab][l_abSBusize]*petnum+ThunderDB[l_ab][l_abOffset]*(petnum-1))
+fbarpet:SetHeight(ThunderDB[l_ab][l_abSBusize])
+if ThunderDB[l_ab][l_abThird] then
+	fbarpet:SetPoint(RABSpositions[9].a,RABSpositions[9].x,RABSpositions[9].y+ThunderDB[l_ab][l_abBusize]+ThunderDB[l_ab][l_abOffset])
 else
 	fbarpet:SetPoint(RABSpositions[9].a,RABSpositions[9].x,RABSpositions[9].y)
 end
 	
-if ThunderDB["ActionBars"]["TestMode"] then
+if ThunderDB[l_ab][l_abTestMode] then
 	fbarpet:SetBackdrop({bgFile = "Interface/Tooltips/UI-Tooltip-Background", edgeFile = "", tile = true, tileSize = 16, edgeSize = 16, insets = { left = 0, right = 0, top = 0, bottom = 0 }})
 end
 fbarpet:SetScale(1)
@@ -558,18 +558,18 @@ PetActionBarFrame:SetParent(fbarpet)
 for i=1, petnum do
 	local petbu = _G["PetActionButton"..i]
 	local cd = _G["PetActionButton"..i.."Cooldown"]
-	petbu:SetSize(ThunderDB["ActionBars"]["ClassButtonSize"], ThunderDB["ActionBars"]["ClassButtonSize"])
+	petbu:SetSize(ThunderDB[l_ab][l_abSBusize], ThunderDB[l_ab][l_abSBusize])
 	petbu:ClearAllPoints()
 	if i == 1 then
 		petbu:SetPoint("BOTTOMLEFT", fbarpet, 0,0)
 	else
 		local previous = _G["PetActionButton"..i-1]      
-		petbu:SetPoint("LEFT", previous, "RIGHT", ThunderDB["ActionBars"]["Offset"], 0)
+		petbu:SetPoint("LEFT", previous, "RIGHT", ThunderDB[l_ab][l_abOffset], 0)
 	end
 	cd:SetAllPoints(petbu)
 end
 
-if ThunderDB["ActionBars"]["MouseoverPet"] then    
+if ThunderDB[l_ab][l_abMP] then    
 	local function lighton(alpha)
 	if PetActionBarFrame:IsShown() then
 	for i=1, petnum do
@@ -594,11 +594,11 @@ end
 ----------------------------------------------------------------------------------------
 
 local fbarveb = CreateFrame("Frame","rABS_VehicleExit",UIParent, "SecureHandlerStateTemplate")
-fbarveb:SetHeight(ThunderDB["ActionBars"]["ClassButtonSize"])
-fbarveb:SetWidth(ThunderDB["ActionBars"]["ClassButtonSize"])
+fbarveb:SetHeight(ThunderDB[l_ab][l_abSBusize])
+fbarveb:SetWidth(ThunderDB[l_ab][l_abSBusize])
 fbarveb:SetPoint(RABSpositions[11].a,RABSpositions[11].x,RABSpositions[11].y)
   
-if ThunderDB["ActionBars"]["TestMode"] then
+if ThunderDB[l_ab][l_abTestMode] then
 	fbarveb:SetBackdrop({bgFile = "Interface/Tooltips/UI-Tooltip-Background", edgeFile = "", tile = true, tileSize = 16, edgeSize = 16, insets = { left = 0, right = 0, top = 0, bottom = 0 }})
 end
 fbarveb:SetScale(1)

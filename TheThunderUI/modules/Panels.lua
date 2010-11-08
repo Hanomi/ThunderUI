@@ -1,10 +1,10 @@
-----------------------------------------------------------------------------------------
+﻿----------------------------------------------------------------------------------------
 -- LitePanels by Katae of Anvilmar
 -- Lightweight Panels of Awesomeness!
 ----------------------------------------------------------------------------------------
 
 local module = {}
-module.name = "LitePanels"
+module.name = l_lpanels
 module.Init = function()
 	if not ThunderDB.modules[module.name] then return end
 	local settings = ThunderDB
@@ -59,9 +59,9 @@ local function setcolor(color)
 	if color == "CLASS" then
 		return class.r, class.g, class.b
 	elseif color == "graycolor" then
-		return unpack(ThunderDB["Main"]["Border color"])
+		return unpack(ThunderDB[l_main][l_bgcolor])
 	elseif color == "blackcolor" then
-		return unpack(ThunderDB["Main"]["Background color"])
+		return unpack(ThunderDB[l_main][l_bcolor])
 	elseif is(color,'string') then
 		return strmatch(color, "([%d%.]+)%s+([%d%.]+)%s+([%d%.]+)")
 	else 
@@ -424,7 +424,7 @@ lpanels:CreateLayout("Load For All", {
 	bg_color = "blackcolor",
 	bg_alpha = 0.8,
 	inset = fixscale(-1),
-	border = ThunderDB["Main"]["BlankText"],
+	border = ThunderDB[l_main][l_blank],
 	border_size = fixscale(1),
 	scale = 1,
 	border_color = "graycolor",
@@ -434,18 +434,18 @@ lpanels:CreateLayout("Load For All", {
 	anchor_frame = "MultiBarLeftButton3",
 	parent = "MultiBarLeftButton3", anchor_to = "TOPLEFT",
 	x_off = -fixscale(4), y_off = 0,
-	width = ThunderDB["ActionBars"]["ButtonSize"]*2+ThunderDB["ActionBars"]["Offset"]+fixscale(8),
-	height = ThunderDB["ActionBars"]["ButtonSize"]*8+ThunderDB["ActionBars"]["Offset"]*7,
+	width = ThunderDB[l_ab][l_abBusize]*2+ThunderDB[l_ab][l_abOffset]+fixscale(8),
+	height = ThunderDB[l_ab][l_abBusize]*8+ThunderDB[l_ab][l_abOffset]*7,
 	bg_alpha = 0,
 --	scale = 1,
 	OnLoad = function(self)
 		self:SetScale(1)
-		if ThunderDB["ActionBars"]["RightBars"] == 0 then
+		if ThunderDB[l_ab][l_abRB] == 0 then
 			self:SetAlpha(0)
-		elseif(ThunderDB["ActionBars"]["ThirdPanel"]==true) then
-			self:SetWidth(ThunderDB["ActionBars"]["ButtonSize"]+fixscale(8))
-		elseif(ThunderDB["ActionBars"]["ThirdPanel"]==false) and (ThunderDB["ActionBars"]["RightBars"]==1) then
-			self:SetWidth(ThunderDB["ActionBars"]["ButtonSize"]+fixscale(8))
+		elseif(ThunderDB[l_ab][l_abThird]==true) then
+			self:SetWidth(ThunderDB[l_ab][l_abBusize]+fixscale(8))
+		elseif(ThunderDB[l_ab][l_abThird]==false) and (ThunderDB[l_ab][l_abRB]==1) then
+			self:SetWidth(ThunderDB[l_ab][l_abBusize]+fixscale(8))
 			self:SetParent(MultiBarRightButton3)
 			self:SetPoint("TOPLEFT", MultiBarRightButton3, -fixscale(4), 0)
 		end
@@ -564,17 +564,17 @@ lpanels:CreateLayout("Load For All", {
 	anchor_frame = "ActionButton3",
 	parent = "ActionButton3", anchor_to = "TOPLEFT",
 	x_off = 0, y_off = fixscale(4),
-	width = ThunderDB["ActionBars"]["ButtonSize"]*8+ThunderDB["ActionBars"]["Offset"]*7,
-	height = ThunderDB["ActionBars"]["ButtonSize"]*2+ThunderDB["ActionBars"]["Offset"]+fixscale(8),
+	width = ThunderDB[l_ab][l_abBusize]*8+ThunderDB[l_ab][l_abOffset]*7,
+	height = ThunderDB[l_ab][l_abBusize]*2+ThunderDB[l_ab][l_abOffset]+fixscale(8),
 --	scale = 1,
 	bg_alpha = 0,
 	OnLoad = function(self) 
 		self:SetScale(1)
-		if(ThunderDB["ActionBars"]["ThirdPanel"]==true) then
-			self:SetHeight(ThunderDB["ActionBars"]["ButtonSize"]*3+ThunderDB["ActionBars"]["Offset"]*2+fixscale(8))
+		if(ThunderDB[l_ab][l_abThird]==true) then
+			self:SetHeight(ThunderDB[l_ab][l_abBusize]*3+ThunderDB[l_ab][l_abOffset]*2+fixscale(8))
 		end
-		if(ThunderDB["ActionBars"]["InvertBars"]~=true) then
-			if(ThunderDB["ActionBars"]["ThirdPanel"]==true) then
+		if(ThunderDB[l_ab][l_abInvert]~=true) then
+			if(ThunderDB[l_ab][l_abThird]==true) then
 				self:SetPoint("TOPLEFT", MultiBarRightButton3, 0, fixscale(4))
 			else
 				self:SetPoint("TOPLEFT", MultiBarBottomLeftButton3, 0, fixscale(4))
@@ -693,7 +693,7 @@ lpanels:CreateLayout("Load For All", {
 {	name = "RIGHTCHAT",
 	anchor_to = "BOTTOMRIGHT",
 	x_off = fixscale(-19), y_off = fixscale(23),
-	width = fixscale(ThunderDB["LitePanels"]["RightPanelWidth"]), height = fixscale(ThunderDB["LitePanels"]["RightPanelHeight"]),
+	width = fixscale(ThunderDB[l_lpanels][l_lpwidth]), height = fixscale(ThunderDB[l_lpanels][l_lpheight]),
 	bg_alpha = 0,
 },
 {	name = "RIGHTCHATL", parent = "RIGHTCHAT",
@@ -712,56 +712,56 @@ lpanels:CreateLayout("Load For All", {
 },
 {   name = "LineChatRT",
     parent = "RIGHTCHAT", anchor_to = "TOP", x_off = 0, y_off = fixscale(1),
-    width = fixscale(ThunderDB["LitePanels"]["RightPanelWidth"]+fixscale(2)), height = fixscale(1),
+    width = fixscale(ThunderDB[l_lpanels][l_lpwidth]+fixscale(2)), height = fixscale(1),
     gradient = "H",
     bg_color = "graycolor", gradient_color = "graycolor",
     bg_alpha = 1, gradient_alpha = 1,
 },
 {   name = "LineChatRT2",
     parent = "RIGHTCHAT", anchor_to = "TOP", x_off = 0, y_off = fixscale(2),
-    width = fixscale(ThunderDB["LitePanels"]["RightPanelWidth"]+fixscale(4)), height = fixscale(1),
+    width = fixscale(ThunderDB[l_lpanels][l_lpwidth]+fixscale(4)), height = fixscale(1),
     gradient = "H",
     bg_color = "blackcolor", gradient_color = "blackcolor",
     bg_alpha = 1, gradient_alpha = 1,
 },
 {   name = "LineChatRR",
     parent = "RIGHTCHAT", anchor_to = "RIGHT", x_off = fixscale(1), y_off = 0,
-    width = fixscale(1), height = fixscale(ThunderDB["LitePanels"]["RightPanelHeight"]+fixscale(2)),
+    width = fixscale(1), height = fixscale(ThunderDB[l_lpanels][l_lpheight]+fixscale(2)),
     gradient = "V",
     bg_color = "graycolor", gradient_color = "graycolor",
     bg_alpha = 0, gradient_alpha = 1,
 },
 {   name = "LineChatRR2",
     parent = "RIGHTCHAT", anchor_to = "RIGHT", x_off = fixscale(2), y_off = 0,
-    width = fixscale(1), height = fixscale(ThunderDB["LitePanels"]["RightPanelHeight"]+fixscale(4)),
+    width = fixscale(1), height = fixscale(ThunderDB[l_lpanels][l_lpheight]+fixscale(4)),
     gradient = "V",
     bg_color = "blackcolor", gradient_color = "blackcolor",
     bg_alpha = 0, gradient_alpha = 1,
 },
 {   name = "LineChatRL",
     parent = "RIGHTCHAT", anchor_to = "LEFT", x_off = fixscale(-1), y_off = 0,
-    width = fixscale(1), height = fixscale(ThunderDB["LitePanels"]["RightPanelHeight"]+fixscale(2)),
+    width = fixscale(1), height = fixscale(ThunderDB[l_lpanels][l_lpheight]+fixscale(2)),
     gradient = "V",
     bg_color = "graycolor", gradient_color = "graycolor",
     bg_alpha = 1, gradient_alpha = 1,
 },
 {   name = "LineChatRL2",
     parent = "RIGHTCHAT", anchor_to = "LEFT", x_off = fixscale(-2), y_off = 0,
-    width = fixscale(1), height = fixscale(ThunderDB["LitePanels"]["RightPanelHeight"]+fixscale(4)),
+    width = fixscale(1), height = fixscale(ThunderDB[l_lpanels][l_lpheight]+fixscale(4)),
     gradient = "V",
     bg_color = "blackcolor", gradient_color = "blackcolor",
     bg_alpha = 1, gradient_alpha = 1,
 },
 {   name = "LineChatRB",
     parent = "RIGHTCHAT", anchor_to = "BOTTOM", x_off = 0, y_off = fixscale(-1),
-    width = fixscale(ThunderDB["LitePanels"]["RightPanelWidth"]+fixscale(2)), height = fixscale(1),
+    width = fixscale(ThunderDB[l_lpanels][l_lpwidth]+fixscale(2)), height = fixscale(1),
     gradient = "H",
     bg_color = "graycolor", gradient_color = "graycolor",
     bg_alpha = 1, gradient_alpha = 1,
 },
 {   name = "LineChatRB2",
     parent = "RIGHTCHAT", anchor_to = "BOTTOM", x_off = 0, y_off = fixscale(-2),
-    width = fixscale(ThunderDB["LitePanels"]["RightPanelWidth"]+fixscale(4)), height = fixscale(1),
+    width = fixscale(ThunderDB[l_lpanels][l_lpwidth]+fixscale(4)), height = fixscale(1),
     gradient = "H",
     bg_color = "blackcolor", gradient_color = "blackcolor",
     bg_alpha = 1, gradient_alpha = 1,
@@ -769,7 +769,7 @@ lpanels:CreateLayout("Load For All", {
 {	name = "LEFTCHAT",
 	anchor_to = "BOTTOMLEFT",
 	x_off = fixscale(19), y_off = fixscale(23),
-	width = fixscale(ThunderDB["Chat"]["ChatWidth"]), height = fixscale(ThunderDB["Chat"]["ChatHeight"]),
+	width = fixscale(ThunderDB[l_chat][l_cwidth]), height = fixscale(ThunderDB[l_chat][l_cheight]),
 	bg_alpha = 0,
 },
 {	name = "LEFTCHATL", parent = "LEFTCHAT",
@@ -788,56 +788,56 @@ lpanels:CreateLayout("Load For All", {
 },
 {   name = "LineChatLT",
     parent = "LEFTCHAT", anchor_to = "TOP", x_off = 0, y_off = fixscale(1),
-    width = fixscale(ThunderDB["Chat"]["ChatWidth"]+fixscale(2)), height = fixscale(1),
+    width = fixscale(ThunderDB[l_chat][l_cwidth]+fixscale(2)), height = fixscale(1),
     gradient = "H",
     bg_color = "graycolor", gradient_color = "graycolor",
     bg_alpha = 1, gradient_alpha = 1,
 },
 {   name = "LineChatLT2",
     parent = "LEFTCHAT", anchor_to = "TOP", x_off = 0, y_off = fixscale(2),
-    width = fixscale(ThunderDB["Chat"]["ChatWidth"]+fixscale(4)), height = fixscale(1),
+    width = fixscale(ThunderDB[l_chat][l_cwidth]+fixscale(4)), height = fixscale(1),
     gradient = "H",
     bg_color = "blackcolor", gradient_color = "blackcolor",
     bg_alpha = 1, gradient_alpha = 1,
 },
 {   name = "LineChatLR",
     parent = "LEFTCHAT", anchor_to = "RIGHT", x_off = fixscale(1), y_off = 0,
-    width = fixscale(1), height = fixscale(ThunderDB["Chat"]["ChatHeight"]+fixscale(2)),
+    width = fixscale(1), height = fixscale(ThunderDB[l_chat][l_cheight]+fixscale(2)),
     gradient = "V",
     bg_color = "graycolor", gradient_color = "graycolor",
     bg_alpha = 1, gradient_alpha = 1,
 },
 {   name = "LineChatLR2",
     parent = "LEFTCHAT", anchor_to = "RIGHT", x_off = fixscale(2), y_off = 0,
-    width = fixscale(1), height = fixscale(ThunderDB["Chat"]["ChatHeight"]+fixscale(4)),
+    width = fixscale(1), height = fixscale(ThunderDB[l_chat][l_cheight]+fixscale(4)),
     gradient = "V",
     bg_color = "blackcolor", gradient_color = "blackcolor",
     bg_alpha = 1, gradient_alpha = 1,
 },
 {   name = "LineChatLL",
     parent = "LEFTCHAT", anchor_to = "LEFT", x_off = fixscale(-1), y_off = 0,
-    width = fixscale(1), height = fixscale(ThunderDB["Chat"]["ChatHeight"]+fixscale(2)),
+    width = fixscale(1), height = fixscale(ThunderDB[l_chat][l_cheight]+fixscale(2)),
     gradient = "V",
     bg_color = "graycolor", gradient_color = "graycolor",
     bg_alpha = 0, gradient_alpha = 1,
 },
 {   name = "LineChatLL2",
     parent = "LEFTCHAT", anchor_to = "LEFT", x_off = fixscale(-2), y_off = 0,
-    width = fixscale(1), height = fixscale(ThunderDB["Chat"]["ChatHeight"]+fixscale(4)),
+    width = fixscale(1), height = fixscale(ThunderDB[l_chat][l_cheight]+fixscale(4)),
     gradient = "V",
     bg_color = "blackcolor", gradient_color = "blackcolor",
     bg_alpha = 0, gradient_alpha = 1,
 },
 {   name = "LineChatLB",
     parent = "LEFTCHAT", anchor_to = "BOTTOM", x_off = 0, y_off = fixscale(-1),
-    width = fixscale(ThunderDB["Chat"]["ChatWidth"]+fixscale(2)), height = fixscale(1),
+    width = fixscale(ThunderDB[l_chat][l_cwidth]+fixscale(2)), height = fixscale(1),
     gradient = "H",
     bg_color = "graycolor", gradient_color = "graycolor",
     bg_alpha = 1, gradient_alpha = 1,
 },
 {   name = "LineChatLB2",
     parent = "LEFTCHAT", anchor_to = "BOTTOM", x_off = 0, y_off = fixscale(-2),
-    width = fixscale(ThunderDB["Chat"]["ChatWidth"]+fixscale(4)), height = fixscale(1),
+    width = fixscale(ThunderDB[l_chat][l_cwidth]+fixscale(4)), height = fixscale(1),
     gradient = "H",
     bg_color = "blackcolor", gradient_color = "blackcolor",
     bg_alpha = 1, gradient_alpha = 1,
@@ -845,7 +845,7 @@ lpanels:CreateLayout("Load For All", {
 {	name = "StatContainerRIGHT",
 	anchor_to = "BOTTOMRIGHT",
 	x_off = fixscale(-18), y_off = fixscale(5),
-	width = fixscale(ThunderDB["LitePanels"]["RightPanelWidth"]), height = fixscale(16),
+	width = fixscale(ThunderDB[l_lpanels][l_lpwidth]), height = fixscale(16),
 	bg_alpha = 0,
 },
 {	name = "BoxRL", parent = "StatContainerRIGHT",
@@ -879,7 +879,7 @@ lpanels:CreateLayout("Load For All", {
 {	name = "StatContainerLEFT",
 	anchor_to = "BOTTOMLEFT",
 	x_off = fixscale(18), y_off = 5,
-	width = fixscale(ThunderDB["Chat"]["ChatWidth"]), height = fixscale(16),
+	width = fixscale(ThunderDB[l_chat][l_cwidth]), height = fixscale(16),
 	bg_alpha = 0,
 },
 {	name = "BoxLL", parent = "StatContainerLEFT",
@@ -943,9 +943,9 @@ lpanels:CreateLayout("Load For All", {
 {	name = "PetBarsBAGROUND",
 	anchor_frame = "PetActionButton1",
 	parent = "PetActionButton3", anchor_to = "TOPLEFT", strata = "TOOLTIP",
-	x_off = ThunderDB["ActionBars"]["ClassButtonSize"]/2, y_off = fixscale(4),
-	width = ThunderDB["ActionBars"]["ClassButtonSize"]*9+ThunderDB["ActionBars"]["Offset"]*9,
-	height = ThunderDB["ActionBars"]["ClassButtonSize"]+fixscale(8),
+	x_off = ThunderDB[l_ab][l_abSBusize]/2, y_off = fixscale(4),
+	width = ThunderDB[l_ab][l_abSBusize]*9+ThunderDB[l_ab][l_abOffset]*9,
+	height = ThunderDB[l_ab][l_abSBusize]+fixscale(8),
 	scale = 1,
 	bg_alpha = 0,
 },

@@ -5,7 +5,7 @@
 --]]
 
 local module = {}
-module.name = "Loot"
+module.name = l_loot
 module.Init = function()
 	if not ThunderDB.modules[module.name] then return end
 	local settings = ThunderDB
@@ -185,7 +185,7 @@ local createSlot = function(id)
 	name:SetPoint("RIGHT", frame)
 	name:SetPoint("LEFT", icon, "RIGHT",8,0)
 	name:SetNonSpaceWrap(true)
-	name:SetFont(ThunderDB["Loot"]["LootFont"], ThunderDB["Loot"]["LootFontSize"], "OUTLINE")
+	name:SetFont(ThunderDB[l_loot][l_lfont], ThunderDB[l_loot][l_lfontsize], "OUTLINE")
 	--name:SetFontObject(GameFontWhite)GameTooltipHeaderText
 
 	name:SetWidth(120)
@@ -209,7 +209,7 @@ local createSlot = function(id)
 
 end
 
-title:SetFont(ThunderDB["Loot"]["LootFont"], ThunderDB["Loot"]["LootFontSize"], "OUTLINE")
+title:SetFont(ThunderDB[l_loot][l_lfont], ThunderDB[l_loot][l_lfontsize], "OUTLINE")
 title:SetJustifyH"LEFT"
 title:SetPoint("TOPLEFT", addon, "TOPLEFT", 6, -4)
 
@@ -226,14 +226,14 @@ addon:SetParent(UIParent)
 addon:SetUserPlaced(true)
 addon:SetPoint("TOPLEFT", 200, -200)
 addon:SetBackdrop{
-	bgFile = ThunderDB["Main"]["BlankText"],
-	edgeFile = ThunderDB["Main"]["BlankText"], 
+	bgFile = ThunderDB[l_main][l_blank],
+	edgeFile = ThunderDB[l_main][l_blank], 
 	tile = false, tileSize = 0, edgeSize = 1, 
 	insets = {top = -1, left = -1, bottom = -1, right = -1},
 }
 addon:SetWidth(256)
 addon:SetHeight(64)
-addon:SetBackdropColor(unpack(ThunderDB["Main"]["Background color"]))
+addon:SetBackdropColor(unpack(ThunderDB[l_main][l_bcolor]))
 
 
 addon:SetClampedToScreen(true)

@@ -4,7 +4,7 @@
 ----------------------------------------------------------------------------------------
 
 local module = {}
-module.name = "Chat"
+module.name = l_chat
 module.Init = function()
 	if not ThunderDB.modules[module.name] then return end
 	local settings = ThunderDB
@@ -80,8 +80,8 @@ local function PLAYER_ENTERING_WORLD()
 	--edit all chat windows
 	for i = 1, NUM_CHAT_WINDOWS do
 		_G["ChatFrame"..i]:SetClampRectInsets(0,0,0,0)
-		_G["ChatFrame"..i]:SetWidth(ThunderDB["Chat"]["ChatWidth"]-5)
-		_G["ChatFrame"..i]:SetHeight(ThunderDB["Chat"]["ChatHeight"]-3)	
+		_G["ChatFrame"..i]:SetWidth(ThunderDB[l_chat][l_cwidth]-5)
+		_G["ChatFrame"..i]:SetHeight(ThunderDB[l_chat][l_cheight]-3)	
 
 		_G["ChatFrame"..i]:SetClampedToScreen(false)
 	
@@ -112,7 +112,7 @@ local function PLAYER_ENTERING_WORLD()
 		local id = _G["ChatFrame"..i]:GetID()
 		local _, fontSize = FCF_GetChatWindowInfo(id)
 
-		_G["ChatFrame"..i]:SetFont(ThunderDB["Chat"]["ChatFont"], fontSize or 11)
+		_G["ChatFrame"..i]:SetFont(ThunderDB[l_chat][l_cfont], fontSize or 11)
 		
 		_G["ChatFrame"..i]:SetFrameStrata("LOW")
 		_G["ChatFrame"..i]:SetMovable(true)
@@ -184,7 +184,7 @@ ChannelsEdits()
 -----------------------------------------------------------------------------
 -- Copy URL
 -----------------------------------------------------------------------------
-if ThunderDB["Chat"]["CopyURL"] then
+if ThunderDB[l_chat][l_curl] then
 local color = "8A9DDE"
 local pattern = "[wWhH][wWtT][wWtT][\46pP]%S+[^%p%s]"
 
@@ -248,7 +248,7 @@ end
 -----------------------------------------------------------------------------
 -- Copy Chat (by Shestak)
 -----------------------------------------------------------------------------
-if ThunderDB["Chat"]["CopyChat"] then
+if ThunderDB[l_chat][l_ccopy] then
 local lines = {}
 local frame = nil
 local editBox = nil
@@ -257,13 +257,13 @@ local isf = nil
 local function CreatCopyFrame()
 	frame = CreateFrame("Frame", "CopyFrame", UIParent)
 	frame:SetBackdrop({
-			bgFile = ThunderDB["Main"]["BlankText"], 
-			edgeFile = ThunderDB["Main"]["BlankText"], 
+			bgFile = ThunderDB[l_main][l_blank], 
+			edgeFile = ThunderDB[l_main][l_blank], 
 			tile = 0, tileSize = 0, edgeSize = 1, 
 			insets = { left = -1, right = -1, top = -1, bottom = -1 }
 	})
-	frame:SetBackdropColor(unpack(ThunderDB["Main"]["Background color"]))
-	frame:SetBackdropBorderColor(unpack(ThunderDB["Main"]["Border color"])) 
+	frame:SetBackdropColor(unpack(ThunderDB[l_main][l_bcolor]))
+	frame:SetBackdropBorderColor(unpack(ThunderDB[l_main][l_bgcolor])) 
 	frame:SetWidth(500)
 	frame:SetHeight(300)
 	frame:SetPoint("CENTER", UIParent, "CENTER")
@@ -373,8 +373,8 @@ function TempChatSkin()
 				chatTab.noMouseAlpha = 0
 				
 				_G[chatFrame:GetName()]:SetClampRectInsets(0,0,0,0)
-				_G[chatFrame:GetName()]:SetWidth(ThunderDB["Chat"]["ChatWidth"]-5)
-				_G[chatFrame:GetName()]:SetHeight(ThunderDB["Chat"]["ChatHeight"]-3)	
+				_G[chatFrame:GetName()]:SetWidth(ThunderDB[l_chat][l_cwidth]-5)
+				_G[chatFrame:GetName()]:SetHeight(ThunderDB[l_chat][l_cheight]-3)	
 				_G[chatFrame:GetName()]:ClearAllPoints()
 				_G[chatFrame:GetName()]:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 20, 25)
 
@@ -412,7 +412,7 @@ function TempChatSkin()
 				local id = _G[chatFrame:GetName()]:GetID()
 				local _, fontSize = FCF_GetChatWindowInfo(id)
 
-				_G[chatFrame:GetName()]:SetFont(ThunderDB["Chat"]["ChatFont"], fontSize or 11)
+				_G[chatFrame:GetName()]:SetFont(ThunderDB[l_chat][l_cfont], fontSize or 11)
 				
 				-- Set random stuff
 				_G[chatFrame:GetName()]:SetFrameStrata("LOW")

@@ -1,10 +1,10 @@
-----------------------------------------------------------------------------------------
+﻿----------------------------------------------------------------------------------------
 -- rActionButtonStyler
 -- zork - 2010
 ----------------------------------------------------------------------------------------
 
 local module = {}
-module.name = "ButtonStyler"
+module.name = l_bstyler
 module.Init = function()
 	if not ThunderDB.modules[module.name] then return end
 	local settings = ThunderDB
@@ -44,12 +44,12 @@ local function rActionButtonStyler_AB_style(self)
 		bo.Show = nomoreplay
 		na:Hide()
       
-		if not ThunderDB["ActionBars"]["HideHotkey"] then
-			ho:SetFont(ThunderDB["ButtonStyler"]["ButtonFont"], ThunderDB["ButtonStyler"]["ButtonFontSize"], "OUTLINE")
+		if not ThunderDB[l_bstyler][l_bshh] then
+			ho:SetFont(ThunderDB[l_bstyler][l_bsfont], ThunderDB[l_bstyler][l_bsfontsize], "OUTLINE")
 			ho:ClearAllPoints()
 			ho:SetPoint("TOPRIGHT", 1, -1)
-			ho:SetWidth(ThunderDB["ActionBars"]["ButtonSize"]+2)
-			ho:SetHeight(ThunderDB["ButtonStyler"]["ButtonFontSize"])
+			ho:SetWidth(ThunderDB[l_ab][l_abBusize]+2)
+			ho:SetHeight(ThunderDB[l_bstyler][l_bsfontsize])
 		else
 			ho:Hide()
 			ho.Show = nomoreplay
@@ -57,14 +57,14 @@ local function rActionButtonStyler_AB_style(self)
 
 		co:ClearAllPoints()
 		co:SetPoint("BOTTOMRIGHT", 0, fixscale(2))
-		co:SetFont(ThunderDB["ButtonStyler"]["ButtonFont"], ThunderDB["ButtonStyler"]["ButtonFontSize"], "OUTLINE")
+		co:SetFont(ThunderDB[l_bstyler][l_bsfont], ThunderDB[l_bstyler][l_bsfontsize], "OUTLINE")
     
 		--applying the textures
 	--	fl:SetTexture("")
 		bu:SetNormalTexture("")
-		bu:SetHighlightTexture(ThunderDB["ButtonStyler"]["HighlightText"])
-		bu:SetPushedTexture(ThunderDB["ButtonStyler"]["PushedText"])
-		bu:SetCheckedTexture(ThunderDB["ButtonStyler"]["CheckedText"])
+		bu:SetHighlightTexture(ThunderDB[l_bstyler][l_bsHighlight])
+		bu:SetPushedTexture(ThunderDB[l_bstyler][l_bsPushed])
+		bu:SetCheckedTexture(ThunderDB[l_bstyler][l_bsChecked])
 
 		--cut the default border of the icons and make them shiny
 		ic:SetTexCoord(0.1,0.9,0.1,0.9)
@@ -101,9 +101,9 @@ local function rActionButtonStyler_AB_stylepet()
 
 	--	fl:SetTexture("")
 		bu:SetNormalTexture("")
-		bu:SetHighlightTexture(ThunderDB["ButtonStyler"]["HighlightText"])
-		bu:SetPushedTexture(ThunderDB["ButtonStyler"]["PushedText"])
-		bu:SetCheckedTexture(ThunderDB["ButtonStyler"]["CheckedText"])
+		bu:SetHighlightTexture(ThunderDB[l_bstyler][l_bsHighlight])
+		bu:SetPushedTexture(ThunderDB[l_bstyler][l_bsPushed])
+		bu:SetCheckedTexture(ThunderDB[l_bstyler][l_bsChecked])
 		
 		--cut the default border of the icons and make them shiny
 		ic:SetTexCoord(0.1,0.9,0.1,0.9)
@@ -131,9 +131,9 @@ local function rActionButtonStyler_AB_styleshapeshift()
 
 	--	fl:SetTexture("")
 		bu:SetNormalTexture("")
-		bu:SetHighlightTexture(ThunderDB["ButtonStyler"]["HighlightText"])
-		bu:SetPushedTexture(ThunderDB["ButtonStyler"]["PushedText"])
-		bu:SetCheckedTexture(ThunderDB["ButtonStyler"]["CheckedText"])
+		bu:SetHighlightTexture(ThunderDB[l_bstyler][l_bsHighlight])
+		bu:SetPushedTexture(ThunderDB[l_bstyler][l_bsPushed])
+		bu:SetCheckedTexture(ThunderDB[l_bstyler][l_bsChecked])
     
 		--cut the default border of the icons and make them shiny
 		ic:SetTexCoord(0.1,0.9,0.1,0.9)
@@ -172,11 +172,11 @@ local function modActionButton_UpdateHotkeys(self, actionButtonType)
 		hotkey:SetText(text)
 	end
 
-	if ThunderDB["ActionBars"]["HideHotkey"] ~= true then
+	if ThunderDB[l_bstyler][l_bshh] ~= true then
 		hotkey:ClearAllPoints()
 		hotkey:SetPoint("TOPRIGHT", 1, -1)
-		hotkey:SetWidth(ThunderDB["ActionBars"]["ButtonSize"]+2)
-		hotkey:SetHeight(ThunderDB["ButtonStyler"]["ButtonFontSize"])
+		hotkey:SetWidth(ThunderDB[l_ab][l_abBusize]+2)
+		hotkey:SetHeight(ThunderDB[l_bstyler][l_bsfontsize])
 	else
 		hotkey:Hide()
 	end

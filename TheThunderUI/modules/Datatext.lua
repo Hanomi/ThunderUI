@@ -4,19 +4,19 @@
 ----------------------------------------------------------------------------------------
 
 local module = {}
-module.name = "Datatext"
+module.name = l_data
 module.Init = function()
 	if not ThunderDB.modules[module.name] then return end
 	local settings = ThunderDB
 
-if ThunderDB["Datatext"]["fps_ms"] > 8 then ThunderDB["Datatext"]["fps_ms"] = 0 end
-if ThunderDB["Datatext"]["mem"] > 8 then ThunderDB["Datatext"]["fps_ms"] = 0 end
-if ThunderDB["Datatext"]["armor"] > 8 then ThunderDB["Datatext"]["fps_ms"] = 0 end
-if ThunderDB["Datatext"]["gold"] > 8 then ThunderDB["Datatext"]["fps_ms"] = 0 end
-if ThunderDB["Datatext"]["wowtime"] > 8 then ThunderDB["Datatext"]["fps_ms"] = 0 end
-if ThunderDB["Datatext"]["friends"] > 8 then ThunderDB["Datatext"]["fps_ms"] = 0 end
-if ThunderDB["Datatext"]["guild"] > 8 then ThunderDB["Datatext"]["fps_ms"] = 0 end
-if ThunderDB["Datatext"]["bags"] > 8 then ThunderDB["Datatext"]["fps_ms"] = 0 end
+if ThunderDB[l_data][l_dfpsms] > 8 then ThunderDB[l_data][l_dfpsms] = 0 end
+if ThunderDB[l_data][l_dmem] > 8 then ThunderDB[l_data][l_dmem] = 0 end
+if ThunderDB[l_data][l_darmor] > 8 then ThunderDB[l_data][l_darmor] = 0 end
+if ThunderDB[l_data][l_dgold] > 8 then ThunderDB[l_data][l_dgold] = 0 end
+if ThunderDB[l_data][l_dtime] > 8 then ThunderDB[l_data][l_dtime] = 0 end
+if ThunderDB[l_data][l_dfriends] > 8 then ThunderDB[l_data][l_dfriends] = 0 end
+if ThunderDB[l_data][l_dguild] > 8 then ThunderDB[l_data][l_dguild] = 0 end
+if ThunderDB[l_data][l_dbags] > 8 then ThunderDB[l_data][l_dbags] = 0 end
 		
 		
 Stats = CreateFrame("Frame")
@@ -50,12 +50,12 @@ end
 -- FPS
 --------------------------------------------------------------------
 
-if ThunderDB["Datatext"]["fps_ms"] > 0 then
+if ThunderDB[l_data][l_dfpsms] > 0 then
 	local Stat1 = CreateFrame("Frame")
 
 	local Text  = UIParent:CreateFontString(nil, "OVERLAY")
-	Text:SetFont(ThunderDB["Datatext"]["DataFont"], ThunderDB["Datatext"]["DataFontSize"], "OUTLINE")
-	panel_setpoint(ThunderDB["Datatext"]["fps_ms"], Text)
+	Text:SetFont(ThunderDB[l_data][l_dfont], ThunderDB[l_data][l_dfontsize], "OUTLINE")
+	panel_setpoint(ThunderDB[l_data][l_dfpsms], Text)
 
 
 	local int = 1
@@ -85,13 +85,13 @@ end
 -- MEM
 --------------------------------------------------------------------
 
-if ThunderDB["Datatext"]["mem"] > 0 then
+if ThunderDB[l_data][l_dmem] > 0 then
 	local Stat2 = CreateFrame("Frame")
 	Stat2:EnableMouse(true)
 
 	local Text  = UIParent:CreateFontString(nil, "OVERLAY")
-	Text:SetFont(ThunderDB["Datatext"]["DataFont"], ThunderDB["Datatext"]["DataFontSize"], "OUTLINE")
-	panel_setpoint(ThunderDB["Datatext"]["mem"], Text)
+	Text:SetFont(ThunderDB[l_data][l_dfont], ThunderDB[l_data][l_dfontsize], "OUTLINE")
+	panel_setpoint(ThunderDB[l_data][l_dmem], Text)
 
 
 	local function formatMem(memory, color)
@@ -210,7 +210,7 @@ end
 -- GUILD ROSTER
 --------------------------------------------------------------------
 	
-if ThunderDB["Datatext"]["guild"] > 0 then
+if ThunderDB[l_data][l_dguild] > 0 then
 	local Stat3 = CreateFrame("Frame")
 	Stat3:EnableMouse(true)
 	
@@ -218,8 +218,8 @@ if ThunderDB["Datatext"]["guild"] > 0 then
 	local ttsubh = {r=0.75,g=0.9,b=1}
 
 	local Text  = UIParent:CreateFontString(nil, "OVERLAY")
-	Text:SetFont(ThunderDB["Datatext"]["DataFont"], ThunderDB["Datatext"]["DataFontSize"], "OUTLINE")
-	panel_setpoint(ThunderDB["Datatext"]["guild"], Text)
+	Text:SetFont(ThunderDB[l_data][l_dfont], ThunderDB[l_data][l_dfontsize], "OUTLINE")
+	panel_setpoint(ThunderDB[l_data][l_dguild], Text)
 
 
 	local function Update(self, event, ...)	
@@ -299,13 +299,13 @@ end
  -- BAGS
 --------------------------------------------------------------------
 
-if ThunderDB["Datatext"]["bags"] > 0 then
+if ThunderDB[l_data][l_dbags] > 0 then
     local Stat4 = CreateFrame("Frame")
     Stat4:EnableMouse(true)
 
     local Text  = UIParent:CreateFontString(nil, "OVERLAY")
-    Text:SetFont(ThunderDB["Datatext"]["DataFont"], ThunderDB["Datatext"]["DataFontSize"], "OUTLINE")
-    panel_setpoint(ThunderDB["Datatext"]["bags"], Text)
+    Text:SetFont(ThunderDB[l_data][l_dfont], ThunderDB[l_data][l_dfontsize], "OUTLINE")
+    panel_setpoint(ThunderDB[l_data][l_dbags], Text)
 
 
 	local function OnEvent(self, event, ...)
@@ -329,7 +329,7 @@ end
 -- FRIEND
 --------------------------------------------------------------------
 	
-if ThunderDB["Datatext"]["friends"] > 0 then
+if ThunderDB[l_data][l_dfriends] > 0 then
 local Stat5 = CreateFrame("Frame")
 	Stat5:EnableMouse(true)
 	
@@ -337,8 +337,8 @@ local Stat5 = CreateFrame("Frame")
 	local ttsubh = {r=0.75,g=0.9,b=1}
 
 	local Text  = UIParent:CreateFontString(nil, "LOW")
-	Text:SetFont(ThunderDB["Datatext"]["DataFont"], ThunderDB["Datatext"]["DataFontSize"], "OUTLINE")
-	panel_setpoint(ThunderDB["Datatext"]["friends"], Text)
+	Text:SetFont(ThunderDB[l_data][l_dfont], ThunderDB[l_data][l_dfontsize], "OUTLINE")
+	panel_setpoint(ThunderDB[l_data][l_dfriends], Text)
 
 
 	local function Update(self, event)
@@ -427,13 +427,13 @@ end
 -- DURABILITY
 --------------------------------------------------------------------
 	
-if ThunderDB["Datatext"]["armor"] > 0 then
+if ThunderDB[l_data][l_darmor] > 0 then
 	local Stat6 = CreateFrame("Frame")
 	Stat6:EnableMouse(true)
 
 	local Text  = UIParent:CreateFontString(nil, "OVERLAY")
-	Text:SetFont(ThunderDB["Datatext"]["DataFont"], ThunderDB["Datatext"]["DataFontSize"], "OUTLINE")
-	panel_setpoint(ThunderDB["Datatext"]["armor"], Text)
+	Text:SetFont(ThunderDB[l_data][l_dfont], ThunderDB[l_data][l_dfontsize], "OUTLINE")
+	panel_setpoint(ThunderDB[l_data][l_darmor], Text)
 
 
 	local Total = 0
@@ -489,13 +489,13 @@ end
 -- GOLD
 --------------------------------------------------------------------
 
-if ThunderDB["Datatext"]["gold"] > 0 then
+if ThunderDB[l_data][l_dgold] > 0 then
 	local Stat7 = CreateFrame("Frame")
 	Stat7:EnableMouse(true)
 
 	local Text  = UIParent:CreateFontString(nil, "OVERLAY")
-	Text:SetFont(ThunderDB["Datatext"]["DataFont"], ThunderDB["Datatext"]["DataFontSize"], "OUTLINE")
-	panel_setpoint(ThunderDB["Datatext"]["gold"], Text)
+	Text:SetFont(ThunderDB[l_data][l_dfont], ThunderDB[l_data][l_dfontsize], "OUTLINE")
+	panel_setpoint(ThunderDB[l_data][l_dgold], Text)
 
 
 	local Profit	= 0
@@ -641,24 +641,24 @@ end
 -- TIME
 --------------------------------------------------------------------
 
-if ThunderDB["Datatext"]["wowtime"] > 0 then
+if ThunderDB[l_data][l_dtime] > 0 then
    local Stat8 = CreateFrame("Frame")
    Stat8:EnableMouse(true)
 
    local Text  = UIParent:CreateFontString(nil, "OVERLAY")
-   Text:SetFont(ThunderDB["Datatext"]["DataFont"], ThunderDB["Datatext"]["DataFontSize"], "OUTLINE")
-   panel_setpoint(ThunderDB["Datatext"]["wowtime"], Text)
+   Text:SetFont(ThunderDB[l_data][l_dfont], ThunderDB[l_data][l_dfontsize], "OUTLINE")
+   panel_setpoint(ThunderDB[l_data][l_dtime], Text)
    
    local int = 1
    local function Update(self, t)
       local pendingCalendarInvites = CalendarGetNumPendingInvites()
          int = int - t
          if int < 0 then
-            if ThunderDB["Datatext"]["localtime"] == true then
+            if ThunderDB[l_data][l_dltime] == true then
                Hr24 = tonumber(date("%H"))
                Hr = tonumber(date("%I"))
                Min = date("%M")
-               if ThunderDB["Datatext"]["time24"] == true then
+               if ThunderDB[l_data][l_d24time] == true then
                   if pendingCalendarInvites > 0 then
                      Text:SetText("|cffFF0000"..Hr24..":"..Min)
                   else
@@ -683,7 +683,7 @@ if ThunderDB["Datatext"]["wowtime"] > 0 then
             local Hr, Min = GetGameTime()
             if Hr == 0 then Hr = 12 end
             if Min<10 then Min = "0"..Min end
-            if ThunderDB["Datatext"]["time24"] == true then         
+            if ThunderDB[l_data][l_d24time] == true then         
                Text:SetText(Hr..":"..Min.." |cffffffff|r")
             else             
                if Hr>=12 then

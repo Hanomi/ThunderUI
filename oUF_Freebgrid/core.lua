@@ -2,13 +2,13 @@
 	"cute" oUF_Freebgrid by Freebaster
 --]]
 
-if ThunderDB["modules"]["UnitFrames"] ~= true or ThunderDB["modules"]["UnitFramesRaid"] ~= true then return end
+if ThunderDB["modules"][l_uf] ~= true or ThunderDB["modules"][l_ufr] ~= true then return end
 
 local ADDON_NAME, ns = ...
 local oUF = ns.oUF or oUF
 assert(oUF, "oUF_Freebgrid was unable to locate oUF install.")
 
-if ThunderDB["UnitFramesRaid"]["KillBlizzRaid"] then
+if ThunderDB[l_ufr][l_ufrkblizz] then
 	CompactRaidFrameManager:SetScale(0.001)
 	CompactRaidFrameManager:SetAlpha(0)
 	CompactRaidFrameContainer:SetScale(0.001)
@@ -23,76 +23,76 @@ end
 local function SAP()
 	local pos, posRel, spacingX, spacingY, colX, colY, growth, point
 	
-	if ThunderDB["UnitFramesRaid"]["Point"] == "TOP" and ThunderDB["UnitFramesRaid"]["Growth"] == "LEFT" then
+	if ThunderDB[l_ufr][l_ufrpoint] == "TOP" and ThunderDB[l_ufr][l_ufrgrowth] == "LEFT" then
 		pos = "TOPRIGHT"
 		posRel = "TOPLEFT"
 		growth = "RIGHT"
 		spacingX = 0
-		spacingY = -(ThunderDB["UnitFramesRaid"]["GridOffset"])
-		colX = -(ThunderDB["UnitFramesRaid"]["GridOffset"])
+		spacingY = -(ThunderDB[l_ufr][l_ufroffset])
+		colX = -(ThunderDB[l_ufr][l_ufroffset])
 		colY = 0
 		point = "TOPRIGHT"
-	elseif ThunderDB["UnitFramesRaid"]["Point"] == "TOP" and ThunderDB["UnitFramesRaid"]["Growth"] == "RIGHT" then
+	elseif ThunderDB[l_ufr][l_ufrpoint] == "TOP" and ThunderDB[l_ufr][l_ufrgrowth] == "RIGHT" then
 		pos = "TOPLEFT"
 		posRel = "TOPRIGHT"
 		growth = "LEFT"
 		spacingX = 0
-		spacingY = -(ThunderDB["UnitFramesRaid"]["GridOffset"])
-		colX = ThunderDB["UnitFramesRaid"]["GridOffset"]
+		spacingY = -(ThunderDB[l_ufr][l_ufroffset])
+		colX = ThunderDB[l_ufr][l_ufroffset]
 		colY = 0
 		point = "TOPLEFT"
-	elseif ThunderDB["UnitFramesRaid"]["Point"] == "LEFT" and ThunderDB["UnitFramesRaid"]["Growth"] == "TOP" then
+	elseif ThunderDB[l_ufr][l_ufrpoint] == "LEFT" and ThunderDB[l_ufr][l_ufrgrowth] == "TOP" then
 		pos = "BOTTOMLEFT"
 		posRel = "TOPLEFT"
 		growth = "BOTTOM"
-		spacingX = ThunderDB["UnitFramesRaid"]["GridOffset"]
+		spacingX = ThunderDB[l_ufr][l_ufroffset]
 		spacingY = 0
 		colX = 0
-		colY = ThunderDB["UnitFramesRaid"]["GridOffset"]
+		colY = ThunderDB[l_ufr][l_ufroffset]
 		point = "BOTTOMLEFT"
-	elseif ThunderDB["UnitFramesRaid"]["Point"] == "LEFT" and ThunderDB["UnitFramesRaid"]["Growth"] == "BOTTOM" then
+	elseif ThunderDB[l_ufr][l_ufrpoint] == "LEFT" and ThunderDB[l_ufr][l_ufrgrowth] == "BOTTOM" then
 		pos = "TOPLEFT"
 		posRel = "BOTTOMLEFT"
 		growth = "TOP"
-		spacingX = ThunderDB["UnitFramesRaid"]["GridOffset"]
+		spacingX = ThunderDB[l_ufr][l_ufroffset]
 		spacingY = 0
 		colX = 0
-		colY = -(ThunderDB["UnitFramesRaid"]["GridOffset"])
+		colY = -(ThunderDB[l_ufr][l_ufroffset])
 		point = "TOPLEFT"
-	elseif ThunderDB["UnitFramesRaid"]["Point"] == "RIGHT" and ThunderDB["UnitFramesRaid"]["Growth"] == "TOP" then
+	elseif ThunderDB[l_ufr][l_ufrpoint] == "RIGHT" and ThunderDB[l_ufr][l_ufrgrowth] == "TOP" then
 		pos = "BOTTOMRIGHT"
 		posRel = "TOPRIGHT"
 		growth = "BOTTOM"
-		spacingX = -(ThunderDB["UnitFramesRaid"]["GridOffset"])
+		spacingX = -(ThunderDB[l_ufr][l_ufroffset])
 		spacingY = 0
 		colX = 0
-		colY = ThunderDB["UnitFramesRaid"]["GridOffset"]
+		colY = ThunderDB[l_ufr][l_ufroffset]
 		point = "BOTTOMRIGHT"
-	elseif ThunderDB["UnitFramesRaid"]["Point"] == "RIGHT" and ThunderDB["UnitFramesRaid"]["Growth"] == "BOTTOM" then
+	elseif ThunderDB[l_ufr][l_ufrpoint] == "RIGHT" and ThunderDB[l_ufr][l_ufrgrowth] == "BOTTOM" then
 		pos = "TOPRIGHT"
 		posRel = "BOTTOMRIGHT"
 		growth = "TOP"
-		spacingX = -(ThunderDB["UnitFramesRaid"]["GridOffset"])
+		spacingX = -(ThunderDB[l_ufr][l_ufroffset])
 		spacingY = 0
 		colX = 0
-		colY = -(ThunderDB["UnitFramesRaid"]["GridOffset"])
+		colY = -(ThunderDB[l_ufr][l_ufroffset])
 		point = "TOPRIGHT"
-	elseif ThunderDB["UnitFramesRaid"]["Point"] == "BOTTOM" and ThunderDB["UnitFramesRaid"]["Growth"] == "LEFT" then
+	elseif ThunderDB[l_ufr][l_ufrpoint] == "BOTTOM" and ThunderDB[l_ufr][l_ufrgrowth] == "LEFT" then
 		pos = "BOTTOMRIGHT"
 		posRel = "BOTTOMLEFT"
 		growth = "RIGHT"
 		spacingX = 0
-		spacingY = (ThunderDB["UnitFramesRaid"]["GridOffset"])
-		colX = -(ThunderDB["UnitFramesRaid"]["GridOffset"])
+		spacingY = (ThunderDB[l_ufr][l_ufroffset])
+		colX = -(ThunderDB[l_ufr][l_ufroffset])
 		colY = 0
 		point = "BOTTOMRIGHT"
-	elseif ThunderDB["UnitFramesRaid"]["Point"] == "BOTTOM" and ThunderDB["UnitFramesRaid"]["Growth"] == "RIGHT" then
+	elseif ThunderDB[l_ufr][l_ufrpoint] == "BOTTOM" and ThunderDB[l_ufr][l_ufrgrowth] == "RIGHT" then
 		pos = "BOTTOMLEFT"
 		posRel = "BOTTOMRIGHT"
 		growth = "LEFT"
 		spacingX = 0
-		spacingY = (ThunderDB["UnitFramesRaid"]["GridOffset"])
-		colX = (ThunderDB["UnitFramesRaid"]["GridOffset"])
+		spacingY = (ThunderDB[l_ufr][l_ufroffset])
+		colX = (ThunderDB[l_ufr][l_ufroffset])
 		colY = 0
 		point = "BOTTOMLEFT"
 	else -- You failed to equal any of the above. So I give this...
@@ -100,8 +100,8 @@ local function SAP()
 		posRel = "TOPRIGHT"
 		growth = "LEFT"
 		spacingX = 0
-		spacingY = -(ThunderDB["UnitFramesRaid"]["GridOffset"])
-		colX = ThunderDB["UnitFramesRaid"]["GridOffset"]
+		spacingY = -(ThunderDB[l_ufr][l_ufroffset])
+		colX = ThunderDB[l_ufr][l_ufroffset]
 		colY = 0
 		point = "TOPLEFT"
 	end
@@ -132,14 +132,14 @@ local menu = function(self)
 end
 
 local backdrop = {
-	bgFile = ThunderDB["Main"]["BlankText"],
-	edgeFile = ThunderDB["Main"]["BlankText"], 
+	bgFile = ThunderDB[l_main][l_blank],
+	edgeFile = ThunderDB[l_main][l_blank], 
 	tile = false, tileSize = 0, edgeSize = 1, 
 	insets = {top = -1, left = -1, bottom = -1, right = -1},
 }
 
 local frameBD = {
-	edgeFile = ThunderDB["Main"]["ShadowText"], edgeSize = 5,
+	edgeFile = ThunderDB[l_main][l_shadow], edgeSize = 5,
 	insets = {left = 3, right = 3, top = 3, bottom = 3}
 }
 
@@ -180,7 +180,7 @@ local PostUpdateHealth = function(health, unit, min, max)
     local name = oUF.Tags['thunder:name'](unit)
     local self = health.__owner
     local val = 1
-    if ThunderDB["UnitFramesRaid"]["RaidPower"] then
+    if ThunderDB[l_ufr][l_ufrpower] then
         val = 8
     end
 
@@ -191,7 +191,7 @@ local PostUpdateHealth = function(health, unit, min, max)
 		for length=#name, 1, -1 do 
 			substring = utf8sub(name, 1, length) 
 			self.Info:SetText(substring) 
-			if self.Info:GetStringWidth() <= ThunderDB["UnitFramesRaid"]["GridWidth"] - val then break end 
+			if self.Info:GetStringWidth() <= ThunderDB[l_ufr][l_ufrwidth] - val then break end 
 		end
 		nameCache[name] = substring
 	end
@@ -208,7 +208,7 @@ local PostUpdateHealth = function(health, unit, min, max)
 		r, g, b = t[1], t[2], t[3]
 	end
 	
-	if ThunderDB["UnitFrames"]["ClassColors"] and not ThunderDB["UnitFrames"]["InvertClassColors"] then
+	if ThunderDB[l_uf][l_ufcc] and not ThunderDB[l_uf][l_uficc] then
 		self.Info:SetTextColor(1, 1, 1)
 	else
 		self.Info:SetTextColor(r, g, b)
@@ -225,11 +225,11 @@ local PostUpdateHealth = function(health, unit, min, max)
 			health.value:SetText("|cffD7BEA5".."Ghost".."|r")
 		end
 		
-		if ThunderDB["UnitFrames"]["ClassColors"] and (not ThunderDB["UnitFrames"]["InvertClassColors"]) then
+		if ThunderDB[l_uf][l_ufcc] and (not ThunderDB[l_uf][l_uficc]) then
 			local class = select(2, UnitClass(unit))
 			local color = UnitIsPlayer(unit) and oUF.colors.class[class] or {0.84, 0.75, 0.65}
-			health.bg:SetVertexColor(color[1]*ThunderDB["UnitFrames"]["UiContrast"], color[2]*ThunderDB["UnitFrames"]["UiContrast"], color[3]*ThunderDB["UnitFrames"]["UiContrast"])
-		elseif ThunderDB["UnitFrames"]["ClassColors"] and ThunderDB["UnitFrames"]["InvertClassColors"] then
+			health.bg:SetVertexColor(color[1]*ThunderDB[l_uf][l_ufuicont], color[2]*ThunderDB[l_uf][l_ufuicont], color[3]*ThunderDB[l_uf][l_ufuicont])
+		elseif ThunderDB[l_uf][l_ufcc] and ThunderDB[l_uf][l_uficc] then
 			local class = select(2, UnitClass(unit))
 			local color = UnitIsPlayer(unit) and oUF.colors.class[class] or {0.84, 0.75, 0.65}		
 			health.bg:SetVertexColor(color[1], color[2], color[3])
@@ -237,7 +237,7 @@ local PostUpdateHealth = function(health, unit, min, max)
 			health.bg:SetVertexColor(0, 0, 0)
 		end
 	else
-		if ThunderDB["UnitFrames"]["ClassColors"] then
+		if ThunderDB[l_uf][l_ufcc] then
 			local r, g, b, t
 			local reaction = UnitReaction(unit, "player")
 			if(UnitIsPlayer(unit)) then
@@ -253,12 +253,12 @@ local PostUpdateHealth = function(health, unit, min, max)
 				r, g, b = t[1], t[2], t[3]
 			end
 
-			if ThunderDB["UnitFrames"]["InvertClassColors"] then
-				health:SetStatusBarColor(r*ThunderDB["UnitFrames"]["UiContrast"], g*ThunderDB["UnitFrames"]["UiContrast"], b*ThunderDB["UnitFrames"]["UiContrast"])
+			if ThunderDB[l_uf][l_uficc] then
+				health:SetStatusBarColor(r*ThunderDB[l_uf][l_ufuicont], g*ThunderDB[l_uf][l_ufuicont], b*ThunderDB[l_uf][l_ufuicont])
 				health.bg:SetVertexColor(r, g, b)			
 			else
 				health:SetStatusBarColor(r, g, b)
-				health.bg:SetVertexColor(r*ThunderDB["UnitFrames"]["UiContrast"], g*ThunderDB["UnitFrames"]["UiContrast"], b*ThunderDB["UnitFrames"]["UiContrast"])
+				health.bg:SetVertexColor(r*ThunderDB[l_uf][l_ufuicont], g*ThunderDB[l_uf][l_ufuicont], b*ThunderDB[l_uf][l_ufuicont])
 			end
 		else
 			local r, g, b
@@ -268,7 +268,7 @@ local PostUpdateHealth = function(health, unit, min, max)
 			health.bg:SetVertexColor(0, 0, 0)
 		end
 
-		if ThunderDB["UnitFramesRaid"]["ShowHealDif"] and min ~= max then
+		if ThunderDB[l_ufr][l_ufrhealdif] and min ~= max then
 			health.value:SetFormattedText("-"..siValue(max-min))
 		else
 			health.value:SetText("")
@@ -281,39 +281,39 @@ local PostUpdatePower = function(power, unit, min, max)
 	local self = power:GetParent()
 
 	if ptype == 'MANA' then
-		if(ThunderDB["UnitFramesRaid"]["Orientation"] == "VERTICAL")then
+		if(ThunderDB[l_ufr][l_ufrorient] == "VERTICAL")then
 			power:SetPoint("TOP", 0, -3)
-			power:SetWidth(ThunderDB["UnitFramesRaid"]["GridWidth"]*ThunderDB["UnitFramesRaid"]["PowerbarSize"])
-			self.Health:SetWidth((1 - ThunderDB["UnitFramesRaid"]["PowerbarSize"])*ThunderDB["UnitFramesRaid"]["GridWidth"]-6)
+			power:SetWidth(ThunderDB[l_ufr][l_ufrwidth]*ThunderDB[l_ufr][l_ufrpowersize])
+			self.Health:SetWidth((1 - ThunderDB[l_ufr][l_ufrpowersize])*ThunderDB[l_ufr][l_ufrwidth]-6)
 		else
 			power:SetPoint("LEFT", 3, 0)
-			power:SetHeight(ThunderDB["UnitFramesRaid"]["GridHeight"]*ThunderDB["UnitFramesRaid"]["PowerbarSize"])
-			self.Health:SetHeight((1 - ThunderDB["UnitFramesRaid"]["PowerbarSize"])*ThunderDB["UnitFramesRaid"]["GridHeight"]-6)
+			power:SetHeight(ThunderDB[l_ufr][l_ufrheight]*ThunderDB[l_ufr][l_ufrpowersize])
+			self.Health:SetHeight((1 - ThunderDB[l_ufr][l_ufrpowersize])*ThunderDB[l_ufr][l_ufrheight]-6)
 		end
 	else
-		if(ThunderDB["UnitFramesRaid"]["Orientation"] == "VERTICAL")then
+		if(ThunderDB[l_ufr][l_ufrorient] == "VERTICAL")then
 			power:SetPoint("TOP", 0, -3)
 			power:SetWidth(0.0000001) -- in this case absolute zero is something, rather than nothing
-			self.Health:SetWidth(ThunderDB["UnitFramesRaid"]["GridWidth"]-6)
+			self.Health:SetWidth(ThunderDB[l_ufr][l_ufrwidth]-6)
 		else
 			power:SetPoint("LEFT", 3, 0)
 			power:SetHeight(0.0000001) -- ^ ditto
-			self.Health:SetHeight(ThunderDB["UnitFramesRaid"]["GridHeight"]-6)
+			self.Health:SetHeight(ThunderDB[l_ufr][l_ufrheight]-6)
 		end
 	end
 	
-	if ThunderDB["UnitFrames"]["ClassColors"] then
+	if ThunderDB[l_uf][l_ufcc] then
 		local r, g, b = 1, 1, 1
 			if(oUF.colors.power[ptype]) then
 				r, g, b = unpack(thundercolors.power[ptype])
 			end
 		
-		if ThunderDB["UnitFrames"]["InvertClassColors"] then
-			power:SetStatusBarColor(r*ThunderDB["UnitFrames"]["UiContrast"], g*ThunderDB["UnitFrames"]["UiContrast"], b*ThunderDB["UnitFrames"]["UiContrast"])
+		if ThunderDB[l_uf][l_uficc] then
+			power:SetStatusBarColor(r*ThunderDB[l_uf][l_ufuicont], g*ThunderDB[l_uf][l_ufuicont], b*ThunderDB[l_uf][l_ufuicont])
 			power.bg:SetVertexColor(r, g, b)
 		else
 			power:SetStatusBarColor(r, g, b)
-			power.bg:SetVertexColor(r*ThunderDB["UnitFrames"]["UiContrast"], g*ThunderDB["UnitFrames"]["UiContrast"], b*ThunderDB["UnitFrames"]["UiContrast"])
+			power.bg:SetVertexColor(r*ThunderDB[l_uf][l_ufuicont], g*ThunderDB[l_uf][l_ufuicont], b*ThunderDB[l_uf][l_ufuicont])
 		end
 	else
 		local r, g, b, t
@@ -331,7 +331,7 @@ local PostUpdatePower = function(power, unit, min, max)
 			r, g, b = t[1], t[2], t[3]
 		end
 		power:SetStatusBarColor(r, g, b)
-		power.bg:SetVertexColor(r*ThunderDB["UnitFrames"]["UiContrast"], g*ThunderDB["UnitFrames"]["UiContrast"], b*ThunderDB["UnitFrames"]["UiContrast"])
+		power.bg:SetVertexColor(r*ThunderDB[l_uf][l_ufuicont], g*ThunderDB[l_uf][l_ufuicont], b*ThunderDB[l_uf][l_ufuicont])
 	end
 end
 
@@ -346,7 +346,7 @@ local updateThreat = function(self, event, unit)
 		local r, g, b = GetThreatStatusColor(status)
 		threat:SetBackdropBorderColor(r, g, b, 1)
 	else
-		threat:SetBackdropBorderColor(unpack(ThunderDB["Main"]["Border color"]))
+		threat:SetBackdropBorderColor(unpack(ThunderDB[l_main][l_bgcolor]))
 		threat:SetAlpha(1)
 	end
 	threat:Show()
@@ -453,8 +453,8 @@ local sharedstyle = function(self)
 	threat:SetPoint("TOPLEFT", 1, -1)
 	threat:SetPoint("BOTTOMRIGHT", -1, 1)
 	threat:SetBackdrop(backdrop)
-	threat:SetBackdropColor(unpack(ThunderDB["Main"]["Background color"]))
-	threat:SetBackdropBorderColor(unpack(ThunderDB["Main"]["Border color"]))
+	threat:SetBackdropColor(unpack(ThunderDB[l_main][l_bcolor]))
+	threat:SetBackdropBorderColor(unpack(ThunderDB[l_main][l_bgcolor]))
 	threat:SetAlpha(1)
 	threat.Override = updateThreat
 	self.Threat = threat
@@ -476,27 +476,27 @@ local sharedstyle = function(self)
 ----------------------------------------------
 
 	self.Health = CreateFrame("StatusBar", nil, self)
-	self.Health:SetOrientation(ThunderDB["UnitFramesRaid"]["Orientation"])
+	self.Health:SetOrientation(ThunderDB[l_ufr][l_ufrorient])
 	self.Health:SetPoint("TOP", 0, -3)
 	self.Health:SetPoint("LEFT", 3, 0)
-	if ThunderDB["UnitFramesRaid"]["Orientation"] == "VERTICAL" then
+	if ThunderDB[l_ufr][l_ufrorient] == "VERTICAL" then
 		self.Health:SetPoint("BOTTOM", 0, 3)
 	else
 		self.Health:SetPoint("RIGHT", -3, 0)
 	end
-	self.Health:SetStatusBarTexture(ThunderDB["Main"]["BarText"])
+	self.Health:SetStatusBarTexture(ThunderDB[l_main][l_bar])
 	fixStatusbar(self.Health)
 	self.Health.frequentUpdates = true
 	self.Health.Smooth = true
 
 	self.Health.bg = self.Health:CreateTexture(nil, "BORDER")
 	self.Health.bg:SetAllPoints()
-	self.Health.bg:SetTexture(ThunderDB["Main"]["BarText"])
+	self.Health.bg:SetTexture(ThunderDB[l_main][l_bar])
 
 	self.Health.PostUpdate = PostUpdateHealth
 
 	self.Health.value = self.Health:CreateFontString(nil, "OVERLAY")
-	self.Health.value:SetFont(ThunderDB["UnitFramesRaid"]["FramesFont"], ThunderDB["UnitFramesRaid"]["FrameFontSize"]-1)
+	self.Health.value:SetFont(ThunderDB[l_ufr][l_ufrfont], ThunderDB[l_ufr][l_ufrufsize]-1)
 	self.Health.value:SetJustifyH("RIGHT")
 	self.Health.value:SetShadowColor(0, 0, 0)
 	self.Health.value:SetShadowOffset(1, -1)
@@ -507,12 +507,12 @@ local sharedstyle = function(self)
 -- Манабары?
 ----------------------------------------------
 
-if ThunderDB["UnitFramesRaid"]["RaidPower"] then
+if ThunderDB[l_ufr][l_ufrpower] then
 	self.Power = CreateFrame("StatusBar", nil, self)
-    self.Power:SetOrientation(ThunderDB["UnitFramesRaid"]["Orientation"])
+    self.Power:SetOrientation(ThunderDB[l_ufr][l_ufrorient])
 	self.Power:SetPoint("BOTTOM", self, 0, 3)
     self.Power:SetPoint("RIGHT", self, -3, 0)
-	self.Power:SetStatusBarTexture(ThunderDB["Main"]["BarText"])
+	self.Power:SetStatusBarTexture(ThunderDB[l_main][l_bar])
     fixStatusbar(self.Power)
     
     self.Power.frequentUpdates = true
@@ -520,7 +520,7 @@ if ThunderDB["UnitFramesRaid"]["RaidPower"] then
 
     self.Power.bg = self.Power:CreateTexture(nil, "BORDER")
     self.Power.bg:SetAllPoints(self.Power)
-    self.Power.bg:SetTexture(ThunderDB["Main"]["BarText"])
+    self.Power.bg:SetTexture(ThunderDB[l_main][l_bar])
 
     self.Power.PostUpdate = PostUpdatePower
 end
@@ -531,7 +531,7 @@ end
 
     self.Highlight = self.Health:CreateTexture(nil, "OVERLAY")
     self.Highlight:SetAllPoints(self)
-    self.Highlight:SetTexture(ThunderDB["Main"]["BlankText"])
+    self.Highlight:SetTexture(ThunderDB[l_main][l_blank])
     self.Highlight:SetVertexColor(1,1,1,.1)
     self.Highlight:SetBlendMode("ADD")
     self.Highlight:Hide()
@@ -542,7 +542,7 @@ end
 
     self.RaidIcon = self.Health:CreateTexture(nil, 'OVERLAY')
     self.RaidIcon:SetPoint("TOP", self, 0, 4)
-    self.RaidIcon:SetSize(ThunderDB["UnitFramesRaid"]["IconSize"], ThunderDB["UnitFramesRaid"]["IconSize"])
+    self.RaidIcon:SetSize(ThunderDB[l_ufr][l_ufrisize], ThunderDB[l_ufr][l_ufrisize])
 
 ----------------------------------------------
 -- Leader Icon
@@ -550,7 +550,7 @@ end
 
     self.Leader = self.Health:CreateTexture(nil, "OVERLAY")
     self.Leader:SetPoint("TOPLEFT", self, 0, 8)
-    self.Leader:SetSize(ThunderDB["UnitFramesRaid"]["IconSize"], ThunderDB["UnitFramesRaid"]["IconSize"])
+    self.Leader:SetSize(ThunderDB[l_ufr][l_ufrisize], ThunderDB[l_ufr][l_ufrisize])
 
 ----------------------------------------------
 -- Assistant Icon
@@ -558,24 +558,24 @@ end
 
     self.Assistant = self.Health:CreateTexture(nil, "OVERLAY")
     self.Assistant:SetPoint("TOPLEFT", self, 0, 8)
-    self.Assistant:SetSize(ThunderDB["UnitFramesRaid"]["IconSize"], ThunderDB["UnitFramesRaid"]["IconSize"])
+    self.Assistant:SetSize(ThunderDB[l_ufr][l_ufrisize], ThunderDB[l_ufr][l_ufrisize])
 
 ----------------------------------------------
 -- Raid Icons
 ----------------------------------------------    
 
 	self.MasterLooter = self.Health:CreateTexture(nil, 'OVERLAY')
-    self.MasterLooter:SetSize(ThunderDB["UnitFramesRaid"]["IconSize"], ThunderDB["UnitFramesRaid"]["IconSize"])
+    self.MasterLooter:SetSize(ThunderDB[l_ufr][l_ufrisize], ThunderDB[l_ufr][l_ufrisize])
     self.MasterLooter:SetPoint('LEFT', self.Leader, 'RIGHT')
 	
 ----------------------------------------------
 -- LFD Role
 ----------------------------------------------
 
-if ThunderDB["UnitFramesRaid"]["ShowLFDRole"] then
+if ThunderDB[l_ufr][l_ufrlfdrole] then
 	self.LFDRole = self.Health:CreateTexture(nil, 'OVERLAY')
-	self.LFDRole:SetSize(ThunderDB["UnitFramesRaid"]["IconSize"], ThunderDB["UnitFramesRaid"]["IconSize"])
-	self.LFDRole:SetPoint('RIGHT', self, 'LEFT', ThunderDB["UnitFramesRaid"]["IconSize"]/2, ThunderDB["UnitFramesRaid"]["IconSize"]/2)
+	self.LFDRole:SetSize(ThunderDB[l_ufr][l_ufrisize], ThunderDB[l_ufr][l_ufrisize])
+	self.LFDRole:SetPoint('RIGHT', self, 'LEFT', ThunderDB[l_ufr][l_ufrisize]/2, ThunderDB[l_ufr][l_ufrisize]/2)
 end
 
 ----------------------------------------------
@@ -584,7 +584,7 @@ end
 
 	self.ReadyCheck = self.Health:CreateTexture(nil, "OVERLAY")
     self.ReadyCheck:SetPoint("TOP", self)
-    self.ReadyCheck:SetSize(ThunderDB["UnitFramesRaid"]["IconSize"], ThunderDB["UnitFramesRaid"]["IconSize"])	
+    self.ReadyCheck:SetSize(ThunderDB[l_ufr][l_ufrisize], ThunderDB[l_ufr][l_ufrisize])	
 	
 ----------------------------------------------
 -- Имя
@@ -593,7 +593,7 @@ end
     self.Info = self.Health:CreateFontString(nil, "OVERLAY")
     self.Info:SetPoint("TOP", 0, -7)
     self.Info:SetJustifyH("CENTER")
-    self.Info:SetFont(ThunderDB["UnitFramesRaid"]["FramesFont"], ThunderDB["UnitFramesRaid"]["FrameFontSize"])
+    self.Info:SetFont(ThunderDB[l_ufr][l_ufrfont], ThunderDB[l_ufr][l_ufrufsize])
     self.Info:SetShadowOffset(1.25, -1.25)
 
 ----------------------------------------------
@@ -616,9 +616,9 @@ end
 ----------------------------------------------
 
     local auras = CreateFrame("Frame", nil, self)
-    auras:SetSize(ThunderDB["UnitFramesRaid"]["DebuffSize"], ThunderDB["UnitFramesRaid"]["DebuffSize"])
+    auras:SetSize(ThunderDB[l_ufr][l_ufrdsize], ThunderDB[l_ufr][l_ufrdsize])
     auras:SetPoint("BOTTOMLEFT", self.Health, 1, 1)
-    auras.size = ThunderDB["UnitFramesRaid"]["DebuffSize"]
+    auras.size = ThunderDB[l_ufr][l_ufrdsize]
     auras.CustomFilter = CustomFilter
     self.freebAuras = auras
 
@@ -633,25 +633,25 @@ oUF:Factory(function(self)
 	local pos, posRel, spacingX, spacingY, colX, colY, growth, point = SAP()
 
 	raid = {}
-	for i = 1, ThunderDB["UnitFramesRaid"]["GridParty"] do 
+	for i = 1, ThunderDB[l_ufr][l_ufrpartyn] do 
 		local group = self:SpawnHeader('Raid_Freebgrid'..i, nil, 'raid,party,solo',
 		'oUF-initialConfigFunction', ([[
 			self:SetWidth(%d)
 			self:SetHeight(%d)
-			]]):format(ThunderDB["UnitFramesRaid"]["GridWidth"], ThunderDB["UnitFramesRaid"]["GridHeight"]),
+			]]):format(ThunderDB[l_ufr][l_ufrwidth], ThunderDB[l_ufr][l_ufrheight]),
 		'showPlayer', true,
 		'showSolo', false,
 		'showParty', true,
 		'showRaid', true,
 		'xoffset', spacingX, 
 		'yOffset', spacingY,
-		'point', ThunderDB["UnitFramesRaid"]["Point"],
+		'point', ThunderDB[l_ufr][l_ufrpoint],
 		'groupFilter', tostring(i),
 		'groupingOrder', '1,2,3,4,5,6,7,8',
 		'groupBy', 'GROUP',
-		'maxColumns', ThunderDB["UnitFramesRaid"]["GridParty"],
+		'maxColumns', ThunderDB[l_ufr][l_ufrpartyn],
 		'unitsPerColumn', 5,
-		'columnSpacing', ThunderDB["UnitFramesRaid"]["GridOffset"],
+		'columnSpacing', ThunderDB[l_ufr][l_ufroffset],
 		'columnAnchorPoint', growth
 		)
 		if i == 1 then
@@ -663,35 +663,35 @@ oUF:Factory(function(self)
 		raid[i] = group
 	end
 		
-	if ThunderDB["UnitFramesRaid"]["ShowPets"] then
+	if ThunderDB[l_ufr][l_ufrPets] then
         local pets = self:SpawnHeader('Pet_Freebgrid', 'SecureGroupPetHeaderTemplate', 'raid,party,solo',
         'oUF-initialConfigFunction', ([[
             self:SetWidth(%d)
             self:SetHeight(%d)
-            ]]):format(ThunderDB["UnitFramesRaid"]["GridWidth"], ThunderDB["UnitFramesRaid"]["GridHeight"]),
+            ]]):format(ThunderDB[l_ufr][l_ufrwidth], ThunderDB[l_ufr][l_ufrheight]),
         'showSolo', false,
         'showParty', true,
         'showRaid', true,
         'xoffset', spacingX,
         'yOffset', spacingY,
-        'point', ThunderDB["UnitFramesRaid"]["Point"],
-        'maxColumns', ThunderDB["UnitFramesRaid"]["GridParty"],
+        'point', ThunderDB[l_ufr][l_ufrpoint],
+        'maxColumns', ThunderDB[l_ufr][l_ufrpartyn],
         'unitsPerColumn', 5,
-        'columnSpacing', ThunderDB["UnitFramesRaid"]["GridOffset"],
+        'columnSpacing', ThunderDB[l_ufr][l_ufroffset],
         'columnAnchorPoint', growth
         )
         pets:SetPoint(point, raidpetsframe, point, 0, 0)
         pets:SetScale(1)
     end
 
-    if ThunderDB["UnitFramesRaid"]["ShowMT"] then
+    if ThunderDB[l_ufr][l_ufrMT] then
         local tank = self:SpawnHeader('MT_Freebgrid', nil, 'raid,party,solo',
         'oUF-initialConfigFunction', ([[
             self:SetWidth(%d)
             self:SetHeight(%d)
-            ]]):format(ThunderDB["UnitFramesRaid"]["GridWidth"], ThunderDB["UnitFramesRaid"]["GridHeight"]),
+            ]]):format(ThunderDB[l_ufr][l_ufrwidth], ThunderDB[l_ufr][l_ufrheight]),
         "showRaid", true,
-        "yOffset", -ThunderDB["UnitFramesRaid"]["GridOffset"]
+        "yOffset", -ThunderDB[l_ufr][l_ufroffset]
         )
         tank:SetPoint(point, raidmtframe, point, 0, 0)
 

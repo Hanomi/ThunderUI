@@ -1,11 +1,11 @@
---[[
+﻿--[[
 	caelNamePlates
 	
 	All credits of this nameplates script is by caelNamePlates and his author Caellian.
 --]]
 
 local module = {}
-module.name = "Nameplates"
+module.name = l_nameplates
 module.Init = function()
 	if not ThunderDB.modules[module.name] then return end
 	local settings = ThunderDB
@@ -14,10 +14,10 @@ local caelNamePlates = CreateFrame("Frame", nil, UIParent)
 caelNamePlates:SetScript("OnEvent", function(self, event, ...) self[event](self, ...) end)
 
 local overlayTexture = [=[Interface\Tooltips\Nameplate-Border]=]
-local font, fontSize, fontOutline = ThunderDB["Nameplates"]["NameplatesFont"], ThunderDB["Nameplates"]["NameplatesFontSize"], "OUTLINE"
+local font, fontSize, fontOutline = ThunderDB[l_nameplates][l_npfont], ThunderDB[l_nameplates][l_npfontsize], "OUTLINE"
 
 local backdrop = {
-		edgeFile = ThunderDB["Main"]["ShadowText"], edgeSize = 5,
+		edgeFile = ThunderDB[l_main][l_shadow], edgeSize = 5,
 		insets = {left = 3, right = 3, top = 3, bottom = 3}
 	}
 local select = select
@@ -179,11 +179,11 @@ local CreateFrame = function(frame)
 	levelTextRegion:SetFont(font, fontSize, fontOutline)
 	levelTextRegion:SetShadowOffset(1.25, -1.25)
 
-	healthBar:SetStatusBarTexture(ThunderDB["Main"]["BarText"])
+	healthBar:SetStatusBarTexture(ThunderDB[l_main][l_bar])
 
 	healthBar.hpBackground = healthBar:CreateTexture(nil, "BORDER")
 	healthBar.hpBackground:SetAllPoints(healthBar)
-	healthBar.hpBackground:SetTexture(ThunderDB["Main"]["BarText"])
+	healthBar.hpBackground:SetTexture(ThunderDB[l_main][l_bar])
 	healthBar.hpBackground:SetVertexColor(0.15, 0.15, 0.15)
 
 	healthBar.hpGlow = CreateFrame("Frame", nil, healthBar)
@@ -196,7 +196,7 @@ local CreateFrame = function(frame)
 	castBar.castbarOverlay = castbarOverlay
 	castBar.healthBar = healthBar
 	castBar.shieldedRegion = shieldedRegion
-	castBar:SetStatusBarTexture(ThunderDB["Main"]["BarText"])
+	castBar:SetStatusBarTexture(ThunderDB[l_main][l_bar])
 
 	castBar:HookScript("OnShow", OnShow)
 	castBar:HookScript("OnSizeChanged", OnSizeChanged)
@@ -213,7 +213,7 @@ local CreateFrame = function(frame)
 
 	castBar.cbBackground = castBar:CreateTexture(nil, "BORDER")
 	castBar.cbBackground:SetAllPoints(castBar)
-	castBar.cbBackground:SetTexture(ThunderDB["Main"]["BarText"])
+	castBar.cbBackground:SetTexture(ThunderDB[l_main][l_bar])
 	castBar.cbBackground:SetVertexColor(0.15, 0.15, 0.15)
 
 	castBar.cbGlow = CreateFrame("Frame", nil, castBar)
@@ -237,7 +237,7 @@ local CreateFrame = function(frame)
 	castBar.cbIcon:SetBackdropColor(0, 0, 0)
 	castBar.cbIcon:SetBackdropBorderColor(0, 0, 0)
 		
-	highlightRegion:SetTexture(ThunderDB["Main"]["BarText"])
+	highlightRegion:SetTexture(ThunderDB[l_main][l_bar])
 	highlightRegion:SetVertexColor(0.25, 0.25, 0.25)
 	frame.highlight = highlightRegion
 

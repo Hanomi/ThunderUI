@@ -1,10 +1,10 @@
-----------------------------------------------------------------------------------------
+﻿----------------------------------------------------------------------------------------
 -- alTooltip
 -- Allez - 2010
 ----------------------------------------------------------------------------------------
 
 local module = {}
-module.name = "Tooltips"
+module.name = l_tooltips
 module.Init = function()
 	if not ThunderDB.modules[module.name] then return end
 	local settings = ThunderDB
@@ -13,11 +13,11 @@ module.Init = function()
 local relpoint = "BOTTOMRIGHT"
 local point = "BOTTOMRIGHT"
 local xpoint = -18
-local ypoint = (30 + ThunderDB["LitePanels"]["RightPanelHeight"])
+local ypoint = (30 + ThunderDB[l_lpanels][l_lpheight])
 
 local backdrop = {
-	bgFile = ThunderDB["Main"]["BlankText"],
-	edgeFile = ThunderDB["Main"]["BlankText"],
+	bgFile = ThunderDB[l_main][l_blank],
+	edgeFile = ThunderDB[l_main][l_blank],
 	tile = false, tileSize = 0, edgeSize = 1,
 	insets = {top = -1, left = -1, bottom = -1, right = -1},
 }
@@ -42,7 +42,7 @@ local types = {
 
 hooksecurefunc("GameTooltip_SetDefaultAnchor", function(tooltip, parent)
 	local frame = GetMouseFocus()
-	if ThunderDB["Tooltips"]["CursorAnchor"] and frame == WorldFrame then
+	if ThunderDB[l_tooltips][l_tcursor] and frame == WorldFrame then
 		tooltip:SetOwner(parent, "ANCHOR_CURSOR")
 	else
 		tooltip:SetOwner(parent, "ANCHOR_NONE")	
@@ -55,10 +55,10 @@ GameTooltip:HookScript("OnUpdate",function(self, ...)
 	if self:GetAnchorType() == "ANCHOR_CURSOR" then
 		-- h4x for world object tooltip border showing last border color 
 		-- or showing background sometime ~blue :x by Tukz
-		self:SetBackdropColor(unpack(ThunderDB["Main"]["Background color"]))
-		self:SetBackdropBorderColor(unpack(ThunderDB["Main"]["Border color"]))
+		self:SetBackdropColor(unpack(ThunderDB[l_main][l_bcolor]))
+		self:SetBackdropBorderColor(unpack(ThunderDB[l_main][l_bgcolor]))
 	elseif self:GetAnchorType() == "ANCHOR_NONE" then
-		if InCombatLockdown() and ThunderDB["Tooltips"]["HideInCombat"] then
+		if InCombatLockdown() and ThunderDB[l_tooltips][l_thidecombat] then
 			self:SetAlpha(0)
 		else
 			self:SetAlpha(1)
@@ -68,10 +68,10 @@ end)
 
 for _, v in pairs(tooltips) do
 	v:SetBackdrop(backdrop)
-	v:SetBackdropColor(unpack(ThunderDB["Main"]["Background color"]))
-	v:SetBackdropBorderColor(unpack(ThunderDB["Main"]["Border color"]))
+	v:SetBackdropColor(unpack(ThunderDB[l_main][l_bcolor]))
+	v:SetBackdropBorderColor(unpack(ThunderDB[l_main][l_bgcolor]))
 	v:SetScript("OnShow", function(self)
-		self:SetBackdropColor(unpack(ThunderDB["Main"]["Background color"]))
+		self:SetBackdropColor(unpack(ThunderDB[l_main][l_bcolor]))
 		local item
 		if self.GetItem then
 			item = select(2, self:GetItem())
@@ -83,11 +83,11 @@ for _, v in pairs(tooltips) do
 				self:SetBackdropBorderColor(r, g, b, 0.7)
 			end
 		else
-			self:SetBackdropBorderColor(unpack(ThunderDB["Main"]["Border color"]))
+			self:SetBackdropBorderColor(unpack(ThunderDB[l_main][l_bgcolor]))
 		end
 	end)
 	v:HookScript("OnHide", function(self)
-		self:SetBackdropBorderColor(unpack(ThunderDB["Main"]["Border color"]))
+		self:SetBackdropBorderColor(unpack(ThunderDB[l_main][l_bgcolor]))
 	end)
 end
 
@@ -145,7 +145,7 @@ end
 GameTooltip:HookScript("OnTooltipSetUnit", function(self)
 	local unit = select(2, self:GetUnit())
 	
-	if self:GetOwner() ~= UIParent and ThunderDB["Tooltips"]["HideUnitFramesTooltip"] then self:Hide() return end
+	if self:GetOwner() ~= UIParent and ThunderDB[l_tooltips][l_thideuf] then self:Hide() return end
 	
 	if unit then
 		local unitClassification = types[UnitClassification(unit)] or " "
@@ -195,7 +195,7 @@ GameTooltip:HookScript("OnTooltipSetUnit", function(self)
 	end
 end)
 
-GameTooltipStatusBar:SetStatusBarTexture(ThunderDB["Main"]["BarText"])
+GameTooltipStatusBar:SetStatusBarTexture(ThunderDB[l_main][l_bar])
 GameTooltipStatusBar:ClearAllPoints()
 GameTooltipStatusBar:SetPoint("BOTTOMLEFT", GameTooltip, "TOPLEFT", 2, 5)
 GameTooltipStatusBar:SetPoint("BOTTOMRIGHT", GameTooltip, "TOPRIGHT", -2, 5)
@@ -229,16 +229,16 @@ GameTooltipStatusBar.bg:SetPoint("BOTTOMRIGHT", GameTooltipStatusBar, "BOTTOMRIG
 GameTooltipStatusBar.bg:SetFrameStrata("TOOLTIP")
 GameTooltipStatusBar.bg:SetFrameLevel(GameTooltipStatusBar:GetFrameLevel()-1)
 GameTooltipStatusBar.bg:SetBackdrop(backdrop)
-GameTooltipStatusBar.bg:SetBackdropColor(unpack(ThunderDB["Main"]["Background color"]))
-GameTooltipStatusBar.bg:SetBackdropBorderColor(unpack(ThunderDB["Main"]["Border color"]))
+GameTooltipStatusBar.bg:SetBackdropColor(unpack(ThunderDB[l_main][l_bcolor]))
+GameTooltipStatusBar.bg:SetBackdropBorderColor(unpack(ThunderDB[l_main][l_bgcolor]))
 
 local iconFrame = CreateFrame("Frame", nil, ItemRefTooltip)
 iconFrame:SetWidth(30)
 iconFrame:SetHeight(30)
 iconFrame:SetPoint("TOPRIGHT", ItemRefTooltip, "TOPLEFT", -3, 0)
 iconFrame:SetBackdrop(backdrop)
-iconFrame:SetBackdropColor(unpack(ThunderDB["Main"]["Background color"]))
-iconFrame:SetBackdropBorderColor(unpack(ThunderDB["Main"]["Border color"]))
+iconFrame:SetBackdropColor(unpack(ThunderDB[l_main][l_bcolor]))
+iconFrame:SetBackdropBorderColor(unpack(ThunderDB[l_main][l_bgcolor]))
 iconFrame.icon = iconFrame:CreateTexture(nil, "OVERLAY")
 iconFrame.icon:SetPoint("TOPLEFT", 2, -2)
 iconFrame.icon:SetPoint("BOTTOMRIGHT", -2, 2)
@@ -261,7 +261,7 @@ hooksecurefunc("SetItemRef", function(link, text, button)
 	end
 end)
 
-if ThunderDB["Tooltips"]["HideActionBarsTooltip"] then
+if ThunderDB[l_tooltips][l_thideab] then
 	local HideActionButtonsTooltip = function(self)
 		if not IsShiftKeyDown() then
 			self:Hide()
@@ -273,7 +273,7 @@ hooksecurefunc(GameTooltip, "SetPetAction", HideActionButtonsTooltip)
 hooksecurefunc(GameTooltip, "SetShapeshift", HideActionButtonsTooltip)
 end
 
-if ThunderDB["Tooltips"]["ShowPlayerTitles"] then return end
+if ThunderDB[l_tooltips][l_ttitles] then return end
 GameTooltip:HookScript("OnTooltipSetUnit", function(self)
 	local unitName, unit = self:GetUnit()
 	if unit and UnitIsPlayer(unit) then

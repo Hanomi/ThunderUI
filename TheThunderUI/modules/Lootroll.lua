@@ -5,7 +5,7 @@
 --]]
 
 local module = {}
-module.name = "Lootroll"
+module.name = l_lroll
 module.Init = function()
 	if not ThunderDB.modules[module.name] then return end
 	local settings = ThunderDB
@@ -22,7 +22,7 @@ if not (GetLocale=="enGB" or GetLocale=="enUS") then
 	LOOT_ROLL_DISENCHANT = "%s has selected Disenchant for: %s"
 end
 
-local position = {"TOPLEFT", ThunderDB["Lootroll"]["Roll X"], ThunderDB["Lootroll"]["Roll Y"]} -- roll frames positioning
+local position = {"TOPLEFT", ThunderDB[l_lroll][l_lrX], ThunderDB[l_lroll][l_lrY]} -- roll frames positioning
 
 local GFHCName, GFHCHeight = GameFontHighlightCenter:GetFont();
 local grouplootlist, grouplootbars, grouplootrolls = {}, {}, {};
@@ -179,7 +179,7 @@ function frame:UpdateGroupLoot()
 			bar:EnableMouse(1);
 			bar:SetWidth(250);
 			bar:SetHeight(20);
-			bar:SetStatusBarTexture(ThunderDB["Main"]["BarText"]);
+			bar:SetStatusBarTexture(ThunderDB[l_main][l_bar]);
 			if ( index == 1 ) then
 				bar:SetPoint(position[1], position[2], position[3]);
 			else
@@ -194,7 +194,7 @@ function frame:UpdateGroupLoot()
 			
 			bar.background = bar:CreateTexture(nil, "BORDER");
 			bar.background:SetAllPoints();
-			bar.background:SetTexture(ThunderDB["Main"]["BarText"]);
+			bar.background:SetTexture(ThunderDB[l_main][l_bar]);
 			bar.background:SetVertexColor(0.5, 0.5, 0.5, 0.7);
 			
 			bar.pass = CreateFrame("Button", "$perentPassButton", bar);
@@ -302,9 +302,9 @@ function frame:UpdateGroupLoot()
 			SetDesaturation(bar.greed:GetNormalTexture(), not Greedable)
 
 		if ( bindOnPickUp ) then
-			bar.ibg:SetBackdropBorderColor(unpack(ThunderDB["Main"]["Border color"]))
+			bar.ibg:SetBackdropBorderColor(unpack(ThunderDB[l_main][l_bgcolor]))
 		else
-			bar.ibg:SetBackdropBorderColor(unpack(ThunderDB["Lootroll"]["BoE color"]))
+			bar.ibg:SetBackdropBorderColor(unpack(ThunderDB[l_lroll][l_lrcolorboe]))
 		end
 			
 		bar:SetStatusBarColor(color.r, color.g, color.b, 1);

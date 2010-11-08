@@ -3,14 +3,14 @@
 		and oUF_Caellian(Caellian, Gotai, Recluse)
 --]]
 
-if ThunderDB["modules"]["UnitFrames"] ~= true then return end
+if ThunderDB["modules"][l_uf] ~= true then return end
 
-raidzoneframe = CreateFrame("Frame", nil, UIParent) --ThunderDB["UnitFramesRaid"]["GridOffset"] ThunderDB["UnitFramesRaid"]["GridWidth"] ThunderDB["UnitFramesRaid"]["GridHeight"]
-raidzoneframe:SetWidth(ThunderDB["UnitFramesRaid"]["GridWidth"]*5+ThunderDB["UnitFramesRaid"]["GridOffset"]*4)
-raidzoneframe:SetHeight(ThunderDB["UnitFramesRaid"]["GridHeight"]*5+ThunderDB["UnitFramesRaid"]["GridOffset"]*4)
-if ThunderDB["UnitFramesRaid"]["HealModePosition"] and ThunderDB["ActionBars"]["ThirdPanel"] then
+raidzoneframe = CreateFrame("Frame", nil, UIParent) --ThunderDB[l_ufr][l_ufroffset] ThunderDB[l_ufr][l_ufrwidth] ThunderDB[l_ufr][l_ufrheight]
+raidzoneframe:SetWidth(ThunderDB[l_ufr][l_ufrwidth]*5+ThunderDB[l_ufr][l_ufroffset]*4)
+raidzoneframe:SetHeight(ThunderDB[l_ufr][l_ufrheight]*5+ThunderDB[l_ufr][l_ufroffset]*4)
+if ThunderDB[l_ufr][l_ufrhealmode] and ThunderDB[l_ab][l_abThird] then
 	raidzoneframe:SetPoint("BOTTOM", UIParent, -1, 150)
-elseif ThunderDB["UnitFramesRaid"]["HealModePosition"] then
+elseif ThunderDB[l_ufr][l_ufrhealmode] then
 	raidzoneframe:SetPoint("BOTTOM", UIParent, -1, 120)
 else
 	raidzoneframe:SetPoint("LEFT", UIParent, 10, 0)
@@ -34,10 +34,10 @@ raidmtframe:Show()
 
 local _, myclass = UnitClass("player")
 
-if ThunderDB["UnitFrames"]["UiContrast"] > 1 then
-	ThunderDB["UnitFrames"]["UiContrast"] = 1
-elseif ThunderDB["UnitFrames"]["UiContrast"] < 0 then
-	ThunderDB["UnitFrames"]["UiContrast"] = 0
+if ThunderDB[l_uf][l_ufuicont] > 1 then
+	ThunderDB[l_uf][l_ufuicont] = 1
+elseif ThunderDB[l_uf][l_ufuicont] < 0 then
+	ThunderDB[l_uf][l_ufuicont] = 0
 end
 
 local siValue = function(value)
@@ -55,26 +55,26 @@ local siValue = function(value)
 end
 
 local backdrop = {
-	bgFile = ThunderDB["Main"]["BlankText"],
+	bgFile = ThunderDB[l_main][l_blank],
 	insets = {top = 0, left = 0, bottom = 0, right = 0},
 }
 
 local backdrop2 = {
-	bgFile = ThunderDB["Main"]["BlankText"],
-	edgeFile = ThunderDB["Main"]["BlankText"], 
+	bgFile = ThunderDB[l_main][l_blank],
+	edgeFile = ThunderDB[l_main][l_blank], 
 	tile = false, tileSize = 0, edgeSize = 1, 
 	insets = {top = 0, left = 0, bottom = 0, right = 0},
 }
 
 local backdrop3 = {
-	bgFile = ThunderDB["Main"]["BlankText"],
-	edgeFile = ThunderDB["Main"]["BlankText"], 
+	bgFile = ThunderDB[l_main][l_blank],
+	edgeFile = ThunderDB[l_main][l_blank], 
 	tile = false, tileSize = 0, edgeSize = 1, 
 	insets = {top = -1, left = -1, bottom = -1, right = -1},
 }
 
 local frameBD = {
-	edgeFile = ThunderDB["Main"]["ShadowText"], edgeSize = 5,
+	edgeFile = ThunderDB[l_main][l_shadow], edgeSize = 5,
 	insets = {left = 3, right = 3, top = 3, bottom = 3}
 }
 
@@ -118,11 +118,11 @@ local PostUpdateHealth = function(health, unit, min, max)
 			health.value:SetText("|cffD7BEA5".."Ghost".."|r")
 		end
 		
-		if ThunderDB["UnitFrames"]["ClassColors"] and (not ThunderDB["UnitFrames"]["InvertClassColors"]) then
+		if ThunderDB[l_uf][l_ufcc] and (not ThunderDB[l_uf][l_uficc]) then
 			local class = select(2, UnitClass(unit))
 			local color = UnitIsPlayer(unit) and oUF.colors.class[class] or {0.84, 0.75, 0.65}
-			health.bg:SetVertexColor(color[1]*ThunderDB["UnitFrames"]["UiContrast"], color[2]*ThunderDB["UnitFrames"]["UiContrast"], color[3]*ThunderDB["UnitFrames"]["UiContrast"])
-		elseif ThunderDB["UnitFrames"]["ClassColors"] and ThunderDB["UnitFrames"]["InvertClassColors"] then
+			health.bg:SetVertexColor(color[1]*ThunderDB[l_uf][l_ufuicont], color[2]*ThunderDB[l_uf][l_ufuicont], color[3]*ThunderDB[l_uf][l_ufuicont])
+		elseif ThunderDB[l_uf][l_ufcc] and ThunderDB[l_uf][l_uficc] then
 			local class = select(2, UnitClass(unit))
 			local color = UnitIsPlayer(unit) and oUF.colors.class[class] or {0.84, 0.75, 0.65}		
 			health.bg:SetVertexColor(color[1], color[2], color[3])
@@ -130,7 +130,7 @@ local PostUpdateHealth = function(health, unit, min, max)
 			health.bg:SetVertexColor(0, 0, 0)
 		end
 	else
-		if ThunderDB["UnitFrames"]["ClassColors"] then
+		if ThunderDB[l_uf][l_ufcc] then
 			local r, g, b, t
 			local reaction = UnitReaction(unit, "player")
 			if(UnitIsPlayer(unit)) then
@@ -146,12 +146,12 @@ local PostUpdateHealth = function(health, unit, min, max)
 				r, g, b = t[1], t[2], t[3]
 			end
 
-			if ThunderDB["UnitFrames"]["InvertClassColors"] then
-				health:SetStatusBarColor(r*ThunderDB["UnitFrames"]["UiContrast"], g*ThunderDB["UnitFrames"]["UiContrast"], b*ThunderDB["UnitFrames"]["UiContrast"])
+			if ThunderDB[l_uf][l_uficc] then
+				health:SetStatusBarColor(r*ThunderDB[l_uf][l_ufuicont], g*ThunderDB[l_uf][l_ufuicont], b*ThunderDB[l_uf][l_ufuicont])
 				health.bg:SetVertexColor(r, g, b)			
 			else
 				health:SetStatusBarColor(r, g, b)
-				health.bg:SetVertexColor(r*ThunderDB["UnitFrames"]["UiContrast"], g*ThunderDB["UnitFrames"]["UiContrast"], b*ThunderDB["UnitFrames"]["UiContrast"])
+				health.bg:SetVertexColor(r*ThunderDB[l_uf][l_ufuicont], g*ThunderDB[l_uf][l_ufuicont], b*ThunderDB[l_uf][l_ufuicont])
 			end
 		else
 			local r, g, b
@@ -181,19 +181,19 @@ local PostUpdateHealth = function(health, unit, min, max)
 end
 
 local PreUpdatePower = function(power, unit)
-	if ThunderDB["UnitFrames"]["ClassColors"] then
+	if ThunderDB[l_uf][l_ufcc] then
 		local r, g, b = 1, 1, 1
 		local _, ptype = UnitPowerType(unit)
 			if(oUF.colors.power[ptype]) then
 				r, g, b = unpack(thundercolors.power[ptype])
 			end
 		
-		if ThunderDB["UnitFrames"]["InvertClassColors"] then
-			power:SetStatusBarColor(r*ThunderDB["UnitFrames"]["UiContrast"], g*ThunderDB["UnitFrames"]["UiContrast"], b*ThunderDB["UnitFrames"]["UiContrast"])
+		if ThunderDB[l_uf][l_uficc] then
+			power:SetStatusBarColor(r*ThunderDB[l_uf][l_ufuicont], g*ThunderDB[l_uf][l_ufuicont], b*ThunderDB[l_uf][l_ufuicont])
 			power.bg:SetVertexColor(r, g, b)
 		else
 			power:SetStatusBarColor(r, g, b)
-			power.bg:SetVertexColor(r*ThunderDB["UnitFrames"]["UiContrast"], g*ThunderDB["UnitFrames"]["UiContrast"], b*ThunderDB["UnitFrames"]["UiContrast"])
+			power.bg:SetVertexColor(r*ThunderDB[l_uf][l_ufuicont], g*ThunderDB[l_uf][l_ufuicont], b*ThunderDB[l_uf][l_ufuicont])
 		end
 	else
 		local r, g, b, t
@@ -211,7 +211,7 @@ local PreUpdatePower = function(power, unit)
 			r, g, b = t[1], t[2], t[3]
 		end
 		power:SetStatusBarColor(r, g, b)
-		power.bg:SetVertexColor(r*ThunderDB["UnitFrames"]["UiContrast"], g*ThunderDB["UnitFrames"]["UiContrast"], b*ThunderDB["UnitFrames"]["UiContrast"])
+		power.bg:SetVertexColor(r*ThunderDB[l_uf][l_ufuicont], g*ThunderDB[l_uf][l_ufuicont], b*ThunderDB[l_uf][l_ufuicont])
 	end
 end
 
@@ -229,14 +229,14 @@ local PostUpdatePower = function(power, unit, min, max)
 	if not UnitIsConnected(unit) or UnitIsDead(unit) or UnitIsGhost(unit) then
 		power:SetValue(0)
 		
-		if ThunderDB["UnitFrames"]["ClassColors"] and (not ThunderDB["UnitFrames"]["InvertClassColors"]) then
-			power.bg:SetVertexColor(color[1] * ThunderDB["UnitFrames"]["UiContrast"], color[2] * ThunderDB["UnitFrames"]["UiContrast"], color[3] * ThunderDB["UnitFrames"]["UiContrast"])
-		elseif ThunderDB["UnitFrames"]["ClassColors"] and ThunderDB["UnitFrames"]["InvertClassColors"] then
+		if ThunderDB[l_uf][l_ufcc] and (not ThunderDB[l_uf][l_uficc]) then
+			power.bg:SetVertexColor(color[1] * ThunderDB[l_uf][l_ufuicont], color[2] * ThunderDB[l_uf][l_ufuicont], color[3] * ThunderDB[l_uf][l_ufuicont])
+		elseif ThunderDB[l_uf][l_ufcc] and ThunderDB[l_uf][l_uficc] then
 			power.bg:SetVertexColor(color[1], color[2], color[3])
 		else
 			local class = select(2, UnitClass(unit))
 			local color = UnitIsPlayer(unit) and oUF.colors.class[class] or {0.84, 0.75, 0.65}
-			power.bg:SetVertexColor(color[1] * ThunderDB["UnitFrames"]["UiContrast"], color[2] * ThunderDB["UnitFrames"]["UiContrast"], color[3] * ThunderDB["UnitFrames"]["UiContrast"])
+			power.bg:SetVertexColor(color[1] * ThunderDB[l_uf][l_ufuicont], color[2] * ThunderDB[l_uf][l_ufuicont], color[3] * ThunderDB[l_uf][l_ufuicont])
 		end
 	end
 
@@ -316,7 +316,7 @@ end
 local auraIcon = function(auras, button)
 	local count = button.count
 	count:ClearAllPoints()
-	count:SetFont(ThunderDB["UnitFrames"]["FramesFont"], ThunderDB["UnitFrames"]["AuraFontSize"], "OUTLINE")
+	count:SetFont(ThunderDB[l_uf][l_uffont], ThunderDB[l_uf][l_uffsize], "OUTLINE")
 	count:SetTextColor(1, 1, 1)
 	count:SetPoint("BOTTOMRIGHT", 0, -1)
 	
@@ -343,7 +343,7 @@ local auraIcon = function(auras, button)
 	button.bd = bd
 	
 	local remaining = button:CreateFontString(nil, "OVERLAY")
-	remaining:SetFont(ThunderDB["UnitFrames"]["FramesFont"], ThunderDB["UnitFrames"]["AuraFontSize"], "OUTLINE")
+	remaining:SetFont(ThunderDB[l_uf][l_uffont], ThunderDB[l_uf][l_uffsize], "OUTLINE")
 	remaining:SetTextColor(1, 1, 1)
 	remaining:SetPoint("CENTER", 0, 3)
 	button.remaining = remaining
@@ -364,7 +364,7 @@ do
 	local color = DebuffTypeColor[dtype] or DebuffTypeColor.none
 		icon.bd:SetBackdropBorderColor(color.r/2, color.g/2, color.b/2)
 	else
-		icon.bd:SetBackdropBorderColor(unpack(ThunderDB["Main"]["Border color"]))
+		icon.bd:SetBackdropBorderColor(unpack(ThunderDB[l_main][l_bgcolor]))
 	end
  
 	if(icon.debuff and unit == 'target') then
@@ -406,7 +406,7 @@ end
 
 local UnitSpecific = {
 	player = function(self)
-		if ThunderDB["UnitFrames"]["ClassBars"] and myclass == "DEATHKNIGHT" then	
+		if ThunderDB[l_uf][l_ufclbars] and myclass == "DEATHKNIGHT" then	
 			local runeloadcolors = {
 					[1] = {0.59, 0.31, 0.31},
 					[2] = {0.59, 0.31, 0.31},
@@ -418,12 +418,12 @@ local UnitSpecific = {
 
 			self.Runes = CreateFrame("Frame", nil, self)
 			self.Runes:SetPoint("TOPLEFT", self, "BOTTOMLEFT", 3, -4)
-			self.Runes:SetSize(ThunderDB["UnitFrames"]["WidthA"]-6, 5)
+			self.Runes:SetSize(ThunderDB[l_uf][l_ufwA]-6, 5)
 				
 			for i = 1, 6 do
 				self.Runes[i] = CreateFrame("StatusBar", nil, self.Runes)
-				self.Runes[i]:SetSize((ThunderDB["UnitFrames"]["WidthA"]-11)/6, 5)
-				self.Runes[i]:SetStatusBarTexture(ThunderDB["Main"]["BarText"])
+				self.Runes[i]:SetSize((ThunderDB[l_uf][l_ufwA]-11)/6, 5)
+				self.Runes[i]:SetStatusBarTexture(ThunderDB[l_main][l_bar])
 				self.Runes[i]:GetStatusBarTexture():SetHorizTile(false)
 				self.Runes[i]:SetStatusBarColor(unpack(runeloadcolors[i]))
 				
@@ -439,29 +439,29 @@ local UnitSpecific = {
 			self.Runes.bg:SetPoint("BOTTOMRIGHT", self.Runes, "BOTTOMRIGHT", 2, -2)
 			self.Runes.bg:SetFrameStrata("BACKGROUND")
 			self.Runes.bg:SetBackdrop(backdrop3)
-			self.Runes.bg:SetBackdropColor(unpack(ThunderDB["Main"]["Background color"]))
-			self.Runes.bg:SetBackdropBorderColor(unpack(ThunderDB["Main"]["Border color"]))
+			self.Runes.bg:SetBackdropColor(unpack(ThunderDB[l_main][l_bcolor]))
+			self.Runes.bg:SetBackdropBorderColor(unpack(ThunderDB[l_main][l_bgcolor]))
 		end
 		
-		if ThunderDB["UnitFrames"]["ClassBars"] and myclass == "SHAMAN" then
+		if ThunderDB[l_uf][l_ufclbars] and myclass == "SHAMAN" then
 			self.TotemBar = {}
 			self.TotemBar.Destroy = true
 			for i = 1, 4 do
 				self.TotemBar[i] = CreateFrame("StatusBar", self:GetName().."_TotemBar"..i, self)
 				self.TotemBar[i]:SetHeight(8)
-				self.TotemBar[i]:SetWidth(ThunderDB["UnitFrames"]["WidthA"]/4 - 3)
+				self.TotemBar[i]:SetWidth(ThunderDB[l_uf][l_ufwA]/4 - 3)
 				if (i == 1) then
 					self.TotemBar[i]:SetPoint("TOPLEFT", self, "BOTTOMLEFT", 1, -1)
 				else
 					self.TotemBar[i]:SetPoint("TOPLEFT", self.TotemBar[i-1], "TOPRIGHT", 3, 0)
 				end
-				self.TotemBar[i]:SetStatusBarTexture(ThunderDB["Main"]["BarText"])
+				self.TotemBar[i]:SetStatusBarTexture(ThunderDB[l_main][l_bar])
 				self.TotemBar[i]:GetStatusBarTexture():SetHorizTile(false)
 				self.TotemBar[i]:SetMinMaxValues(0, 1)
 
 				self.TotemBar[i].bg = self.TotemBar[i]:CreateTexture(nil, "BORDER")
 				self.TotemBar[i].bg:SetAllPoints()
-				self.TotemBar[i].bg:SetTexture(ThunderDB["Main"]["BarText"])
+				self.TotemBar[i].bg:SetTexture(ThunderDB[l_main][l_bar])
 				self.TotemBar[i].bg:SetVertexColor(0.15, 0.15, 0.15)
 			end
 		end
@@ -471,13 +471,13 @@ local UnitSpecific = {
 			self.Experience:SetPoint('BOTTOMLEFT', UIParent, 'BOTTOM', -185, 10)
 			self.Experience:SetPoint('BOTTOMRIGHT', UIParent, 'BOTTOM', 185, 10)
 			self.Experience:SetHeight(6)
-			self.Experience:SetStatusBarTexture(ThunderDB["Main"]["BarText"])
+			self.Experience:SetStatusBarTexture(ThunderDB[l_main][l_bar])
 			self.Experience:SetStatusBarColor(0, 0.7, 1)
 			self.Experience.Tooltip = true
 
 			self.Experience.Rested = CreateFrame('StatusBar', nil, self.Experience)
 			self.Experience.Rested:SetAllPoints(self.Experience)
-			self.Experience.Rested:SetStatusBarTexture(ThunderDB["Main"]["BarText"])
+			self.Experience.Rested:SetStatusBarTexture(ThunderDB[l_main][l_bar])
 			self.Experience.Rested:SetStatusBarColor(0, 0.4, 1, 0.6)
 			self.Experience.Rested:SetBackdrop(backdrop)
 			self.Experience.Rested:SetBackdropColor(0, 0, 0)
@@ -487,8 +487,8 @@ local UnitSpecific = {
 			self.Experience.bg:SetPoint("BOTTOMRIGHT", self.Experience, "BOTTOMRIGHT", 2, -2)
 			self.Experience.bg:SetFrameStrata("BACKGROUND")
 			self.Experience.bg:SetBackdrop(backdrop3)
-			self.Experience.bg:SetBackdropColor(unpack(ThunderDB["Main"]["Background color"]))
-			self.Experience.bg:SetBackdropBorderColor(unpack(ThunderDB["Main"]["Border color"]))
+			self.Experience.bg:SetBackdropColor(unpack(ThunderDB[l_main][l_bcolor]))
+			self.Experience.bg:SetBackdropBorderColor(unpack(ThunderDB[l_main][l_bgcolor]))
 		end
 
 		if(IsAddOnLoaded("oUF_Reputation")) and UnitLevel("player") == MAX_PLAYER_LEVEL then
@@ -497,7 +497,7 @@ local UnitSpecific = {
 			self.Reputation:SetPoint('BOTTOMRIGHT', UIParent, 'BOTTOM', 185, 10)
 			self.Reputation:SetHeight(6)
 			self.Reputation:SetFrameStrata("LOW")
-			self.Reputation:SetStatusBarTexture(ThunderDB["Main"]["BarText"])
+			self.Reputation:SetStatusBarTexture(ThunderDB[l_main][l_bar])
 			self.Reputation:SetStatusBarColor(0, 0.7, 1)
 			self.Reputation.PostUpdate = UpdateReputationColor
 			self.Reputation.Tooltip = true
@@ -507,21 +507,21 @@ local UnitSpecific = {
 			self.Reputation.bg:SetPoint("BOTTOMRIGHT", self.Reputation, "BOTTOMRIGHT", 2, -2)
 			self.Reputation.bg:SetFrameStrata("BACKGROUND")
 			self.Reputation.bg:SetBackdrop(backdrop3)
-			self.Reputation.bg:SetBackdropColor(unpack(ThunderDB["Main"]["Background color"]))
-			self.Reputation.bg:SetBackdropBorderColor(unpack(ThunderDB["Main"]["Border color"]))
+			self.Reputation.bg:SetBackdropColor(unpack(ThunderDB[l_main][l_bcolor]))
+			self.Reputation.bg:SetBackdropBorderColor(unpack(ThunderDB[l_main][l_bgcolor]))
 		end
 		
-		if ThunderDB["UnitFrames"]["ClassBars"] and myclass == "PALADIN" then
+		if ThunderDB[l_uf][l_ufclbars] and myclass == "PALADIN" then
 			self.HolyPower = CreateFrame("Frame", nil, self)
 			self.HolyPower:SetPoint("TOPLEFT", self, "BOTTOMLEFT", 3, -4)
-			self.HolyPower:SetSize((ThunderDB["UnitFrames"]["WidthA"]-20)/3, 5) -- mb need self.HolyPower:SetSize(ThunderDB["UnitFrames"]["WidthA"]-20, 5) ??
+			self.HolyPower:SetSize((ThunderDB[l_uf][l_ufwA]-20)/3, 5) -- mb need self.HolyPower:SetSize(ThunderDB[l_uf][l_ufwA]-20, 5) ??
 			self.HolyPower.anchor = 'BOTTOM'
 			self.HolyPower.growth = 'RIGHT'
 		
 			for i = 1, 3 do
 				self.HolyPower[i] = CreateFrame("StatusBar", nil, self.HolyPower)
-				self.HolyPower[i]:SetStatusBarTexture(ThunderDB["Main"]["BarText"])
-				self.HolyPower[i]:SetSize((ThunderDB["UnitFrames"]["WidthA"]-20)/3, 5)
+				self.HolyPower[i]:SetStatusBarTexture(ThunderDB[l_main][l_bar])
+				self.HolyPower[i]:SetSize((ThunderDB[l_uf][l_ufwA]-20)/3, 5)
 				self.HolyPower[i]:SetStatusBarColor(1,.95,.33)
 	
 				if i == 1 then
@@ -535,21 +535,21 @@ local UnitSpecific = {
 				self.HolyPower[i].bd:SetPoint("BOTTOMRIGHT", self.HolyPower[i], "BOTTOMRIGHT", 2, -2)
 				self.HolyPower[i].bd:SetFrameStrata("BACKGROUND")
 				self.HolyPower[i].bd:SetBackdrop(backdrop3)
-				self.HolyPower[i].bd:SetBackdropColor(unpack(ThunderDB["Main"]["Background color"]))
-				self.HolyPower[i].bd:SetBackdropBorderColor(unpack(ThunderDB["Main"]["Border color"]))
+				self.HolyPower[i].bd:SetBackdropColor(unpack(ThunderDB[l_main][l_bcolor]))
+				self.HolyPower[i].bd:SetBackdropBorderColor(unpack(ThunderDB[l_main][l_bgcolor]))
 			end
 		end
-		if ThunderDB["UnitFrames"]["ClassBars"] and myclass == "WARLOCK" then
+		if ThunderDB[l_uf][l_ufclbars] and myclass == "WARLOCK" then
 			self.SoulShards = CreateFrame("Frame", nil, self)
 			self.SoulShards:SetPoint("TOPLEFT", self, "BOTTOMLEFT", 3, -4)
-			self.SoulShards:SetSize((ThunderDB["UnitFrames"]["WidthA"]-20)/3, 5)
+			self.SoulShards:SetSize((ThunderDB[l_uf][l_ufwA]-20)/3, 5)
 			self.SoulShards.anchor = 'BOTTOM'
 			self.SoulShards.growth = 'RIGHT'
 		
 			for i = 1, 3 do
 				self.SoulShards[i] = CreateFrame("StatusBar", nil, self.SoulShards)
-				self.SoulShards[i]:SetStatusBarTexture(ThunderDB["Main"]["BarText"])
-				self.SoulShards[i]:SetSize((ThunderDB["UnitFrames"]["WidthA"]-20)/3, 5)
+				self.SoulShards[i]:SetStatusBarTexture(ThunderDB[l_main][l_bar])
+				self.SoulShards[i]:SetSize((ThunderDB[l_uf][l_ufwA]-20)/3, 5)
 				self.SoulShards[i]:SetStatusBarColor(.75,.33,1)
 	
 				if i == 1 then
@@ -563,39 +563,39 @@ local UnitSpecific = {
 				self.SoulShards[i].bd:SetPoint("BOTTOMRIGHT", self.SoulShards[i], "BOTTOMRIGHT", 2, -2)
 				self.SoulShards[i].bd:SetFrameStrata("BACKGROUND")
 				self.SoulShards[i].bd:SetBackdrop(backdrop3)
-				self.SoulShards[i].bd:SetBackdropColor(unpack(ThunderDB["Main"]["Background color"]))
-				self.SoulShards[i].bd:SetBackdropBorderColor(unpack(ThunderDB["Main"]["Border color"]))
+				self.SoulShards[i].bd:SetBackdropColor(unpack(ThunderDB[l_main][l_bcolor]))
+				self.SoulShards[i].bd:SetBackdropBorderColor(unpack(ThunderDB[l_main][l_bgcolor]))
 			end
 		end
-		if ThunderDB["UnitFrames"]["ClassBars"] and myclass == "DRUID" then
+		if ThunderDB[l_uf][l_ufclbars] and myclass == "DRUID" then
 			self.EclipseBar = CreateFrame('Frame', nil, self)
 			self.EclipseBar:SetPoint("TOPLEFT", self, "BOTTOMLEFT", 3, -4)
-			self.EclipseBar:SetSize(ThunderDB["UnitFrames"]["WidthA"]-6, 5)
+			self.EclipseBar:SetSize(ThunderDB[l_uf][l_ufwA]-6, 5)
 			
 			self.EclipseBar.bd = CreateFrame("Frame", nil, self.EclipseBar)
 			self.EclipseBar.bd:SetPoint("TOPLEFT", self.EclipseBar, "TOPLEFT", -2, 2)
 			self.EclipseBar.bd:SetPoint("BOTTOMRIGHT", self.EclipseBar, "BOTTOMRIGHT", 2, -2)					
 			self.EclipseBar.bd:SetBackdrop(backdrop3)
-			self.EclipseBar.bd:SetBackdropColor(unpack(ThunderDB["Main"]["Background color"]))
-			self.EclipseBar.bd:SetBackdropBorderColor(unpack(ThunderDB["Main"]["Border color"]))		
+			self.EclipseBar.bd:SetBackdropColor(unpack(ThunderDB[l_main][l_bcolor]))
+			self.EclipseBar.bd:SetBackdropBorderColor(unpack(ThunderDB[l_main][l_bgcolor]))		
 
 			local lunarBar = CreateFrame("StatusBar", nil, self.EclipseBar)
 			lunarBar:SetPoint("LEFT", self.EclipseBar, "LEFT", 0, 0)
 			lunarBar:SetSize(self.EclipseBar:GetWidth(), self.EclipseBar:GetHeight())
-			lunarBar:SetStatusBarTexture(ThunderDB["Main"]["BarText"])
+			lunarBar:SetStatusBarTexture(ThunderDB[l_main][l_bar])
 			lunarBar:SetStatusBarColor(0.34, 0.1, 0.86)
 			self.EclipseBar.LunarBar = lunarBar
 
 			local solarBar = CreateFrame("StatusBar", nil, self.EclipseBar)
 			solarBar:SetPoint("LEFT", lunarBar:GetStatusBarTexture(), "RIGHT", 0, 0)
 			solarBar:SetSize(self.EclipseBar:GetWidth(), self.EclipseBar:GetHeight())
-			solarBar:SetStatusBarTexture(ThunderDB["Main"]["BarText"])
+			solarBar:SetStatusBarTexture(ThunderDB[l_main][l_bar])
 			solarBar:SetStatusBarColor(0.95, 0.73, 0.15)
 			self.EclipseBar.SolarBar = solarBar
 			
 			local eclipseBarText = solarBar:CreateFontString(nil, "OVERLAY")
 			eclipseBarText:SetPoint("CENTER", self.EclipseBar, "CENTER")
-			eclipseBarText:SetFont(ThunderDB["UnitFrames"]["FramesFont"], ThunderDB["UnitFrames"]["FrameFontSize"]-1, "OUTLINE")
+			eclipseBarText:SetFont(ThunderDB[l_uf][l_uffont], ThunderDB[l_uf][l_ufufsize]-1, "OUTLINE")
 			self:Tag(eclipseBarText, '[pereclipse]%')
         end
 	end,	
@@ -607,7 +607,7 @@ local UnitSpecific = {
 				self.CPoints[i] = self.Health:CreateTexture(nil, "OVERLAY")
 				self.CPoints[i]:SetHeight(12)
 				self.CPoints[i]:SetWidth(12)
-				self.CPoints[i]:SetTexture(ThunderDB["Main"]["bubbleTex"])
+				self.CPoints[i]:SetTexture(ThunderDB[l_main][l_cp])
 				if i == 1 then
 					self.CPoints[i]:SetPoint("TOPLEFT", self, "TOPLEFT", -8, 8)
 					self.CPoints[i]:SetVertexColor(1, 0.31, 0.31)
@@ -622,7 +622,7 @@ local UnitSpecific = {
 		self:RegisterEvent("UNIT_COMBO_POINTS", UpdateCPoints)
 		
 	-- mouseover focus script by Munglunch 
-		if ThunderDB["UnitFrames"]["MouseFocusScript"] then
+		if ThunderDB[l_uf][l_ufmfs] then
 		local focuspoint = CreateFrame("BUTTON", "mouseFocus", self.Health, "SecureActionButtonTemplate")
 		focuspoint:EnableMouse(true)
 		focuspoint:RegisterForClicks("AnyUp")
@@ -634,7 +634,7 @@ local UnitSpecific = {
 		focuspoint:SetFrameStrata("DIALOG")
 
 		local focuspointtext = focuspoint:CreateTexture(nil, "ARTWORK")
-		focuspointtext:SetTexture(ThunderDB["Main"]["bubbleTex"])
+		focuspointtext:SetTexture(ThunderDB[l_main][l_cp])
 		focuspointtext:SetParent(focuspoint)
 		focuspointtext:SetAllPoints(focuspoint)
 		focuspointtext:SetVertexColor(0.8, 0.8, 0.3, 1)
@@ -646,7 +646,7 @@ local UnitSpecific = {
 	end,
 
 	focus = function(self)
-		if ThunderDB["UnitFrames"]["MouseFocusScript"] then
+		if ThunderDB[l_uf][l_ufmfs] then
 		local focuspoint2 = CreateFrame("BUTTON", "mouseFocus", self.Health, "SecureActionButtonTemplate")
 		focuspoint2:EnableMouse(true)
 		focuspoint2:RegisterForClicks("AnyUp")
@@ -658,7 +658,7 @@ local UnitSpecific = {
 		focuspoint2:SetFrameStrata("DIALOG")
 
 		local focuspoint2text = focuspoint2:CreateTexture(nil, "ARTWORK")
-		focuspoint2text:SetTexture(ThunderDB["Main"]["bubbleTex"])
+		focuspoint2text:SetTexture(ThunderDB[l_main][l_cp])
 		focuspoint2text:SetParent(focuspoint2)
 		focuspoint2text:SetAllPoints(focuspoint2)
 		focuspoint2text:SetVertexColor(0.8, 0.8, 0.3, 1)
@@ -674,7 +674,7 @@ local sharedstyle = function(self, unit)
 	self.menu = menu
 	
 	self:SetBackdrop(backdrop)
-	self:SetBackdropColor(unpack(ThunderDB["Main"]["Border color"]))
+	self:SetBackdropColor(unpack(ThunderDB[l_main][l_bgcolor]))
 	self:SetAlpha(1)
 	
 	self:SetScript("OnEnter", UnitFrame_OnEnter)
@@ -696,7 +696,7 @@ local sharedstyle = function(self, unit)
  	self.Selfbpanel:SetPoint("BOTTOMRIGHT")
 	self.Selfbpanel:SetBackdrop(backdrop2)
 	self.Selfbpanel:SetBackdropColor(0, 0, 0, 0)
-	self.Selfbpanel:SetBackdropBorderColor(unpack(ThunderDB["Main"]["Background color"]))
+	self.Selfbpanel:SetBackdropBorderColor(unpack(ThunderDB[l_main][l_bcolor]))
 
 
 ----------------------------------------------
@@ -705,19 +705,19 @@ local sharedstyle = function(self, unit)
 
 if unit == "player" or unit == "target" then	
 	self.Namepanel = CreateFrame("Frame", nil, self)
-	if ThunderDB["UnitFrames"]["Portrait"] and unit == "player" then
-		self.Namepanel:SetPoint("TOPLEFT", self, "BOTTOMLEFT", ThunderDB["UnitFrames"]["Height"]+27, 16)
+	if ThunderDB[l_uf][l_ufport] and unit == "player" then
+		self.Namepanel:SetPoint("TOPLEFT", self, "BOTTOMLEFT", ThunderDB[l_uf][l_ufHA]+27, 16)
 		self.Namepanel:SetPoint("BOTTOMRIGHT", self, "BOTTOMRIGHT", -2, 2)
-	elseif ThunderDB["UnitFrames"]["Portrait"] and unit == "target" then
+	elseif ThunderDB[l_uf][l_ufport] and unit == "target" then
 		self.Namepanel:SetPoint("TOPLEFT", self, "BOTTOMLEFT", 2, 16)
-		self.Namepanel:SetPoint("BOTTOMRIGHT", self, "BOTTOMRIGHT", -27-ThunderDB["UnitFrames"]["Height"], 2)
+		self.Namepanel:SetPoint("BOTTOMRIGHT", self, "BOTTOMRIGHT", -27-ThunderDB[l_uf][l_ufHA], 2)
 	else
 		self.Namepanel:SetPoint("TOPLEFT", self, "BOTTOMLEFT", 2, 16)
 		self.Namepanel:SetPoint("BOTTOMRIGHT", self, "BOTTOMRIGHT", -2, 2)
 	end
 	self.Namepanel:SetBackdrop(backdrop2)
 	self.Namepanel:SetBackdropColor(0, 0, 0, 0.8)
-	self.Namepanel:SetBackdropBorderColor(unpack(ThunderDB["Main"]["Background color"]))
+	self.Namepanel:SetBackdropBorderColor(unpack(ThunderDB[l_main][l_bcolor]))
 end
 	
 ----------------------------------------------
@@ -725,18 +725,18 @@ end
 ----------------------------------------------
 
 	self.Health = CreateFrame("StatusBar", self:GetName().."_Health", self)
-	self.Health:SetHeight(ThunderDB["UnitFrames"]["Height"])
-	if ThunderDB["UnitFrames"]["Portrait"] and unit == "player" then
-		self.Health:SetPoint("TOPLEFT", ThunderDB["UnitFrames"]["Height"]+28, -3)
+	self.Health:SetHeight(ThunderDB[l_uf][l_ufHA])
+	if ThunderDB[l_uf][l_ufport] and unit == "player" then
+		self.Health:SetPoint("TOPLEFT", ThunderDB[l_uf][l_ufHA]+28, -3)
 		self.Health:SetPoint("TOPRIGHT", -3, -3)
-	elseif ThunderDB["UnitFrames"]["Portrait"] and unit == "target" then
+	elseif ThunderDB[l_uf][l_ufport] and unit == "target" then
 		self.Health:SetPoint("TOPLEFT", 3, -3)
-		self.Health:SetPoint("TOPRIGHT", -28-ThunderDB["UnitFrames"]["Height"], -3)
+		self.Health:SetPoint("TOPRIGHT", -28-ThunderDB[l_uf][l_ufHA], -3)
 	else
 		self.Health:SetPoint("TOPLEFT", 3, -3)
 		self.Health:SetPoint("TOPRIGHT", -3, -3)
 	end
-	self.Health:SetStatusBarTexture(ThunderDB["Main"]["BarText"])
+	self.Health:SetStatusBarTexture(ThunderDB[l_main][l_bar])
 	self.Health:GetStatusBarTexture():SetHorizTile(false)
 
 	self.Health.colorTapping = true
@@ -746,7 +746,7 @@ end
 
 	self.Health.bg = self.Health:CreateTexture(nil, "BORDER")
 	self.Health.bg:SetAllPoints()
-	self.Health.bg:SetTexture(ThunderDB["Main"]["BarText"])
+	self.Health.bg:SetTexture(ThunderDB[l_main][l_bar])
 
 	self.Health.PostUpdate = PostUpdateHealth
 	
@@ -755,7 +755,7 @@ end
  	self.Healthpanel:SetPoint("BOTTOMRIGHT", self.Health, "BOTTOMRIGHT", 1, -1)
 	self.Healthpanel:SetBackdrop(backdrop2)
 	self.Healthpanel:SetBackdropColor(0, 0, 0, 0)
-	self.Healthpanel:SetBackdropBorderColor(unpack(ThunderDB["Main"]["Background color"]))
+	self.Healthpanel:SetBackdropBorderColor(unpack(ThunderDB[l_main][l_bcolor]))
 
 ----------------------------------------------
 -- Мана бар
@@ -765,12 +765,12 @@ end
 	self.Power:SetHeight(4)
 	self.Power:SetPoint("TOPLEFT", self.Health, "BOTTOMLEFT", 0, -3)
 	self.Power:SetPoint("TOPRIGHT", self.Health, "BOTTOMRIGHT", 0, -3)
-	self.Power:SetStatusBarTexture(ThunderDB["Main"]["BarText"])
+	self.Power:SetStatusBarTexture(ThunderDB[l_main][l_bar])
 	self.Power:GetStatusBarTexture():SetHorizTile(false)
 
 	self.Power.bg = self.Power:CreateTexture(nil, "BORDER")
 	self.Power.bg:SetAllPoints()
-	self.Power.bg:SetTexture(ThunderDB["Main"]["BarText"])
+	self.Power.bg:SetTexture(ThunderDB[l_main][l_bar])
 
 	self.Power.frequentUpdates = true
 	self.Power.Smooth = true
@@ -783,14 +783,14 @@ end
  	self.Powerpanel:SetPoint("BOTTOMRIGHT", self.Power, "BOTTOMRIGHT", 1, -1)
 	self.Powerpanel:SetBackdrop(backdrop2)
 	self.Powerpanel:SetBackdropColor(0, 0, 0, 0)
-	self.Powerpanel:SetBackdropBorderColor(unpack(ThunderDB["Main"]["Background color"]))
+	self.Powerpanel:SetBackdropBorderColor(unpack(ThunderDB[l_main][l_bcolor]))
 
 ----------------------------------------------
 -- Хп и Мп
 ----------------------------------------------	
 	
-	self.Health.value = SetFontString((unit == "player" or unit == "target") and self.Namepanel or self.Health, ThunderDB["UnitFrames"]["FramesFont"], ThunderDB["UnitFrames"]["FrameFontSize"])
-	self.Power.value = SetFontString((unit == "player" or unit == "target") and self.Namepanel or self.Power, ThunderDB["UnitFrames"]["FramesFont"], ThunderDB["UnitFrames"]["FrameFontSize"])
+	self.Health.value = SetFontString((unit == "player" or unit == "target") and self.Namepanel or self.Health, ThunderDB[l_uf][l_uffont], ThunderDB[l_uf][l_ufufsize])
+	self.Power.value = SetFontString((unit == "player" or unit == "target") and self.Namepanel or self.Power, ThunderDB[l_uf][l_uffont], ThunderDB[l_uf][l_ufufsize])
 if unit == "player" or unit == "target" then
 	self.Health.value:SetPoint("BOTTOMRIGHT", -3, 3)
 	self.Power.value:SetPoint("BOTTOMLEFT", 3, 3)
@@ -804,7 +804,7 @@ end
 ----------------------------------------------	
 
 if unit ~= "player" then
-	self.Info = SetFontString(self.Health, ThunderDB["UnitFrames"]["FramesFont"], ThunderDB["UnitFrames"]["FrameFontSize"])
+	self.Info = SetFontString(self.Health, ThunderDB[l_uf][l_uffont], ThunderDB[l_uf][l_ufufsize])
 	if unit == "target" then
 		self:Tag(self.Info, '[thunder:color][thunder:longname] [thunder:lvl]')
 		self.Info:SetPoint("LEFT", 1, 0)
@@ -818,10 +818,10 @@ end
 -- Портерт и рамка
 ----------------------------------------------	
 
-if ThunderDB["UnitFrames"]["Portrait"] and (unit == "player" or unit == "target") then
+if ThunderDB[l_uf][l_ufport] and (unit == "player" or unit == "target") then
 	self.Portraitpanel = CreateFrame("Frame", nil, self)
-	self.Portraitpanel:SetWidth(ThunderDB["UnitFrames"]["Height"]+24)
-	self.Portraitpanel:SetHeight(ThunderDB["UnitFrames"]["Height"]+24)
+	self.Portraitpanel:SetWidth(ThunderDB[l_uf][l_ufHA]+24)
+	self.Portraitpanel:SetHeight(ThunderDB[l_uf][l_ufHA]+24)
 	if unit == "player" then
 		self.Portraitpanel:SetPoint("TOPLEFT", self, "TOPLEFT", fixscale(2), fixscale(-2))
 	else
@@ -829,7 +829,7 @@ if ThunderDB["UnitFrames"]["Portrait"] and (unit == "player" or unit == "target"
 	end
 	self.Portraitpanel:SetBackdrop(backdrop2)
 	self.Portraitpanel:SetBackdropColor(0, 0, 0, 0.8)
-	self.Portraitpanel:SetBackdropBorderColor(unpack(ThunderDB["Main"]["Background color"]))
+	self.Portraitpanel:SetBackdropBorderColor(unpack(ThunderDB[l_main][l_bcolor]))
 
 	self.Portrait = CreateFrame("PlayerModel", nil, self)
 	self.Portrait:SetPoint("TOPLEFT", self.Portraitpanel, "TOPLEFT", fixscale(1), fixscale(-1))
@@ -840,19 +840,19 @@ end
 -- Кастбары
 ----------------------------------------------	
 
-if (unit == "player" or unit == "target" or unit == "focus") and ThunderDB["UnitFrames"]["Castbars"] then
+if (unit == "player" or unit == "target" or unit == "focus") and ThunderDB[l_uf][l_ufcast] then
 	self.Castbar = CreateFrame("StatusBar", self:GetName().."_Castbar", self)
-	self.Castbar:SetStatusBarTexture(ThunderDB["Main"]["BarText"], "OVERLAY")
+	self.Castbar:SetStatusBarTexture(ThunderDB[l_main][l_bar], "OVERLAY")
 	self.Castbar:GetStatusBarTexture():SetHorizTile(false)
 	self.Castbar:SetStatusBarColor(.95, .95, .95, 0.70)
 	
 	if unit == "focus" then
 		self.Castbar:SetPoint("TOPLEFT", UIParent, "CENTER", fixscale(-150), fixscale(210))
 		self.Castbar:SetPoint("BOTTOMRIGHT", UIParent, "CENTER", fixscale(150), fixscale(190))
-	elseif unit == "player" and ThunderDB["UnitFrames"]["CastbarMaxi"] then
-		self.Castbar:SetPoint("TOPLEFT", UIParent, "BOTTOM", fixscale(-112), fixscale(ThunderDB["UnitFrames"]["CastbarMaxi X pos"]+18))
-		self.Castbar:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOM", fixscale(140), fixscale(ThunderDB["UnitFrames"]["CastbarMaxi X pos"]))
-	elseif unit == "target" and ThunderDB["UnitFrames"]["CastbarMaxi"] then
+	elseif unit == "player" and ThunderDB[l_uf][l_ufcastmaxi] then
+		self.Castbar:SetPoint("TOPLEFT", UIParent, "BOTTOM", fixscale(-112), fixscale(ThunderDB[l_uf][l_ufcastmaxiYpos]+18))
+		self.Castbar:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOM", fixscale(140), fixscale(ThunderDB[l_uf][l_ufcastmaxiYpos]))
+	elseif unit == "target" and ThunderDB[l_uf][l_ufcastmaxi] then
 		self.Castbar:SetPoint("TOPLEFT", self, "TOPLEFT", 3, 98)
 		self.Castbar:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", -28, 80)	
 	else
@@ -861,23 +861,23 @@ if (unit == "player" or unit == "target" or unit == "focus") and ThunderDB["Unit
 		self.Castbar:SetPoint("BOTTOMRIGHT", self.Namepanel, "BOTTOMRIGHT", -1, 1)
 	end
 	
-	if ThunderDB["UnitFrames"]["CastbarMaxi"] or unit == "focus" then
+	if ThunderDB[l_uf][l_ufcastmaxi] or unit == "focus" then
 		self.Castbarbg = CreateFrame("Frame", nil, self.Castbar)
 		self.Castbarbg:SetPoint("TOPLEFT", self.Castbar, "TOPLEFT", fixscale(-2), fixscale(2))
 		self.Castbarbg:SetPoint("BOTTOMRIGHT", self.Castbar, "BOTTOMRIGHT", fixscale(2), fixscale(-2))
 		self.Castbarbg:SetBackdrop(backdrop3)
 		self.Castbarbg:SetFrameStrata("BACKGROUND")
-		self.Castbarbg:SetBackdropColor(unpack(ThunderDB["Main"]["Background color"]))
-		self.Castbarbg:SetBackdropBorderColor(unpack(ThunderDB["Main"]["Border color"]))
+		self.Castbarbg:SetBackdropColor(unpack(ThunderDB[l_main][l_bcolor]))
+		self.Castbarbg:SetBackdropBorderColor(unpack(ThunderDB[l_main][l_bgcolor]))
 	else
 		self.Castbar.bg = self.Castbar:CreateTexture(nil, "BORDER")
 		self.Castbar.bg:SetAllPoints()
-		self.Castbar.bg:SetTexture(ThunderDB["Main"]["BarText"])
-		self.Castbar.bg:SetVertexColor(unpack(ThunderDB["Main"]["Background color"]))
+		self.Castbar.bg:SetTexture(ThunderDB[l_main][l_bar])
+		self.Castbar.bg:SetVertexColor(unpack(ThunderDB[l_main][l_bcolor]))
 	end
 
 	self.Castbar.Time = self.Castbar:CreateFontString(nil, 'OVERLAY')
-	self.Castbar.Time:SetFont(ThunderDB["UnitFrames"]["FramesFont"], ThunderDB["UnitFrames"]["FrameFontSize"])
+	self.Castbar.Time:SetFont(ThunderDB[l_uf][l_uffont], ThunderDB[l_uf][l_ufufsize])
 	self.Castbar.Time:SetShadowOffset(1, -1)
 	self.Castbar.Time:SetPoint("RIGHT", self.Castbar, -1, 1)
 	self.Castbar.CustomTimeText = function(self, duration)
@@ -889,13 +889,13 @@ if (unit == "player" or unit == "target" or unit == "focus") and ThunderDB["Unit
 	end
 	
 	self.Castbar.Text = self.Castbar:CreateFontString(nil, "OVERLAY")
-	self.Castbar.Text:SetFont(ThunderDB["UnitFrames"]["FramesFont"], ThunderDB["UnitFrames"]["FrameFontSize"])
+	self.Castbar.Text:SetFont(ThunderDB[l_uf][l_uffont], ThunderDB[l_uf][l_ufufsize])
 	self.Castbar.Text:SetShadowOffset(1, -1)
 	self.Castbar.Text:SetPoint("LEFT", self.Castbar, 1, 1)
 	self.Castbar.Text:SetPoint("RIGHT", self.Castbar.Time, "LEFT")
 	self.Castbar.Text:SetJustifyH"LEFT"
 	
-if ThunderDB["UnitFrames"]["CastbarIcon"] == true and (unit == "player" or unit == "target" or unit == "focus") then
+if ThunderDB[l_uf][l_ufcasticon] == true and (unit == "player" or unit == "target" or unit == "focus") then
 	self.Castbar.Icon = self.Castbar:CreateTexture(nil, 'ARTWORK')
 	if unit == "focus" then
 		self.Castbar.Icon:SetHeight(25)
@@ -906,14 +906,14 @@ if ThunderDB["UnitFrames"]["CastbarIcon"] == true and (unit == "player" or unit 
 	end
 	self.Castbar.Icon:SetTexCoord(.1, .9, .1, .9)
 
-	if ThunderDB["UnitFrames"]["CastbarMaxi"] and unit == "player" then
+	if ThunderDB[l_uf][l_ufcastmaxi] and unit == "player" then
 		self.Castbar.Icon:SetPoint("BOTTOMRIGHT", self.Castbar, "BOTTOMLEFT", -7, 0)
-	elseif ThunderDB["UnitFrames"]["CastbarMaxi"] and unit == "target" then
+	elseif ThunderDB[l_uf][l_ufcastmaxi] and unit == "target" then
 		self.Castbar.Icon:SetPoint("BOTTOMLEFT", self.Castbar, "BOTTOMRIGHT", 7, 0)
-	elseif ThunderDB["UnitFrames"]["Portrait"] and unit == "player" then
-		self.Castbar.Icon:SetPoint("BOTTOMRIGHT", self.Castbar, "BOTTOMLEFT", -32-ThunderDB["UnitFrames"]["Height"], 0)
-	elseif ThunderDB["UnitFrames"]["Portrait"] and unit == "target" then
-		self.Castbar.Icon:SetPoint("BOTTOMLEFT", self.Castbar, "BOTTOMRIGHT", ThunderDB["UnitFrames"]["Height"]+32, 0)
+	elseif ThunderDB[l_uf][l_ufport] and unit == "player" then
+		self.Castbar.Icon:SetPoint("BOTTOMRIGHT", self.Castbar, "BOTTOMLEFT", -32-ThunderDB[l_uf][l_ufHA], 0)
+	elseif ThunderDB[l_uf][l_ufport] and unit == "target" then
+		self.Castbar.Icon:SetPoint("BOTTOMLEFT", self.Castbar, "BOTTOMRIGHT", ThunderDB[l_uf][l_ufHA]+32, 0)
 	elseif unit == "player" then
 		self.Castbar.Icon:SetPoint("BOTTOMRIGHT", self.Castbar, "BOTTOMLEFT", -7, 0)
 	elseif unit == "target" then
@@ -939,11 +939,11 @@ if ThunderDB["UnitFrames"]["CastbarIcon"] == true and (unit == "player" or unit 
 	SetTemplate(self.Castbar.bd)
 end	
 	
-if unit == "player" and ThunderDB["UnitFrames"]["LatencyShow"] == true then
+if unit == "player" and ThunderDB[l_uf][l_ufcastlatency] == true then
 	self.Castbar.SafeZone = self.Castbar:CreateTexture(nil, "ARTWORK")
 	self.Castbar.SafeZone:SetPoint('TOPRIGHT')
 	self.Castbar.SafeZone:SetPoint('BOTTOMRIGHT')
-	self.Castbar.SafeZone:SetTexture(ThunderDB["Main"]["BarText"])
+	self.Castbar.SafeZone:SetTexture(ThunderDB[l_main][l_bar])
 	self.Castbar.SafeZone:SetVertexColor(0.69, 0.31, 0.31, 0.75)
 end
 end
@@ -970,7 +970,7 @@ end
 -- ПВП флаг
 ----------------------------------------------	
 
-if unit == 'player' and ThunderDB["UnitFrames"]["PVPflag"] then
+if unit == 'player' and ThunderDB[l_uf][l_ufpvp] then
 	self.PvP = self.Health:CreateTexture(nil, 'OVERLAY')
 	self.PvP:SetSize(24, 24)
 	self.PvP:SetPoint('TOPLEFT', self, -5, 5)
@@ -1016,17 +1016,17 @@ end]]
 -- Аур всем и каждому!
 ----------------------------------------------	
 
-if ThunderDB["UnitFrames"]["Auras"] then
-	if unit == 'player' and ThunderDB["UnitFrames"]["Debuffs"] then
+if ThunderDB[l_uf][l_ufauras] then
+	if unit == 'player' and ThunderDB[l_uf][l_ufdeb] then
 		self.Debuffs = CreateFrame("Frame", nil, self)
 		self.Debuffs:SetHeight(100)
-		self.Debuffs:SetWidth(ThunderDB["UnitFrames"]["WidthA"])
-		if ThunderDB["UnitFrames"]["TopAuras"] then
+		self.Debuffs:SetWidth(ThunderDB[l_uf][l_ufwA])
+		if ThunderDB[l_uf][l_ufautop] then
 			self.Debuffs:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 1, 2)
 			self.Debuffs.initialAnchor = "BOTTOMLEFT"
 			self.Debuffs["growth-y"] = "UP"
 		else
-			if (ThunderDB["UnitFrames"]["ClassBars"] and (myclass == "DEATHKNIGHT" or myclass == "SHAMAN" or myclass == "PALADIN")) then
+			if (ThunderDB[l_uf][l_ufclbars] and (myclass == "DEATHKNIGHT" or myclass == "SHAMAN" or myclass == "PALADIN")) then
 				self.Debuffs:SetPoint("TOPLEFT", self, "BOTTOMLEFT", 1, -12)
 			else
 				self.Debuffs:SetPoint("TOPLEFT", self, "BOTTOMLEFT", 1, -2)
@@ -1035,15 +1035,15 @@ if ThunderDB["UnitFrames"]["Auras"] then
 			self.Debuffs["growth-y"] = "DOWN"
 		end
 		self.Debuffs.spacing = 2
-		self.Debuffs.size = ThunderDB["UnitFrames"]["AuraSize"]
-		self.Debuffs.num = ThunderDB["UnitFrames"]["AuraLimit"]*2
+		self.Debuffs.size = ThunderDB[l_uf][l_ufausize]
+		self.Debuffs.num = ThunderDB[l_uf][l_ufalim]*2
 		self.Debuffs.PostCreateIcon = auraIcon
 		self.Debuffs.PostUpdateIcon = PostUpdateIcon
-	elseif unit == 'target' and ThunderDB["UnitFrames"]["CompactTargetAuras"] then
+	elseif unit == 'target' and ThunderDB[l_uf][l_ufacta] then
 		self.Auras = CreateFrame("Frame", nil, self)
 		self.Auras:SetHeight(200)
-		self.Auras:SetWidth(ThunderDB["UnitFrames"]["WidthA"])
-		if ThunderDB["UnitFrames"]["TopAuras"] then
+		self.Auras:SetWidth(ThunderDB[l_uf][l_ufwA])
+		if ThunderDB[l_uf][l_ufautop] then
 			self.Auras:SetPoint('BOTTOMLEFT', self, 'TOPLEFT', 1, 2)
 			self.Auras['growth-y'] = 'UP'
 			self.Auras.initialAnchor = 'BOTTOMLEFT'
@@ -1054,19 +1054,19 @@ if ThunderDB["UnitFrames"]["Auras"] then
 		end
 		self.Auras['growth-x'] = 'RIGHT'
 		self.Auras.spacing = 2
-		self.Auras.size = ThunderDB["UnitFrames"]["AuraSize"]
+		self.Auras.size = ThunderDB[l_uf][l_ufausize]
 		self.Auras.gap = true 
-		self.Auras.numBuffs = ThunderDB["UnitFrames"]["AuraLimit"]
-		self.Auras.numDebuffs = ThunderDB["UnitFrames"]["AuraLimit"]*2
-		self.Auras.onlyShowPlayer = ThunderDB["UnitFrames"]["OnlyShowPlayer"]
+		self.Auras.numBuffs = ThunderDB[l_uf][l_ufalim]
+		self.Auras.numDebuffs = ThunderDB[l_uf][l_ufalim]*2
+		self.Auras.onlyShowPlayer = ThunderDB[l_uf][l_ufospd]
 		
 		self.Auras.PostCreateIcon = auraIcon
 		self.Auras.PostUpdateIcon = PostUpdateIcon
-	elseif unit == 'target' and ThunderDB["UnitFrames"]["CompactTargetAuras"] ~= true then
+	elseif unit == 'target' and ThunderDB[l_uf][l_ufacta] ~= true then
 		self.Buffs = CreateFrame("Frame", nil, self)
 		self.Buffs:SetHeight(10)
-		self.Buffs:SetWidth(ThunderDB["UnitFrames"]["WidthA"])
-		if ThunderDB["UnitFrames"]["TopAuras"] then
+		self.Buffs:SetWidth(ThunderDB[l_uf][l_ufwA])
+		if ThunderDB[l_uf][l_ufautop] then
 			self.Buffs:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 1, 2)
 			self.Buffs.initialAnchor = "BOTTOMLEFT"
 			self.Buffs['growth-y'] = 'UP'
@@ -1076,62 +1076,62 @@ if ThunderDB["UnitFrames"]["Auras"] then
 			self.Buffs['growth-y'] = 'DOWN'
 		end
 		self.Buffs.spacing = 2
-		self.Buffs.size = ThunderDB["UnitFrames"]["AuraSize"]
-		self.Buffs.num = ThunderDB["UnitFrames"]["AuraLimit"]
+		self.Buffs.size = ThunderDB[l_uf][l_ufausize]
+		self.Buffs.num = ThunderDB[l_uf][l_ufalim]
 		self.Buffs['growth-x'] = 'RIGHT'
 		self.Buffs.PostCreateIcon = auraIcon
 		self.Buffs.PostUpdateIcon = PostUpdateIcon
 		
 		self.Debuffs = CreateFrame("Frame", nil, self)
 		self.Debuffs:SetHeight(100)
-		self.Debuffs:SetWidth(ThunderDB["UnitFrames"]["WidthA"])
-		if ThunderDB["UnitFrames"]["TopAuras"] then
-			self.Debuffs:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", -1, ThunderDB["UnitFrames"]["AuraSize"]+6)
+		self.Debuffs:SetWidth(ThunderDB[l_uf][l_ufwA])
+		if ThunderDB[l_uf][l_ufautop] then
+			self.Debuffs:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", -1, ThunderDB[l_uf][l_ufausize]+6)
 			self.Debuffs.initialAnchor = "BOTTOMRIGHT"
 			self.Debuffs['growth-y'] = 'UP'
 		else
-			self.Debuffs:SetPoint("TOPRIGHT", self, "BOTTOMRIGHT", -1, -ThunderDB["UnitFrames"]["AuraSize"]-6)
+			self.Debuffs:SetPoint("TOPRIGHT", self, "BOTTOMRIGHT", -1, -ThunderDB[l_uf][l_ufausize]-6)
 			self.Debuffs.initialAnchor = "TOPRIGHT"
 			self.Debuffs['growth-y'] = 'DOWN'
 		end
 		self.Debuffs.spacing = 2
-		self.Debuffs.size = ThunderDB["UnitFrames"]["AuraSize"]
-		self.Debuffs.num = ThunderDB["UnitFrames"]["AuraLimit"]*2
+		self.Debuffs.size = ThunderDB[l_uf][l_ufausize]
+		self.Debuffs.num = ThunderDB[l_uf][l_ufalim]*2
 		self.Debuffs['growth-x'] = 'LEFT'
-		self.Debuffs.onlyShowPlayer = ThunderDB["UnitFrames"]["OnlyShowPlayer"]
+		self.Debuffs.onlyShowPlayer = ThunderDB[l_uf][l_ufospd]
 		self.Debuffs.PostCreateIcon = auraIcon
 		self.Debuffs.PostUpdateIcon = PostUpdateIcon
 	elseif unit == 'focus' then
 		self.Debuffs = CreateFrame("Frame", nil, self)
 		self.Debuffs.num = 4
-		self.Debuffs.size = ThunderDB["UnitFrames"]["AuraSize"]
+		self.Debuffs.size = ThunderDB[l_uf][l_ufausize]
 		self.Debuffs.spacing = 2
 		self.Debuffs:SetPoint("TOPLEFT", self, "TOPRIGHT", 1, -2)
 		self.Debuffs.initialAnchor = "TOPLEFT"
 		self.Debuffs["growth-x"] = "RIGHT"
 		self.Debuffs["growth-y"] = "DOWN"
-		self.Debuffs:SetHeight(ThunderDB["UnitFrames"]["AuraSize"])
+		self.Debuffs:SetHeight(ThunderDB[l_uf][l_ufausize])
 		self.Debuffs:SetWidth(200)
 		self.Debuffs.PostCreateIcon = auraIcon
 		self.Debuffs.PostUpdateIcon = PostUpdateIcon
 	elseif unit == "pet" then
 		self.Debuffs = CreateFrame("Frame", nil, self)
 		self.Debuffs.num = 4
-		self.Debuffs.size = ThunderDB["UnitFrames"]["AuraSize"]
+		self.Debuffs.size = ThunderDB[l_uf][l_ufausize]
 		self.Debuffs.spacing = 2
 		self.Debuffs:SetPoint("TOPRIGHT", self, "TOPLEFT", -1, -2)
 		self.Debuffs.initialAnchor = "TOPRIGHT"
 		self.Debuffs["growth-x"] = "LEFT"
 		self.Debuffs["growth-y"] = "DOWN"
-		self.Debuffs:SetHeight(ThunderDB["UnitFrames"]["AuraSize"])
+		self.Debuffs:SetHeight(ThunderDB[l_uf][l_ufausize])
 		self.Debuffs:SetWidth(200)
 		self.Debuffs.PostCreateIcon = auraIcon
 		self.Debuffs.PostUpdateIcon = PostUpdateIcon
-	elseif unit == "targettarget" and ThunderDB["UnitFrames"]["TargerTargetDebuffs"] then
+	elseif unit == "targettarget" and ThunderDB[l_uf][l_uftotd] then
 		self.Debuffs = CreateFrame("Frame", nil, self)
-		self.Debuffs:SetHeight(ThunderDB["UnitFrames"]["AuraSize"]-10)
-		self.Debuffs:SetWidth(ThunderDB["UnitFrames"]["WidthC"])
-		if ThunderDB["UnitFrames"]["TopAuras"] then
+		self.Debuffs:SetHeight(ThunderDB[l_uf][l_ufausize]-10)
+		self.Debuffs:SetWidth(ThunderDB[l_uf][l_ufwC])
+		if ThunderDB[l_uf][l_ufautop] then
 			self.Debuffs:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 1, 2)
 			self.Debuffs["growth-y"] = "UP"
 			self.Debuffs.initialAnchor = "BOTTOMLEFT"
@@ -1141,20 +1141,20 @@ if ThunderDB["UnitFrames"]["Auras"] then
 			self.Debuffs.initialAnchor = "TOPLEFT"
 		end
 		self.Debuffs.spacing = 2
-		self.Debuffs.size = ThunderDB["UnitFrames"]["AuraSize"]
+		self.Debuffs.size = ThunderDB[l_uf][l_ufausize]
 		self.Debuffs.num = 6
 		self.Debuffs.PostCreateIcon = auraIcon
 		self.Debuffs.PostUpdateIcon = PostUpdateIcon
 	elseif (unit and unit:find("arena%d")) then
 		self.Debuffs = CreateFrame("Frame", nil, self)
 		self.Debuffs.num = 6
-		self.Debuffs.size = ThunderDB["UnitFrames"]["AuraSize"]
+		self.Debuffs.size = ThunderDB[l_uf][l_ufausize]
 		self.Debuffs.spacing = 2
 		self.Debuffs:SetPoint('TOPLEFT', self, 'TOPRIGHT', 2, -1)
 		self.Debuffs.initialAnchor = "TOPLEFT"
 		self.Debuffs["growth-x"] = "RIGHT"
 		self.Debuffs["growth-y"] = "DOWN"
-		self.Debuffs:SetHeight(ThunderDB["UnitFrames"]["AuraSize"])
+		self.Debuffs:SetHeight(ThunderDB[l_uf][l_ufausize])
 		self.Debuffs:SetWidth(200)
 		self.Debuffs.PostCreateIcon = auraIcon
 		self.Debuffs.PostUpdateIcon = PostUpdateIcon
@@ -1166,11 +1166,11 @@ end
 ----------------------------------------------	
 
 	if unit == "player" or unit == "target" then
- 		self:SetSize(ThunderDB["UnitFrames"]["WidthA"], ThunderDB["UnitFrames"]["Height"]+28)
+ 		self:SetSize(ThunderDB[l_uf][l_ufwA], ThunderDB[l_uf][l_ufHA]+28)
 	elseif unit == "focus" or unit == "pet" then
-		self:SetSize(ThunderDB["UnitFrames"]["WidthB"], ThunderDB["UnitFrames"]["Height"]+13)
+		self:SetSize(ThunderDB[l_uf][l_ufwB], ThunderDB[l_uf][l_ufHA]+13)
 	else
-		self:SetSize(ThunderDB["UnitFrames"]["WidthC"], ThunderDB["UnitFrames"]["Height"]+13)
+		self:SetSize(ThunderDB[l_uf][l_ufwC], ThunderDB[l_uf][l_ufHA]+13)
 	end
 
 ----------------------------------------------
@@ -1205,15 +1205,15 @@ oUF:RegisterStyle("thunder", sharedstyle)
 oUF:Factory(function(self)
 	self:SetActiveStyle"thunder"
 
-if ThunderDB["UnitFramesRaid"]["HealModePosition"] then
-	self:Spawn("player", "oUF_Player"):SetPoint("TOPRIGHT", raidzoneframe, "TOPLEFT", -ThunderDB["UnitFramesRaid"]["GridOffset"], 0)
-	self:Spawn("target", "oUF_Target"):SetPoint("TOPLEFT", raidzoneframe, "TOPRIGHT", ThunderDB["UnitFramesRaid"]["GridOffset"], 0)
-	self:Spawn("targettarget", "oUF_TargetTarget"):SetPoint("TOPLEFT", self.units.target, "BOTTOMLEFT", 0, -ThunderDB["UnitFramesRaid"]["GridOffset"])
+if ThunderDB[l_ufr][l_ufrhealmode] then
+	self:Spawn("player", "oUF_Player"):SetPoint("TOPRIGHT", raidzoneframe, "TOPLEFT", -ThunderDB[l_ufr][l_ufroffset], 0)
+	self:Spawn("target", "oUF_Target"):SetPoint("TOPLEFT", raidzoneframe, "TOPRIGHT", ThunderDB[l_ufr][l_ufroffset], 0)
+	self:Spawn("targettarget", "oUF_TargetTarget"):SetPoint("TOPLEFT", self.units.target, "BOTTOMLEFT", 0, -ThunderDB[l_ufr][l_ufroffset])
 	self:Spawn("focustarget", "oUF_focustarget"):SetPoint("TOPLEFT", self.units.target, "TOPRIGHT", 60, 0)
 	self:Spawn("focus", "oUF_Focus"):SetPoint("BOTTOM", self.units.focustarget, "TOP", 0, 20)
-	self:Spawn("pet", "oUF_Pet"):SetPoint("TOPRIGHT", self.units.player, "BOTTOMLEFT", -ThunderDB["UnitFramesRaid"]["GridOffset"], -ThunderDB["UnitFramesRaid"]["GridOffset"])
+	self:Spawn("pet", "oUF_Pet"):SetPoint("TOPRIGHT", self.units.player, "BOTTOMLEFT", -ThunderDB[l_ufr][l_ufroffset], -ThunderDB[l_ufr][l_ufroffset])
 else
-	if ThunderDB["ActionBars"]["ThirdPanel"] then
+	if ThunderDB[l_ab][l_abThird] then
 		self:Spawn("targettarget", "oUF_TargetTarget"):SetPoint("TOP", UIParent, "BOTTOM", 0, 330)
 	else
 		self:Spawn("targettarget", "oUF_TargetTarget"):SetPoint("TOP", UIParent, "BOTTOM", 0, 300)
@@ -1225,7 +1225,7 @@ else
 	self:Spawn("pet", "oUF_Pet"):SetPoint("TOPRIGHT", self.units.player, "BOTTOMRIGHT", 0, -10)
 end
 
-if ThunderDB["UnitFrames"]["HideParty"] then
+if ThunderDB[l_uf][l_ufhideparty] then
 	--always hide party! :3
 	self:SpawnHeader("oUF_noParty", nil, "party", "showParty", true)
 end

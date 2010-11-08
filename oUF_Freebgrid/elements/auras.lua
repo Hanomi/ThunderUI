@@ -3,8 +3,8 @@ local oUF = ns.oUF or oUF
 assert(oUF, "oUF_Freebgrid was unable to locate oUF install.")
 
 local backdrop = {
-	bgFile = ThunderDB["Main"]["BlankText"],
-	edgeFile = ThunderDB["Main"]["BlankText"], 
+	bgFile = ThunderDB[l_main][l_blank],
+	edgeFile = ThunderDB[l_main][l_blank], 
 	tile = false, tileSize = 0, edgeSize = 1, 
 	insets = {top = -1, left = -1, bottom = -1, right = -1},
 }
@@ -60,7 +60,7 @@ local createAuraIcon = function(auras)
     overlay:SetAllPoints(button)
     overlay:SetBackdrop(backdrop)
 	overlay:SetBackdropColor(0,0,0,0)
-	overlay:SetBackdropBorderColor(unpack(ThunderDB["Main"]["Border color"])) 
+	overlay:SetBackdropBorderColor(unpack(ThunderDB[l_main][l_bgcolor])) 
     overlay:SetFrameLevel(6)
     button.overlay = overlay
 

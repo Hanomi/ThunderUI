@@ -1,4 +1,4 @@
---[[
+﻿--[[
 	tullaCooldownCount
 		A basic cooldown count addon
 
@@ -7,7 +7,7 @@
 --]]
 
 local module = {}
-module.name = "Cooldown"
+module.name = l_cc
 module.Init = function()
 	if not ThunderDB.modules[module.name] then return end
 	local settings = ThunderDB
@@ -30,8 +30,8 @@ local DAY, HOUR, MINUTE = 86400, 3600, 60 --used for formatting text
 local DAYISH, HOURISH, MINUTEISH = 3600 * 23.5, 60 * 59.5, 59.5 --used for formatting text at transition points
 local HALFDAYISH, HALFHOURISH, HALFMINUTEISH = DAY/2 + 0.5, HOUR/2 + 0.5, MINUTE/2 + 0.5 --used for calculating next update times
 
-local FONT_FACE = ThunderDB["Cooldown"]["CCFont"] --what font to use
-local FONT_SIZE = ThunderDB["Cooldown"]["CCFontSize"] --the base font size to use at a scale of 1
+local FONT_FACE = ThunderDB[l_cc][l_cfont] --what font to use
+local FONT_SIZE = ThunderDB[l_cc][l_cfontsize] --the base font size to use at a scale of 1
 local MIN_SCALE = minScale--the minimum scale we want to show cooldown counts at, anything below this will be hidden
 local MIN_DURATION = minDuration --the minimum duration to show cooldown text for
 local EXPIRING_DURATION = expiringDuration --the minimum number of seconds a cooldown must be to use to display in the expiring format
