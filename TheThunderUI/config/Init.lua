@@ -249,7 +249,7 @@ local function setupVars()
 	SetCVar("guildMemberNotify", 1)
 	SetCVar("chatBubblesParty", 1)
 	SetCVar("chatBubbles", 1)
-	SetCVar("UnitNameOwn", 0)
+--[[	SetCVar("UnitNameOwn", 0)
 	SetCVar("UnitNameNPC", 1)
 	SetCVar("UnitNameNonCombatCreatureName", 1)
 	SetCVar("UnitNamePlayerGuild", 1)
@@ -261,7 +261,7 @@ local function setupVars()
 	SetCVar("UnitNameEnemyPlayerName", 1)
 	SetCVar("UnitNameEnemyPetName", 1)
 	SetCVar("UnitNameEnemyGuardianName", 1)
-	SetCVar("UnitNameEnemyTotemName", 1)
+	SetCVar("UnitNameEnemyTotemName", 1)]]
 
 	SetSkada();
 end
