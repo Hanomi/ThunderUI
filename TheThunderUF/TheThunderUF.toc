@@ -1,6 +1,6 @@
 ## Interface: 40000
 ## Title: |cff9DC7CCThe Thunder Unit Frames v.5|r
-## Version: 5.0
+## Version: 5.4
 ## Notes: Unit Frames using the oUF framework.
 ## Author: Hanomi
 ## Credits: Freebaster, Caellian

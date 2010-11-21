@@ -98,13 +98,26 @@ local function rActionButtonStyler_AB_stylepet()
 		local fl  = _G[name.."Flash"]
 		local nt  = _G[name.."NormalTexture2"]
 		local cd  = _G[name.."Cooldown"]
-
+		local ac  = _G[name.."AutoCastable"]
+		local sh  = _G[name.."Shine"]
+			
 	--	fl:SetTexture("")
 		bu:SetNormalTexture("")
 		bu:SetHighlightTexture(ThunderDB[l_bstyler][l_bsHighlight])
 		bu:SetPushedTexture(ThunderDB[l_bstyler][l_bsPushed])
 		bu:SetCheckedTexture(ThunderDB[l_bstyler][l_bsChecked])
 		
+		--adjust the autocast border
+		ac:SetWidth(fixscale(ThunderDB[l_ab][l_abPBusize])*2)
+		ac:SetHeight(fixscale(ThunderDB[l_ab][l_abPBusize])*2)
+		ac:ClearAllPoints()
+		ac:SetPoint("CENTER", bu, 0, 0)
+		
+		sh:SetWidth(fixscale(ThunderDB[l_ab][l_abPBusize]))
+		sh:SetHeight(fixscale(ThunderDB[l_ab][l_abPBusize]))
+		sh:ClearAllPoints()
+		sh:SetPoint("CENTER", bu, 0, 0)
+
 		--cut the default border of the icons and make them shiny
 		ic:SetTexCoord(0.1,0.9,0.1,0.9)
 		ic:SetPoint("TOPLEFT", bu, "TOPLEFT", fixscale(2), fixscale(-2))

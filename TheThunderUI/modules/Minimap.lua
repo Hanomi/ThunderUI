@@ -99,9 +99,11 @@ MiniMapBattlefieldFrame:SetPoint("TOP", Minimap, "TOP", 1, 6)
 ----------------------------------------------------------------------------------------
 -- Feedback Beta Button
 ----------------------------------------------------------------------------------------
---[[FeedbackUIButton:ClearAllPoints()
+if FeedbackUIButton ~= nil then
+FeedbackUIButton:ClearAllPoints()
 FeedbackUIButton:SetPoint("BOTTOMLEFT", Minimap, "BOTTOMRIGHT", 3, 5)
-FeedbackUIButton:SetAlpha(0.5)]]
+FeedbackUIButton:SetAlpha(0.5)
+end
 
 ----------------------------------------------------------------------------------------
 -- Random Group icon

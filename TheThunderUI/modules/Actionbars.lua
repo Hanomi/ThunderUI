@@ -3,11 +3,7 @@
 -- All credits of this - Zork
 ----------------------------------------------------------------------------------------
 
-local module = {}
-module.name = l_ab
-module.Init = function()
-	if not ThunderDB.modules[module.name] then return end
-	local settings = ThunderDB
+local _, class = UnitClass("player")
 
 ----------------------------------------------------------------------------------------
 -- Hide blizz menu
@@ -20,10 +16,183 @@ InterfaceOptionsActionBarsPanelRightTwo:Hide()
 InterfaceOptionsActionBarsPanelAlwaysShowActionBars:Hide()
 
 ----------------------------------------------------------------------------------------
--- Set points
+-- Create DragFunctionality
 ----------------------------------------------------------------------------------------
 
-local _, class = UnitClass("player")
+local rabsuserplaced = true
+local rabslocked = true
+
+applyDragFunctionality = function(f,userplaced,locked)
+	f:SetScript("OnDragStart", function(s) if IsAltKeyDown() and IsShiftKeyDown() then s:StartMoving() end end)
+	f:SetScript("OnDragStop", function(s) s:StopMovingOrSizing() end)
+	
+	local t = f:CreateTexture(nil,"OVERLAY",nil,6)
+	t:SetAllPoints(f)
+	t:SetTexture(0,1,0)
+	t:SetAlpha(0)
+	f.dragtexture = t		
+	f:SetHitRectInsets(-15,-15,-15,-15)
+	f:SetClampedToScreen(true)
+	
+	if not userplaced then
+		f:SetMovable(false)
+	else
+		f:SetMovable(true)
+		f:SetUserPlaced(true)
+		if not locked then
+			f.dragtexture:SetAlpha(0.2)
+			f:EnableMouse(true)
+			f:RegisterForDrag("LeftButton")
+			f:SetScript("OnEnter", function(s) 
+				GameTooltip:SetOwner(s, "ANCHOR_TOP")
+				GameTooltip:AddLine(s:GetName(), 0, 1, 0.5, 1, 1, 1)
+				GameTooltip:AddLine("Hold down ALT+SHIFT to drag!", 1, 1, 1, 1, 1, 1)
+				GameTooltip:Show()
+			end)
+			f:SetScript("OnLeave", function(s) GameTooltip:Hide() end)
+		else
+			f.dragtexture:SetAlpha(0)
+			f:EnableMouse(nil)
+			f:RegisterForDrag(nil)
+			f:SetScript("OnEnter", nil)
+			f:SetScript("OnLeave", nil)
+		end
+	end	
+end
+
+----------------------------------------------------------------------------------------
+-- Move SlashCmd
+----------------------------------------------------------------------------------------
+
+rABS_Frames = {
+	"rABS_StanceBar", --
+	"rABS_PetBar", --
+	"rABS_TotemBar",
+}	
+
+function rABS_unlockFrames()
+	print("rABS: Frames unlocked")
+	for _, v in pairs(rABS_Frames) do
+		f = _G[v]
+		if f and f:IsUserPlaced() then
+			--print(f:GetName())
+			f.dragtexture:SetAlpha(0.2)
+			f:EnableMouse(true)
+			f:RegisterForDrag("LeftButton")
+			f:SetScript("OnEnter", function(s) 
+				GameTooltip:SetOwner(s, "ANCHOR_TOP")
+				GameTooltip:AddLine(s:GetName(), 0, 1, 0.5, 1, 1, 1)
+				GameTooltip:AddLine("Hold down ALT+SHIFT to drag!", 1, 1, 1, 1, 1, 1)
+				GameTooltip:Show()
+			end)
+			f:SetScript("OnLeave", function(s) GameTooltip:Hide() end)
+		end
+	end
+end	
+
+function rABS_lockFrames()
+	print("rABS: frames locked")
+	for _, v in pairs(rABS_Frames) do
+		f = _G[v]
+		if f and f:IsUserPlaced() then
+			f.dragtexture:SetAlpha(0)
+			f:EnableMouse(nil)
+			f:RegisterForDrag(nil)
+			f:SetScript("OnEnter", nil)
+			f:SetScript("OnLeave", nil)
+		end
+	end
+end
+
+local function SlashCmd(cmd)		
+	if (cmd:match"unlock") then
+		rABS_unlockFrames()
+	elseif (cmd:match"lock") then
+		rABS_lockFrames()
+	else
+		print("|c0000FF00rActionBarStyler command list:|r")
+		print("|c0000FF00\/rabs lock|r, to lock all bars")
+		print("|c0000FF00\/rabs unlock|r, to unlock all bars")
+	end
+end
+
+SlashCmdList["rabs"] = SlashCmd;
+SLASH_rabs1 = "/rabs";
+
+----------------------------------------------------------------------------------------
+-- CreateBars and set standart points
+----------------------------------------------------------------------------------------
+
+--StanceBar
+local classbar = CreateFrame("Frame","rABS_StanceBar",UIParent, "SecureHandlerStateTemplate")
+classbar:SetWidth(30)
+classbar:SetHeight(30)
+classbar:SetPoint("TOPLEFT", 10, -10)
+classbar:SetScale(1)
+applyDragFunctionality(classbar,rabsuserplaced,rabslocked)
+ShapeshiftBarFrame:SetParent(classbar)
+ShapeshiftBarFrame:EnableMouse(false)
+
+--PetBar	
+local fbarpet = CreateFrame("Frame","rABS_PetBar",UIParent, "SecureHandlerStateTemplate")
+fbarpet:SetWidth(30)
+fbarpet:SetHeight(30)
+fbarpet:SetPoint("BOTTOM", -1, 102)
+fbarpet:SetScale(1)
+applyDragFunctionality(fbarpet,rabsuserplaced,rabslocked)
+PetActionBarFrame:SetParent(fbarpet)
+PetActionBarFrame:EnableMouse(false)
+
+--TotemBar
+if class == "SHAMAN" then
+	local tbar = _G['MultiCastActionBarFrame']
+
+	if tbar then
+
+		local holder = CreateFrame("Frame","rABS_TotemBar",UIParent, "SecureHandlerStateTemplate")
+		holder:SetWidth(tbar:GetWidth())
+		holder:SetHeight(tbar:GetHeight())
+		applyDragFunctionality(holder,rabsuserplaced,rabslocked)
+					
+		tbar:SetParent(holder)
+		tbar:SetAllPoints(holder)
+		
+		local function moveTotem(self,a1,af,a2,x,y,...)
+			if x ~= -1 then
+				--print('doing')
+				tbar:SetAllPoints(holder)
+			end
+		end
+					
+		hooksecurefunc(tbar, "SetPoint", moveTotem)	
+		holder:SetPoint("BOTTOM", -1, 140)	
+
+		holder:SetScale(0.85)
+		
+		tbar:SetMovable(true)
+		tbar:SetUserPlaced(true)
+		tbar:EnableMouse(false)
+	end
+end
+
+
+
+
+
+
+
+
+local module = {}
+module.name = l_ab
+module.Init = function()
+	if not ThunderDB.modules[module.name] then return end
+	local settings = ThunderDB
+
+
+
+----------------------------------------------------------------------------------------
+-- Set points
+----------------------------------------------------------------------------------------
 
 if ThunderDB[l_ab][l_abRB] > 2 then
 	ThunderDB[l_ab][l_abRB] = 2
@@ -33,9 +202,9 @@ local RABSpositions = {
 	[1] = { a = "BOTTOM",		x = fixscale(ThunderDB[l_ab][l_ab123x]),	y = fixscale(ThunderDB[l_ab][l_ab123y])},--fbar123
 	[2] = { a = "BOTTOMRIGHT",	x = fixscale(ThunderDB[l_ab][l_ab3x]),	y = fixscale(ThunderDB[l_ab][l_ab3y])},--fbar3
 	[3] = { a = "RIGHT",		x = fixscale(ThunderDB[l_ab][l_ab45x]),	y = fixscale(ThunderDB[l_ab][l_ab45y])},--fbar4
-	[6] = { a = "BOTTOM",		x = fixscale(ThunderDB[l_ab][l_abTx]),y = fixscale(ThunderDB[l_ab][l_abTy])},--totem
-	[9] = { a = "BOTTOM",		x = fixscale(ThunderDB[l_ab][l_abPx]),	y = fixscale(ThunderDB[l_ab][l_abPy])},--petbar
-	[10]= { a = "TOPLEFT",		x = fixscale(ThunderDB[l_ab][l_abSx]),y = fixscale(ThunderDB[l_ab][l_abSy])},--shapeshift
+--	[6] = { a = "BOTTOM",		x = fixscale(ThunderDB[l_ab][l_abTx]),y = fixscale(ThunderDB[l_ab][l_abTy])},--totem
+--	[9] = { a = "BOTTOM",		x = fixscale(ThunderDB[l_ab][l_abPx]),	y = fixscale(ThunderDB[l_ab][l_abPy])},--petbar
+--	[10]= { a = "TOPLEFT",		x = fixscale(ThunderDB[l_ab][l_abSx]),y = fixscale(ThunderDB[l_ab][l_abSy])},--shapeshift
 	[11]= { a = "BOTTOM",		x = fixscale(ThunderDB[l_ab][l_abVx]),	y = fixscale(ThunderDB[l_ab][l_abVy])},--my own vehicle exit button
 }
 
@@ -49,8 +218,9 @@ local FramesToHide = {
 	BonusActionBarFrame, 
 	VehicleMenuBar,
 	PossessBarFrame,
-}  
-  
+	MainMenuBarMaxLevelBar,
+}	
+	
 for _, f in pairs(FramesToHide) do
 	if f:GetObjectType() == "Frame" then
 		f:UnregisterAllEvents()
@@ -355,7 +525,7 @@ end
 fbar5:SetScale(1)
 
 MultiBarLeft:SetParent(fbar5)
-  
+	
 for i=1, 12 do
 	local bu5 = _G["MultiBarLeftButton"..i]
 	bu5:ClearAllPoints()
@@ -371,45 +541,45 @@ end
 if ThunderDB[l_ab][l_abMR] then
 	if ThunderDB[l_ab][l_abThird] then
 		local function lighton(alpha)
-		  if MultiBarLeft:IsShown() then
+			if MultiBarLeft:IsShown() then
 			for i=1, 12 do
-			  local pb = _G["MultiBarLeftButton"..i]
-			  pb:SetAlpha(alpha)
+				local pb = _G["MultiBarLeftButton"..i]
+				pb:SetAlpha(alpha)
 			end
-		  end
-		end    
+			end
+		end		
 		fbar5:EnableMouse(true)
 		fbar5:SetScript("OnEnter", function(self) lighton(1) end)
-		fbar5:SetScript("OnLeave", function(self) lighton(0) end)  
+		fbar5:SetScript("OnLeave", function(self) lighton(0) end)	
 		for i=1, 12 do
-		  local pb = _G["MultiBarLeftButton"..i]
-		  pb:SetAlpha(0)
-		  pb:HookScript("OnEnter", function(self) lighton(1) end)
-		  pb:HookScript("OnLeave", function(self) lighton(0) end)
+			local pb = _G["MultiBarLeftButton"..i]
+			pb:SetAlpha(0)
+			pb:HookScript("OnEnter", function(self) lighton(1) end)
+			pb:HookScript("OnLeave", function(self) lighton(0) end)
 		end
 	else
 		local function lighton(alpha)
-		  if MultiBarLeft:IsShown() then
+			if MultiBarLeft:IsShown() then
 			for i=1, 12 do
-			  local pb = _G["MultiBarLeftButton"..i]
-			  pb:SetAlpha(alpha)
+				local pb = _G["MultiBarLeftButton"..i]
+				pb:SetAlpha(alpha)
 			end
-		  end
+			end
 			if MultiBarRight:IsShown() then
 				for i=1, 12 do
 					local pb = _G["MultiBarRightButton"..i]
 					pb:SetAlpha(alpha)
 				end
 			end
-		end    
+		end		
 		mousebar:EnableMouse(true)
 		mousebar:SetScript("OnEnter", function(self) lighton(1) end)
-		mousebar:SetScript("OnLeave", function(self) lighton(0) end)  
+		mousebar:SetScript("OnLeave", function(self) lighton(0) end)	
 		for i=1, 12 do
-		  local pb = _G["MultiBarLeftButton"..i]
-		  pb:SetAlpha(0)
-		  pb:HookScript("OnEnter", function(self) lighton(1) end)
-		  pb:HookScript("OnLeave", function(self) lighton(0) end)
+			local pb = _G["MultiBarLeftButton"..i]
+			pb:SetAlpha(0)
+			pb:HookScript("OnEnter", function(self) lighton(1) end)
+			pb:HookScript("OnLeave", function(self) lighton(0) end)
 		end
 		for i=1, 12 do
 			local pb = _G["MultiBarRightButton"..i]
@@ -434,103 +604,52 @@ end
 -- Class Bar - Stances, Auras and etc
 ----------------------------------------------------------------------------------------
 
-if not ThunderDB[l_ab][l_abHS] then
-  
+if ThunderDB[l_ab][l_abHS] then
+	classbar:Hide()
+else
+	
 	local shapenum = NUM_SHAPESHIFT_SLOTS
-    
-    local classbar = CreateFrame("Frame","rABS_StanceBar",UIParent, "SecureHandlerStateTemplate")
-    classbar:SetWidth(ThunderDB[l_ab][l_abSBusize]*shapenum+ThunderDB[l_ab][l_abOffset]*(shapenum-1))
-    classbar:SetHeight(ThunderDB[l_ab][l_abSBusize])
-    classbar:SetPoint(RABSpositions[10].a,RABSpositions[10].x,RABSpositions[10].y)
-    
-if ThunderDB[l_ab][l_abTestMode] then
-	classbar:SetBackdrop({bgFile = "Interface/Tooltips/UI-Tooltip-Background", edgeFile = "", tile = true, tileSize = 16, edgeSize = 16, insets = { left = 0, right = 0, top = 0, bottom = 0 }})
-end
-classbar:SetScale(1)
-  
-    ShapeshiftBarFrame:SetParent(classbar)
-    
-    for i=1, shapenum do
-      local classbu = _G["ShapeshiftButton"..i]
-      classbu:SetSize(ThunderDB[l_ab][l_abSBusize], ThunderDB[l_ab][l_abSBusize])
-      classbu:ClearAllPoints()
-      if i == 1 then
-        classbu:SetPoint("BOTTOMLEFT", classbar, 0,0)
-      else
-        local previous = _G["ShapeshiftButton"..i-1]      
-        classbu:SetPoint("LEFT", previous, "RIGHT", ThunderDB[l_ab][l_abOffset], 0)
-      end
-    end
-    
-    local function rABS_MoveShapeshift()
-      ShapeshiftButton1:SetPoint("BOTTOMLEFT", classbar, 0,0)
-    end
-    hooksecurefunc("ShapeshiftBar_Update", rABS_MoveShapeshift);
-    
-    
-    if ThunderDB[l_ab][l_abMS] then    
-      local function lighton(alpha)
-        if ShapeshiftBarFrame:IsShown() then
-          for i=1, shapenum do
-            local pb = _G["ShapeshiftButton"..i]
-            pb:SetAlpha(alpha)
-          end
-        end
-      end    
-      classbar:EnableMouse(true)
-      classbar:SetScript("OnEnter", function(self) lighton(1) end)
-      classbar:SetScript("OnLeave", function(self) lighton(0) end)  
-      for i=1, shapenum do
-        local pb = _G["ShapeshiftButton"..i]
-        pb:SetAlpha(0)
-        pb:HookScript("OnEnter", function(self) lighton(1) end)
-        pb:HookScript("OnLeave", function(self) lighton(0) end)
-      end    
-    end
-end
 
-----------------------------------------------------------------------------------------
--- Totem Bar
-----------------------------------------------------------------------------------------
-
-if class == "SHAMAN" then
-
-    local tbar = _G['MultiCastActionBarFrame']
-
-    if tbar then
-
-      local holder = CreateFrame("Frame","rABS_TotemBar",UIParent, "SecureHandlerStateTemplate")
-      holder:SetWidth(tbar:GetWidth())
-      holder:SetHeight(tbar:GetHeight())
-if ThunderDB[l_ab][l_abTestMode] then
-	tbar:SetBackdrop({bgFile = "Interface/Tooltips/UI-Tooltip-Background", edgeFile = "", tile = true, tileSize = 16, edgeSize = 16, insets = { left = 0, right = 0, top = 0, bottom = 0 }})
-end
-            
-      tbar:SetParent(holder)
-      tbar:SetAllPoints(holder)
-      
-      local function moveTotem(self,a1,af,a2,x,y,...)
-        if x ~= RABSpositions[6].x then
-    --      print('doing')
-          tbar:SetAllPoints(holder)
-        end
-      end
-            
-      hooksecurefunc(tbar, "SetPoint", moveTotem)
-	if ThunderDB[l_ab][l_abThird] then
-		holder:SetPoint(RABSpositions[6].a,RABSpositions[6].x,RABSpositions[6].y+44)
-	else
-		holder:SetPoint(RABSpositions[6].a,RABSpositions[6].x,RABSpositions[6].y)
-	end
-
-      holder:SetScale(0.8)
-      
-      tbar:SetMovable(true)
-      tbar:SetUserPlaced(true)
-      tbar:EnableMouse(false)
-
-    end
-  
+		classbar:SetWidth(ThunderDB[l_ab][l_abSBusize]*shapenum+ThunderDB[l_ab][l_abOffset]*(shapenum-1))
+		classbar:SetHeight(ThunderDB[l_ab][l_abSBusize])
+		
+		for i=1, shapenum do
+			local classbu = _G["ShapeshiftButton"..i]
+			classbu:SetSize(ThunderDB[l_ab][l_abSBusize], ThunderDB[l_ab][l_abSBusize])
+			classbu:ClearAllPoints()
+			if i == 1 then
+				classbu:SetPoint("BOTTOMLEFT", classbar, 0,0)
+			else
+				local previous = _G["ShapeshiftButton"..i-1]			
+				classbu:SetPoint("LEFT", previous, "RIGHT", ThunderDB[l_ab][l_abOffset], 0)
+			end
+		end
+		
+		local function rABS_MoveShapeshift()
+			ShapeshiftButton1:SetPoint("BOTTOMLEFT", classbar, 0,0)
+		end
+		hooksecurefunc("ShapeshiftBar_Update", rABS_MoveShapeshift);
+		
+		
+		if ThunderDB[l_ab][l_abMS] then		
+			local function lighton(alpha)
+				if ShapeshiftBarFrame:IsShown() then
+					for i=1, shapenum do
+						local pb = _G["ShapeshiftButton"..i]
+						pb:SetAlpha(alpha)
+					end
+				end
+			end		
+			classbar:EnableMouse(true)
+			classbar:SetScript("OnEnter", function(self) lighton(1) end)
+			classbar:SetScript("OnLeave", function(self) lighton(0) end)	
+			for i=1, shapenum do
+				local pb = _G["ShapeshiftButton"..i]
+				pb:SetAlpha(0)
+				pb:HookScript("OnEnter", function(self) lighton(1) end)
+				pb:HookScript("OnLeave", function(self) lighton(0) end)
+			end		
+		end
 end
 
 ----------------------------------------------------------------------------------------
@@ -539,37 +658,24 @@ end
 
 local petnum = NUM_PET_ACTION_SLOTS
 
-local fbarpet = CreateFrame("Frame","rABS_PetBar",UIParent, "SecureHandlerStateTemplate")
-fbarpet:SetWidth(ThunderDB[l_ab][l_abBusize]*petnum+ThunderDB[l_ab][l_abOffset]*(petnum-1))
-fbarpet:SetHeight(ThunderDB[l_ab][l_abBusize])
-if ThunderDB[l_ab][l_abThird] then
-	fbarpet:SetPoint(RABSpositions[9].a,RABSpositions[9].x,RABSpositions[9].y+ThunderDB[l_ab][l_abBusize]+ThunderDB[l_ab][l_abOffset])
-else
-	fbarpet:SetPoint(RABSpositions[9].a,RABSpositions[9].x,RABSpositions[9].y)
-end
-	
-if ThunderDB[l_ab][l_abTestMode] then
-	fbarpet:SetBackdrop({bgFile = "Interface/Tooltips/UI-Tooltip-Background", edgeFile = "", tile = true, tileSize = 16, edgeSize = 16, insets = { left = 0, right = 0, top = 0, bottom = 0 }})
-end
-fbarpet:SetScale(1)
-  
-PetActionBarFrame:SetParent(fbarpet)
+fbarpet:SetWidth(ThunderDB[l_ab][l_abPBusize]*petnum+ThunderDB[l_ab][l_abOffset]*(petnum-1))
+fbarpet:SetHeight(ThunderDB[l_ab][l_abPBusize])
 
 for i=1, petnum do
 	local petbu = _G["PetActionButton"..i]
 	local cd = _G["PetActionButton"..i.."Cooldown"]
-	petbu:SetSize(ThunderDB[l_ab][l_abBusize], ThunderDB[l_ab][l_abBusize])
+	petbu:SetSize(ThunderDB[l_ab][l_abPBusize], ThunderDB[l_ab][l_abPBusize])
 	petbu:ClearAllPoints()
 	if i == 1 then
 		petbu:SetPoint("BOTTOMLEFT", fbarpet, 0,0)
 	else
-		local previous = _G["PetActionButton"..i-1]      
+		local previous = _G["PetActionButton"..i-1]			
 		petbu:SetPoint("LEFT", previous, "RIGHT", ThunderDB[l_ab][l_abOffset], 0)
 	end
 	cd:SetAllPoints(petbu)
 end
 
-if ThunderDB[l_ab][l_abMP] then    
+if ThunderDB[l_ab][l_abMP] then		
 	local function lighton(alpha)
 	if PetActionBarFrame:IsShown() then
 	for i=1, petnum do
@@ -577,16 +683,16 @@ if ThunderDB[l_ab][l_abMP] then
 	pb:SetAlpha(alpha)
 	end
 	end
-	end    
+	end		
 	fbarpet:EnableMouse(true)
 	fbarpet:SetScript("OnEnter", function(self) lighton(1) end)
-	fbarpet:SetScript("OnLeave", function(self) lighton(0) end)  
+	fbarpet:SetScript("OnLeave", function(self) lighton(0) end)	
 	for i=1, petnum do
 	local pb = _G["PetActionButton"..i]
 	pb:SetAlpha(0)
 	pb:HookScript("OnEnter", function(self) lighton(1) end)
 	pb:HookScript("OnLeave", function(self) lighton(0) end)
-	end    
+	end		
 end
 
 ----------------------------------------------------------------------------------------
@@ -597,12 +703,12 @@ local fbarveb = CreateFrame("Frame","rABS_VehicleExit",UIParent, "SecureHandlerS
 fbarveb:SetHeight(ThunderDB[l_ab][l_abSBusize])
 fbarveb:SetWidth(ThunderDB[l_ab][l_abSBusize])
 fbarveb:SetPoint(RABSpositions[11].a,RABSpositions[11].x,RABSpositions[11].y)
-  
+	
 if ThunderDB[l_ab][l_abTestMode] then
 	fbarveb:SetBackdrop({bgFile = "Interface/Tooltips/UI-Tooltip-Background", edgeFile = "", tile = true, tileSize = 16, edgeSize = 16, insets = { left = 0, right = 0, top = 0, bottom = 0 }})
 end
 fbarveb:SetScale(1)
-  
+	
 local veb = CreateFrame("BUTTON", nil, fbarveb, "SecureActionButtonTemplate");
 veb:SetAllPoints(fbarveb)
 veb:RegisterForClicks("AnyUp")
@@ -621,7 +727,7 @@ local arg1 = ...;
 	elseif(((event=="UNIT_EXITING_VEHICLE") or (event=="UNIT_EXITED_VEHICLE")) and arg1 == "player") then
 		veb:SetAlpha(0)
 	end
-end)  
+end)	
 veb:SetAlpha(0)
 
 end

@@ -131,7 +131,8 @@ local PostUpdateHealth = function(health, unit, min, max)
 		end
 	else
 		if ThunderDB[l_uf][l_ufcc] then
-			local r, g, b, t
+			local r, g, b = .84, .75, .65
+			local t
 			local reaction = UnitReaction(unit, "player")
 			if(UnitIsPlayer(unit)) then
 				local _, class = UnitClass(unit)
@@ -196,7 +197,8 @@ local PreUpdatePower = function(power, unit)
 			power.bg:SetVertexColor(r*ThunderDB[l_uf][l_ufuicont], g*ThunderDB[l_uf][l_ufuicont], b*ThunderDB[l_uf][l_ufuicont])
 		end
 	else
-		local r, g, b, t
+		local r, g, b = .84, .75, .65
+		local t
 		local reaction = UnitReaction(unit, "player")
 		if(UnitIsPlayer(unit)) then
 			local _, class = UnitClass(unit)
@@ -220,7 +222,7 @@ local PostUpdatePower = function(power, unit, min, max)
 	local self = power:GetParent()
 
 	local pType, pToken = UnitPowerType(unit)
-	local color = thundercolors.power[pToken]
+	local color = thundercolors.power[pToken] or {0.84, 0.75, 0.65}
 
 	if color then
 		power.value:SetTextColor(color[1], color[2], color[3])
@@ -466,7 +468,7 @@ local UnitSpecific = {
 			end
 		end
 
-		if IsAddOnLoaded("oUF_Experience") then
+		if UnitLevel("player") < MAX_PLAYER_LEVEL then
 			self.Experience = CreateFrame('StatusBar', nil, self)
 			self.Experience:SetPoint('BOTTOMLEFT', UIParent, 'BOTTOM', -185, 10)
 			self.Experience:SetPoint('BOTTOMRIGHT', UIParent, 'BOTTOM', 185, 10)
@@ -491,7 +493,7 @@ local UnitSpecific = {
 			self.Experience.bg:SetBackdropBorderColor(unpack(ThunderDB[l_main][l_bgcolor]))
 		end
 
-		if(IsAddOnLoaded("oUF_Reputation")) and UnitLevel("player") == MAX_PLAYER_LEVEL then
+		if UnitLevel("player") == MAX_PLAYER_LEVEL then
 			self.Reputation = CreateFrame('StatusBar', nil, self)
 			self.Reputation:SetPoint('BOTTOMLEFT', UIParent, 'BOTTOM', -185, 10)
 			self.Reputation:SetPoint('BOTTOMRIGHT', UIParent, 'BOTTOM', 185, 10)
@@ -850,11 +852,11 @@ if (unit == "player" or unit == "target" or unit == "focus") and ThunderDB[l_uf]
 		self.Castbar:SetPoint("TOPLEFT", UIParent, "CENTER", fixscale(-150), fixscale(210))
 		self.Castbar:SetPoint("BOTTOMRIGHT", UIParent, "CENTER", fixscale(150), fixscale(190))
 	elseif unit == "player" and ThunderDB[l_uf][l_ufcastmaxi] then
-		self.Castbar:SetPoint("TOPLEFT", UIParent, "BOTTOM", fixscale(-112), fixscale(ThunderDB[l_uf][l_ufcastmaxiYpos]+18))
+		self.Castbar:SetPoint("TOPLEFT", UIParent, "BOTTOM", fixscale(-110), fixscale(ThunderDB[l_uf][l_ufcastmaxiYpos]+20))
 		self.Castbar:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOM", fixscale(140), fixscale(ThunderDB[l_uf][l_ufcastmaxiYpos]))
 	elseif unit == "target" and ThunderDB[l_uf][l_ufcastmaxi] then
-		self.Castbar:SetPoint("TOPLEFT", self, "TOPLEFT", 3, 98)
-		self.Castbar:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", -28, 80)	
+		self.Castbar:SetPoint("TOPLEFT", self, "TOPLEFT", 3, ThunderDB[l_uf][l_ufausize]*3+30)
+		self.Castbar:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", -30, ThunderDB[l_uf][l_ufausize]*3+10)	
 	else
 		self.Castbar:SetParent(self.Namepanel)
 		self.Castbar:SetPoint("TOPLEFT", self.Namepanel, "TOPLEFT", 1, -1)
@@ -901,8 +903,8 @@ if ThunderDB[l_uf][l_ufcasticon] == true and (unit == "player" or unit == "targe
 		self.Castbar.Icon:SetHeight(25)
 		self.Castbar.Icon:SetWidth(25)
 	else
-		self.Castbar.Icon:SetHeight(18)
-		self.Castbar.Icon:SetWidth(18)
+		self.Castbar.Icon:SetHeight(20)
+		self.Castbar.Icon:SetWidth(20)
 	end
 	self.Castbar.Icon:SetTexCoord(.1, .9, .1, .9)
 
@@ -1086,11 +1088,11 @@ if ThunderDB[l_uf][l_ufauras] then
 		self.Debuffs:SetHeight(100)
 		self.Debuffs:SetWidth(ThunderDB[l_uf][l_ufwA])
 		if ThunderDB[l_uf][l_ufautop] then
-			self.Debuffs:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", -1, ThunderDB[l_uf][l_ufausize]+6)
+			self.Debuffs:SetPoint("BOTTOMRIGHT", self, "TOPRIGHT", -1, ThunderDB[l_uf][l_ufausize]+4)
 			self.Debuffs.initialAnchor = "BOTTOMRIGHT"
 			self.Debuffs['growth-y'] = 'UP'
 		else
-			self.Debuffs:SetPoint("TOPRIGHT", self, "BOTTOMRIGHT", -1, -ThunderDB[l_uf][l_ufausize]-6)
+			self.Debuffs:SetPoint("TOPRIGHT", self, "BOTTOMRIGHT", -1, -ThunderDB[l_uf][l_ufausize]-4)
 			self.Debuffs.initialAnchor = "TOPRIGHT"
 			self.Debuffs['growth-y'] = 'DOWN'
 		end

@@ -2,8 +2,8 @@
 ## Title: |cff9DC7CCThe Thunder UI v.5|r
 ## Notes: Minimalistic UI.
 ## Author: Hanomi
-## Version: 5.0
-## Credits: Monolit, Fernir, Tukz, Tekkub, ALZA, Shestack, Caellian, Allez, Haste, Industrial, Nightcracker, p3lim, Zork, Tuller, Freebaser, Roth and other.
+## Version: 5.4
+## Credits: Monolit, Wildbreath, Tukz, Tekkub, ALZA, Shestack, Caellian, Allez, Haste, Industrial, Nightcracker, p3lim, Zork, Tuller, Freebaser, Roth and other.
 ## SavedVariables: ThunderDB, tgoldDB, bb08df87101dd7f2161e5b77cf750f753c58ef1b
 ## X-oUF: oUF
 

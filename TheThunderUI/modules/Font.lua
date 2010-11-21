@@ -23,7 +23,7 @@ eventframe:RegisterEvent("PLAYER_ENTERING_WORLD")
 eventframe:SetScript("OnEvent", function(self, event, addon)
 	
    local NORMAL     = ThunderDB[l_main][l_font]
-	local COMBAT     = ThunderDB[l_main][l_font]
+--	local COMBAT     = ThunderDB[l_main][l_font]
 	local NUMBER     = ThunderDB[l_main][l_font]
 	local fSize      = ThunderDB[l_main][l_fontsize] or 11
 
@@ -32,7 +32,7 @@ eventframe:SetScript("OnEvent", function(self, event, addon)
 
 	UNIT_NAME_FONT     = NORMAL
 	NAMEPLATE_FONT     = NORMAL
-	DAMAGE_TEXT_FONT   = COMBAT
+--	DAMAGE_TEXT_FONT   = COMBAT
 	STANDARD_TEXT_FONT = NORMAL
 
 	-- Base fonts
@@ -59,7 +59,7 @@ eventframe:SetScript("OnEvent", function(self, event, addon)
 	SetFont(SystemFont_Tiny,                    NORMAL, fSize)
 	SetFont(Tooltip_Med,                        NORMAL, fSize)
 	SetFont(Tooltip_Small,                      NORMAL, fSize)
-	SetFont(CombatTextFont,                     COMBAT, 40, "OUTLINE") -- number here just increase the font quality.
+--	SetFont(CombatTextFont,                     COMBAT, 40, "OUTLINE") -- number here just increase the font quality.
 
 	hooksecurefunc("PlayerTitleFrame_UpdateTitles", FixTitleFont)
 	FixTitleFont()

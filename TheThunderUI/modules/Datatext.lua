@@ -54,7 +54,7 @@ if ThunderDB[l_data][l_dfpsms] > 0 then
 	local Stat1 = CreateFrame("Frame")
 
 	local Text  = UIParent:CreateFontString(nil, "OVERLAY")
-	Text:SetFont(ThunderDB[l_data][l_dfont], ThunderDB[l_data][l_dfontsize], "OUTLINE")
+	Text:SetFont(ThunderDB[l_data][l_dfont], ThunderDB[l_data][l_dfontsize])
 	panel_setpoint(ThunderDB[l_data][l_dfpsms], Text)
 
 
@@ -90,7 +90,7 @@ if ThunderDB[l_data][l_dmem] > 0 then
 	Stat2:EnableMouse(true)
 
 	local Text  = UIParent:CreateFontString(nil, "OVERLAY")
-	Text:SetFont(ThunderDB[l_data][l_dfont], ThunderDB[l_data][l_dfontsize], "OUTLINE")
+	Text:SetFont(ThunderDB[l_data][l_dfont], ThunderDB[l_data][l_dfontsize])
 	panel_setpoint(ThunderDB[l_data][l_dmem], Text)
 
 
@@ -218,7 +218,7 @@ if ThunderDB[l_data][l_dguild] > 0 then
 	local ttsubh = {r=0.75,g=0.9,b=1}
 
 	local Text  = UIParent:CreateFontString(nil, "OVERLAY")
-	Text:SetFont(ThunderDB[l_data][l_dfont], ThunderDB[l_data][l_dfontsize], "OUTLINE")
+	Text:SetFont(ThunderDB[l_data][l_dfont], ThunderDB[l_data][l_dfontsize])
 	panel_setpoint(ThunderDB[l_data][l_dguild], Text)
 
 
@@ -304,7 +304,7 @@ if ThunderDB[l_data][l_dbags] > 0 then
     Stat4:EnableMouse(true)
 
     local Text  = UIParent:CreateFontString(nil, "OVERLAY")
-    Text:SetFont(ThunderDB[l_data][l_dfont], ThunderDB[l_data][l_dfontsize], "OUTLINE")
+    Text:SetFont(ThunderDB[l_data][l_dfont], ThunderDB[l_data][l_dfontsize])
     panel_setpoint(ThunderDB[l_data][l_dbags], Text)
 
 
@@ -337,7 +337,7 @@ local Stat5 = CreateFrame("Frame")
 	local ttsubh = {r=0.75,g=0.9,b=1}
 
 	local Text  = UIParent:CreateFontString(nil, "LOW")
-	Text:SetFont(ThunderDB[l_data][l_dfont], ThunderDB[l_data][l_dfontsize], "OUTLINE")
+	Text:SetFont(ThunderDB[l_data][l_dfont], ThunderDB[l_data][l_dfontsize])
 	panel_setpoint(ThunderDB[l_data][l_dfriends], Text)
 
 
@@ -432,7 +432,7 @@ if ThunderDB[l_data][l_darmor] > 0 then
 	Stat6:EnableMouse(true)
 
 	local Text  = UIParent:CreateFontString(nil, "OVERLAY")
-	Text:SetFont(ThunderDB[l_data][l_dfont], ThunderDB[l_data][l_dfontsize], "OUTLINE")
+	Text:SetFont(ThunderDB[l_data][l_dfont], ThunderDB[l_data][l_dfontsize])
 	panel_setpoint(ThunderDB[l_data][l_darmor], Text)
 
 
@@ -494,7 +494,7 @@ if ThunderDB[l_data][l_dgold] > 0 then
 	Stat7:EnableMouse(true)
 
 	local Text  = UIParent:CreateFontString(nil, "OVERLAY")
-	Text:SetFont(ThunderDB[l_data][l_dfont], ThunderDB[l_data][l_dfontsize], "OUTLINE")
+	Text:SetFont(ThunderDB[l_data][l_dfont], ThunderDB[l_data][l_dfontsize])
 	panel_setpoint(ThunderDB[l_data][l_dgold], Text)
 
 
@@ -646,7 +646,7 @@ if ThunderDB[l_data][l_dtime] > 0 then
    Stat8:EnableMouse(true)
 
    local Text  = UIParent:CreateFontString(nil, "OVERLAY")
-   Text:SetFont(ThunderDB[l_data][l_dfont], ThunderDB[l_data][l_dfontsize], "OUTLINE")
+   Text:SetFont(ThunderDB[l_data][l_dfont], ThunderDB[l_data][l_dfontsize])
    panel_setpoint(ThunderDB[l_data][l_dtime], Text)
    
    local int = 1

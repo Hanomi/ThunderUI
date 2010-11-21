@@ -105,7 +105,7 @@ if (not oUF.Tags['thunder:color']) then
 				local c = thundercolors.happiness[GetPetHappiness()]
 				return string.format("|cff%02x%02x%02x", c[1] * 255, c[2] * 255, c[3] * 255)
 			elseif (UnitIsPlayer(unit)) then
-				local c =  oUF.colors.class[class]
+				local c =  oUF.colors.class[class] or {0.84, 0.75, 0.65}
 				return string.format("|cff%02x%02x%02x", c[1] * 255, c[2] * 255, c[3] * 255)
 			elseif (reaction) then
 				local c =  oUF.colors.reaction[reaction]

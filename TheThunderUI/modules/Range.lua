@@ -4,12 +4,11 @@
 		Derived from RedRange with negligable improvements to CPU usage
 --]]
 
---[[ locals and speed ]]--
-
+--locals and speed
 local _G = _G
-local UPDATE_DELAY = 0.1
+local UPDATE_DELAY = 0.15
 local ATTACK_BUTTON_FLASH_TIME = ATTACK_BUTTON_FLASH_TIME
-
+local SPELL_POWER_HOLY_POWER = SPELL_POWER_HOLY_POWER
 local ActionButton_GetPagedID = ActionButton_GetPagedID
 local ActionButton_IsFlashing = ActionButton_IsFlashing
 local ActionHasRange = ActionHasRange
@@ -18,17 +17,104 @@ local IsUsableAction = IsUsableAction
 local HasAction = HasAction
 
 
+--code for handling defaults
+local function removeDefaults(tbl, defaults)
+	for k, v in pairs(defaults) do
+		if type(tbl[k]) == 'table' and type(v) == 'table' then
+			removeDefaults(tbl[k], v)
+			if next(tbl[k]) == nil then
+				tbl[k] = nil
+			end
+		elseif tbl[k] == v then
+			tbl[k] = nil
+		end
+	end
+	return tbl
+end
+
+local function copyDefaults(tbl, defaults)
+	for k, v in pairs(defaults) do
+		if type(v) == 'table' then
+			tbl[k] = copyDefaults(tbl[k] or {}, v)
+		elseif tbl[k] == nil then
+			tbl[k] = v
+		end
+	end
+	return tbl
+end
+
+local function timer_Create(parent, interval)
+	local updater = parent:CreateAnimationGroup()
+	updater:SetLooping('NONE')
+	updater:SetScript('OnFinished', function(self)
+		if parent:Update() then
+			parent:Start(interval)
+		end
+	end)
+
+	local a = updater:CreateAnimation('Animation'); a:SetOrder(1)
+
+	parent.Start = function(self)
+		self:Stop()
+		a:SetDuration(interval)
+		updater:Play()
+		return self
+	end
+
+	parent.Stop = function(self)
+		if updater:IsPlaying() then
+			updater:Stop()
+		end
+		return self
+	end
+
+	parent.Active = function(self)
+		return updater:IsPlaying()
+	end
+
+	return parent
+end
+
+--stuff for holy power detection
+local PLAYER_IS_PALADIN = select(2, UnitClass('player')) == 'PALADIN'
+local HAND_OF_LIGHT = GetSpellInfo(90174)
+local isHolyPowerAbility
+do
+	local HOLY_POWER_SPELLS = {
+		[85256] = GetSpellInfo(85256), --Templar's Verdict
+		[53385] = GetSpellInfo(53385), --Divine Storm
+		[53600] = GetSpellInfo(53600), --Shield of the Righteous
+		[84963] = GetSpellInfo(84963), --Inquisition
+		[85673] = GetSpellInfo(85673), --Word of Glory
+	}
+
+	isHolyPowerAbility = function(actionId)
+		local actionType, id = GetActionInfo(actionId)
+		if actionType == 'macro' then
+			local macroSpell = GetMacroSpell(id)
+			if macroSpell then
+				for spellId, spellName in pairs(HOLY_POWER_SPELLS) do
+					if macroSpell == spellName then
+						return true
+					end
+				end
+			end
+		else
+			return HOLY_POWER_SPELLS[id]
+		end
+		return false
+	end
+end
+
+
 --[[ The main thing ]]--
 
-local tullaRange = CreateFrame('Frame', 'tullaRange', UIParent); tullaRange:Hide()
+local tullaRange = timer_Create(CreateFrame('Frame', 'tullaRange'), UPDATE_DELAY)
 
 function tullaRange:Load()
-	self:SetScript('OnUpdate', self.OnUpdate)
-	self:SetScript('OnHide', self.OnHide)
 	self:SetScript('OnEvent', self.OnEvent)
-	self.elapsed = 0
-
 	self:RegisterEvent('PLAYER_LOGIN')
+	self:RegisterEvent('PLAYER_LOGOUT')
 end
 
 
@@ -41,26 +127,13 @@ function tullaRange:OnEvent(event, ...)
 	end
 end
 
-function tullaRange:OnUpdate(elapsed)
-	if self.elapsed < UPDATE_DELAY then
-		self.elapsed = self.elapsed + elapsed
-	else
-		self:Update()
-	end
-end
-
-function tullaRange:OnHide()
-	self.elapsed = 0
-end
-
-
 --[[ Game Events ]]--
 
 function tullaRange:PLAYER_LOGIN()
 	if not TULLARANGE_COLORS then
-		self:LoadDefaults()
+		TULLARANGE_COLORS = {}
 	end
-	self.colors = TULLARANGE_COLORS
+	self.colors = copyDefaults(TULLARANGE_COLORS, self:GetDefaults())
 
 	--add options loader
 	local f = CreateFrame('Frame', nil, InterfaceOptionsFrame)
@@ -76,12 +149,15 @@ function tullaRange:PLAYER_LOGIN()
 	hooksecurefunc('ActionButton_Update', self.OnButtonUpdate)
 end
 
+function tullaRange:PLAYER_LOGOUT()
+	removeDefaults(TULLARANGE_COLORS, self:GetDefaults())
+end
+
 
 --[[ Actions ]]--
 
 function tullaRange:Update()
-	self:UpdateButtons(self.elapsed)
-	self.elapsed = 0
+	return self:UpdateButtons(UPDATE_DELAY)
 end
 
 function tullaRange:ForceColorUpdate()
@@ -90,23 +166,24 @@ function tullaRange:ForceColorUpdate()
 	end
 end
 
-function tullaRange:UpdateShown()
+function tullaRange:UpdateActive()
 	if next(self.buttonsToUpdate) then
-		self:Show()
+		if not self:Active() then
+			self:Start()
+		end
 	else
-		self:Hide()
+		self:Stop()
 	end
 end
 
 function tullaRange:UpdateButtons(elapsed)
-	if not next(self.buttonsToUpdate) then
-		self:Hide()
-		return
+	if next(self.buttonsToUpdate) then
+		for button in pairs(self.buttonsToUpdate) do
+			self:UpdateButton(button, elapsed)
+		end
+		return true
 	end
-
-	for button in pairs(self.buttonsToUpdate) do
-		self:UpdateButton(button, elapsed)
-	end
+	return false
 end
 
 function tullaRange:UpdateButton(button, elapsed)
@@ -116,12 +193,12 @@ end
 
 function tullaRange:UpdateButtonStatus(button)
 	local action = ActionButton_GetPagedID(button)
-	if not(button:IsVisible() and action and HasAction(action) and ActionHasRange(action)) then
-		self.buttonsToUpdate[button] = nil
-	else
+	if button:IsVisible() and action and HasAction(action) and ActionHasRange(action) then
 		self.buttonsToUpdate[button] = true
+	else
+		self.buttonsToUpdate[button] = nil
 	end
-	self:UpdateShown()
+	self:UpdateActive()
 end
 
 
@@ -165,6 +242,9 @@ function tullaRange.UpdateButtonUsable(button)
 		--but out of range
 		if IsActionInRange(action) == 0 then
 			tullaRange.SetButtonColor(button, 'oor')
+		--a holy power abilty, and we're less than 3 Holy Power
+		elseif PLAYER_IS_PALADIN and isHolyPowerAbility(action) and not(UnitPower('player', SPELL_POWER_HOLY_POWER) == 3 or UnitBuff('player', HAND_OF_LIGHT)) then
+			tullaRange.SetButtonColor(button, 'ooh')
 		--in range
 		else
 			tullaRange.SetButtonColor(button, 'normal')
@@ -218,17 +298,18 @@ end
 
 --[[ Configuration ]]--
 
-function tullaRange:LoadDefaults()
-	TULLARANGE_COLORS = {
+function tullaRange:GetDefaults()
+	return {
 		normal = {1, 1, 1},
 		oor = {1, 0.3, 0.1},
 		oom = {0.1, 0.3, 1},
+		ooh = {0.45, 0.45, 1},
 	}
 end
 
 function tullaRange:Reset()
-	self:LoadDefaults()
-	self.colors = TULLARANGE_COLORS
+	TULLARANGE_COLORS = {}
+	self.colors = copyDefaults(TULLARANGE_COLORS, self:GetDefaults())
 
 	self:ForceColorUpdate()
 end

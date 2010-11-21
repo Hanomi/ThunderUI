@@ -1,5 +1,5 @@
 ﻿----------------------------------------------------------------------------------------
--- Ingame config and modules system by Fernir
+-- Ingame config and modules system by Wildbreath(aka Fernir)
 ----------------------------------------------------------------------------------------
 
 addonName, ns = ...
@@ -28,22 +28,17 @@ DefaultSettings = {
 		[l_abTestMode] = false,
 		[l_abInvert] = true,
 		[l_abThird] = false,
-		[l_ab123x] = -1,
+		[l_ab123x] = 0,
 		[l_ab123y] = 26,
 		[l_ab3x] = -304,
 		[l_ab3y] = 26,
 		[l_ab45x] = -10,
 		[l_ab45y] = 0,
-		[l_abTx] = -1,
-		[l_abTy] = 124,
-		[l_abPx] = -1,
-		[l_abPy] = 102,
-		[l_abSx] = 10,
-		[l_abSy] = -10,
 		[l_abVx] = 185,
 		[l_abVy] = 132,
 		[l_abBusize] = 28,
 		[l_abSBusize] = 28,
+		[l_abPBusize] = 28,
 		[l_abOffset] = 4,
 		[l_abRB] = 2,
 		[l_abMR] = false,
@@ -233,15 +228,11 @@ local function setupVars()
 	SetCVar("cameraDistanceMax", 50)
 	SetCVar("cameraDistanceMaxFactor", 3.4)
 	SetCVar("chatMouseScroll", 1)
---	SetCVar("showTimestamps", "none")
 	SetCVar("chatStyle", "classic")
 	SetCVar("WholeChatWindowClickable", 0)
 	SetCVar("ConversationMode", "inline")
---	SetCVar("CombatDamage", 1)
---	SetCVar("CombatHealing", 1)
 	SetCVar("showTutorials", 0)
 	SetCVar("showNewbieTips", 0)
---	SetCVar("Maxfps", 120)
 	SetCVar("autoDismountFlying", 1)
 	SetCVar("autoQuestWatch", 1)
 	SetCVar("autoQuestProgress", 1)
@@ -249,19 +240,6 @@ local function setupVars()
 	SetCVar("guildMemberNotify", 1)
 	SetCVar("chatBubblesParty", 1)
 	SetCVar("chatBubbles", 1)
---[[	SetCVar("UnitNameOwn", 0)
-	SetCVar("UnitNameNPC", 1)
-	SetCVar("UnitNameNonCombatCreatureName", 1)
-	SetCVar("UnitNamePlayerGuild", 1)
-	SetCVar("UnitNamePlayerPVPTitle", 1)
-	SetCVar("UnitNameFriendlyPlayerName", 1)
-	SetCVar("UnitNameFriendlyPetName", 1)
-	SetCVar("UnitNameFriendlyGuardianName", 1)
-	SetCVar("UnitNameFriendlyTotemName", 1)
-	SetCVar("UnitNameEnemyPlayerName", 1)
-	SetCVar("UnitNameEnemyPetName", 1)
-	SetCVar("UnitNameEnemyGuardianName", 1)
-	SetCVar("UnitNameEnemyTotemName", 1)]]
 
 	SetSkada();
 end
@@ -539,12 +517,12 @@ ThunderUI:SetScript("OnEvent", function()
 		if ThunderDB[k] == nil then
 			ThunderDB[k] = v
 			print("|cffaaffaaRestored|r "..k.." |cffaaffaaoption|r")
-			if type(v) == "table" then
-				for n,m in pairs(v) do
-					if ThunderDB[k][n] == nil then
-						ThunderDB[k][n] = m
-						print("|cffaaffaaRestored|r "..k.." |cffaaffaaoption."..n.."|r value")
-					end
+		end
+		if type(v) == "table" then
+			for n,m in pairs(v) do
+				if ThunderDB[k][n] == nil then
+					ThunderDB[k][n] = m
+					print("|cffaaffaaRestored|r "..k.." |cffaaffaaoption. New value|r "..n)
 				end
 			end
 		end

@@ -2,8 +2,6 @@
 	"cute" oUF_Freebgrid by Freebaster
 --]]
 
-if ThunderDB["modules"][l_uf] ~= true or ThunderDB["modules"][l_ufr] ~= true then return end
-
 local ADDON_NAME, ns = ...
 local oUF = ns.oUF or oUF
 assert(oUF, "oUF_Freebgrid was unable to locate oUF install.")
@@ -157,7 +155,7 @@ local siValue = function(value)
     end
 end
 
-local function utf8sub(str, start, numChars) 
+local function freebutf8sub(str, start, numChars) 
     local currentIndex = start 
     while numChars > 0 and currentIndex <= #str do 
         local char = string.byte(str, currentIndex) 
@@ -177,7 +175,7 @@ end
 local nameCache = {}
 
 local PostUpdateHealth = function(health, unit, min, max)
-    local name = oUF.Tags['thunder:name'](unit)
+    local name = UnitName(unit) or "Unknown"
     local self = health.__owner
     local val = 1
     if ThunderDB[l_ufr][l_ufrpower] then
@@ -189,14 +187,15 @@ local PostUpdateHealth = function(health, unit, min, max)
 	else 
 		local substring 
 		for length=#name, 1, -1 do 
-			substring = utf8sub(name, 1, length) 
+			substring = freebutf8sub(name, 1, length) 
 			self.Info:SetText(substring) 
 			if self.Info:GetStringWidth() <= ThunderDB[l_ufr][l_ufrwidth] - val then break end 
 		end
 		nameCache[name] = substring
 	end
 
-	local r, g, b, t
+	local r, g, b = .84, .75, .65
+	local t
 	if(UnitIsPlayer(unit)) then
 		local _, class = UnitClass(unit)
 		t = oUF.colors.class[class]
@@ -238,7 +237,8 @@ local PostUpdateHealth = function(health, unit, min, max)
 		end
 	else
 		if ThunderDB[l_uf][l_ufcc] then
-			local r, g, b, t
+			local r, g, b = .84, .75, .65
+			local t
 			local reaction = UnitReaction(unit, "player")
 			if(UnitIsPlayer(unit)) then
 				local _, class = UnitClass(unit)
@@ -316,7 +316,8 @@ local PostUpdatePower = function(power, unit, min, max)
 			power.bg:SetVertexColor(r*ThunderDB[l_uf][l_ufuicont], g*ThunderDB[l_uf][l_ufuicont], b*ThunderDB[l_uf][l_ufuicont])
 		end
 	else
-		local r, g, b, t
+		local r, g, b = .84, .75, .65
+		local t
 		local reaction = UnitReaction(unit, "player")
 		if(UnitIsPlayer(unit)) then
 			local _, class = UnitClass(unit)
