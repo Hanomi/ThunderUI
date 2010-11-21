@@ -87,7 +87,7 @@ if (not oUF.Tags['thunder:lvl']) then
 	end
 end
 
-oUF.TagEvents['thunder:color'] = "UNIT_HAPPINESS"
+oUF.TagEvents['thunder:color'] = 'UNIT_POWER'
 if (not oUF.Tags['thunder:color']) then
 	oUF.Tags['thunder:color'] = function(unit)
 		if ThunderDB[l_uf][l_ufcc] and not ThunderDB[l_uf][l_uficc] then
