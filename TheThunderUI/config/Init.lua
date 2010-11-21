@@ -606,7 +606,8 @@ ThunderUI:SetScript("OnEvent", function()
 		parseOptions(childpanel, module.name, ThunderDB[module.name])
    end
 
-   print("|cff9DC7CCThe Thunder UI v 5.0|r "..l_welcome)
+   local thunderver = GetAddOnMetadata(addonName, "Version")
+   print("|cff9DC7CCThe Thunder UI v"..thunderver.."|r "..l_welcome)
 
    ThunderUI:UnregisterEvent("VARIABLES_LOADED")
    ThunderUI:SetScript("OnEvent", nil)
